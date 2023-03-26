@@ -1,0 +1,1987 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ar.github.io/developer_notes/operations/mlops/overview/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
+    
+    
+      
+        <title>Overview - AR Assistant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#machine-learning-operations-mlops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-header__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AR Assistant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-tabs__link">
+        Project Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Developer Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-nav__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AR Assistant Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+         
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Project Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Project Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scoping" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Developer Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        📚 Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_1" type="checkbox" id="__nav_3_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_1">
+          Github
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Github" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Github
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/git_intro/" class="md-nav__link">
+        Git Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/git_actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_2">
+          MLOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MLOps" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          MLOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Overview
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-ml-lifecycle" class="md-nav__link">
+    The ML Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-mlops" class="md-nav__link">
+    What is MLOps?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ml-pipeline-stack" class="md-nav__link">
+    ML Pipeline Stack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#levels-of-mlops-readiness" class="md-nav__link">
+    Levels of MLOps Readiness
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data-validation" class="md-nav__link">
+    1. Data Validation
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Data Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types-of-drift" class="md-nav__link">
+    Types of Drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deterministic-tests" class="md-nav__link">
+    Deterministic Tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-deterministic-tests" class="md-nav__link">
+    Non-deterministic Tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-versioning" class="md-nav__link">
+    2. Data Versioning
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_1" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-experiment-tracking" class="md-nav__link">
+    3. Experiment Tracking
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Experiment Tracking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_2" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-artifact-tracking" class="md-nav__link">
+    4. Artifact Tracking
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Artifact Tracking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components-and-artifacts" class="md-nav__link">
+    Components and Artifacts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#artifact-store" class="md-nav__link">
+    Artifact Store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deployment" class="md-nav__link">
+    6. Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inference-pipeline" class="md-nav__link">
+    Inference Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inference-artifact" class="md-nav__link">
+    Inference Artifact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-bias" class="md-nav__link">
+    Model Bias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-cards" class="md-nav__link">
+    Model Cards
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-deploy-a-model" class="md-nav__link">
+    When to deploy a model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_3" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-monitoring-maintenance" class="md-nav__link">
+    7. Monitoring &amp; Maintenance
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Monitoring &amp; Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-decay" class="md-nav__link">
+    Model Decay
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-decay-with-continuous-deployment" class="md-nav__link">
+    Handling Decay with Continuous Deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_4" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pipeline-orchestration" class="md-nav__link">
+    8. Pipeline Orchestration
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pipeline Orchestration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_5" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3" type="checkbox" id="__nav_3_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3">
+          Project Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Planning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Project Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3_1" type="checkbox" id="__nav_3_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3_1">
+          Project Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Scoping" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project_planning/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project_planning/scoping/hlp/" class="md-nav__link">
+        Human Level Performance (HLP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Orchestration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Orchestration" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Orchestration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engineering/orchestration/airflow/" class="md-nav__link">
+        Apache Airflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Data Validation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Validation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Validation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engineering/data_validation/tfdv/" class="md-nav__link">
+        TFDV
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-ml-lifecycle" class="md-nav__link">
+    The ML Lifecycle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-mlops" class="md-nav__link">
+    What is MLOps?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ml-pipeline-stack" class="md-nav__link">
+    ML Pipeline Stack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#levels-of-mlops-readiness" class="md-nav__link">
+    Levels of MLOps Readiness
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-data-validation" class="md-nav__link">
+    1. Data Validation
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Data Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types-of-drift" class="md-nav__link">
+    Types of Drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deterministic-tests" class="md-nav__link">
+    Deterministic Tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-deterministic-tests" class="md-nav__link">
+    Non-deterministic Tests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-data-versioning" class="md-nav__link">
+    2. Data Versioning
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Data Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_1" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-experiment-tracking" class="md-nav__link">
+    3. Experiment Tracking
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Experiment Tracking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_2" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-artifact-tracking" class="md-nav__link">
+    4. Artifact Tracking
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Artifact Tracking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components-and-artifacts" class="md-nav__link">
+    Components and Artifacts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#artifact-store" class="md-nav__link">
+    Artifact Store
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deployment" class="md-nav__link">
+    6. Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inference-pipeline" class="md-nav__link">
+    Inference Pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inference-artifact" class="md-nav__link">
+    Inference Artifact
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-bias" class="md-nav__link">
+    Model Bias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model-cards" class="md-nav__link">
+    Model Cards
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-to-deploy-a-model" class="md-nav__link">
+    When to deploy a model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_3" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-monitoring-maintenance" class="md-nav__link">
+    7. Monitoring &amp; Maintenance
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Monitoring &amp; Maintenance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-decay" class="md-nav__link">
+    Model Decay
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-decay-with-continuous-deployment" class="md-nav__link">
+    Handling Decay with Continuous Deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_4" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-pipeline-orchestration" class="md-nav__link">
+    8. Pipeline Orchestration
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Pipeline Orchestration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-party-tools_5" class="md-nav__link">
+    Third-party Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/developer_notes/operations/mlops/overview.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="machine-learning-operations-mlops">Machine Learning Operations (MLOps)</h1>
+<details class="warning" open="open">
+<summary>Note</summary>
+<p>The topic of MLOps is an entire discipline on top of Machine Learning. This article aims to condense all of the core concepts into a single story. </p>
+</details>
+<h2 id="the-ml-lifecycle">The ML Lifecycle</h2>
+<p><img src="../../../../resources/images/developer_handbook/mlops/ml_lifecycle.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Inspired by the <a href="https://www.tutorialspoint.com/sdlc/sdlc_overview.htm">Software Development Life Cycle</a> (SDLC), the ML lifecycle aims to provide a framework around planning and development machine learning projects. ML practitioners who don't have any experience with MLOps may be familiar with a few of these steps such as EDA, data preprocessing, training and evaluation. However, this is only a portion of what it takes to make a production grade machine learning project. </p>
+<details class="danger" open="open">
+<summary>Steps</summary>
+<ol>
+<li>Data collection</li>
+<li>EDA</li>
+<li>Data cleaning (not model specific)</li>
+<li>Preprocessing (model specific, data segregation, feature engineering etc.)</li>
+<li>Model training</li>
+<li>Evaluation</li>
+<li>Deployment<ul>
+<li>Batch: setup environment for periodic runs for throughput</li>
+<li>Service: a REST API environment can be set up to produce ML value on demand</li>
+<li>Real-time (streaming): used for continous inference on a low latency data stream</li>
+</ul>
+</li>
+<li>Monitoring<ul>
+<li>Performance drop? Repeat step 1</li>
+</ul>
+</li>
+</ol>
+</details>
+<h2 id="what-is-mlops">What is MLOps?</h2>
+<p>Software engineers have done a great job of establishing best practices for software engineering projects through the use of DevOps. However, as machine learning is a more iterative process, this needs to be altered to suit our needs. This is where ML Operations comes in.</p>
+<p>ML Operations, or commonly referred to as MLOps, is a set off best practices for efficientend-to-end development and productionalization of machine learning projects. When dealing with MLOps, you will hear the word "<em>pipeline</em>" a lot. In essence, an ML Pipeline is just a sequences of independent, modular and reusable steps to achieve each part in the machine learning life cycle. This is essential for making a machine learning model usable. It's often the case the ML models, no matter how good the performance, never get used in the real world. </p>
+<blockquote>
+<p><strong><em>“70% accuracy on a model is infinitely better than 95% accuracy on a model that can’t be used in production”</em></strong></p>
+</blockquote>
+<p>But by using MLOps principles we can avoid "racing to a redlight". The attributes of a good ML pipeline are:</p>
+<ul>
+<li>high performance</li>
+<li>scalability</li>
+<li>reliability</li>
+<li>automatation</li>
+<li>reproducibility</li>
+</ul>
+<p>There are three "pillars" to a project that makes use of MLOps principles: </p>
+<ol>
+<li>The Data Pipeline (data ingestion, cleaning, sorting)</li>
+<li>The ML Pipeline (processing, experimentation, testing)</li>
+<li>The Deployment Pipeline (Inference, monitoring)</li>
+</ol>
+<h2 id="ml-pipeline-stack">ML Pipeline Stack</h2>
+<p><img src="../../../../resources/images/developer_handbook/mlops/requirements.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>With respect to ML pipelines, there are a number of crucial concepts that need to be understood before attempting to build an MLOps Stack. The code used for modelling is only a small part in the grand scheme of things. Below are just brief descriptions of the concepts. We'll dig a little deeper into how these are implemented within this article. Obviously we can't test out every tool listed, but the following sections will show what we used. The concepts will remain the same so don't need to use the exact tools we did. These are the best practices that should be put in place so you can ensure you have a durable and robust MLOps pipeline. </p>
+<table>
+<thead>
+<tr>
+<th><strong>Attribute</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Validator</strong></td>
+<td>Automated Validation</td>
+<td>This involved checking for data integrity and <a href="https://towardsdatascience.com/why-data-drift-detection-is-important-and-how-do-you-automate-it-in-5-simple-steps-96d611095d93">data drift</a>, Which is defined as a variation in the production data from the data that was used to test and validate the model before deploying it in production.</td>
+</tr>
+<tr>
+<td><strong>Data Versioning</strong></td>
+<td>Reproducibility</td>
+<td>Needed for tracking different snapshots of your data for experiments. Lets say you train a model 10 times, using different feature engineering techniques each time - if your data is version controlled then you can easily roll back to previous version of your data</td>
+</tr>
+<tr>
+<td><strong>Experiment Tracker</strong></td>
+<td>Reproducibility</td>
+<td>The concept of keeping track of all parameters related to model training such as hyperparameters, metrics, configurations, dataset paths etc. This is crucial for keeping a record of past experiments, and should never be deleted unless 100% centrain you won't need it again.</td>
+</tr>
+<tr>
+<td><strong>Artifact Store</strong></td>
+<td>Reproducibility</td>
+<td>Artifact tracking involves storing a record of the outputs from each component (step) in the pipeline such as models, images, datasets etc.</td>
+</tr>
+<tr>
+<td><strong>Model Registry</strong></td>
+<td>Deployment</td>
+<td>This is a centralized repository for storing your trained models. In production the inference pipeline will reference the lastest model that have been promoted to this registry.</td>
+</tr>
+<tr>
+<td><strong>Model Monitor</strong></td>
+<td>Automated Validation</td>
+<td>Model monitoring involved checking for model performance drift due to changes in the data.</td>
+</tr>
+<tr>
+<td><strong>Pipeline Orchestrator</strong></td>
+<td>Orchestration</td>
+<td>Now that you have defined your stack, you need something that can actually define which componenets will be used, and when. Using an orchestrator tool can enable you to schedule automated runs of your data or ML pipeline</td>
+</tr>
+</tbody>
+</table>
+<p>There are also some optional attributes that can be integrated into your ML Stack. These are more of a "nice-to-have's" or are only required in certain circumstances. We wont cover these in the rest of the article, but they're good to be aware of. </p>
+<table>
+<thead>
+<tr>
+<th><strong>Attribute</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Alerter</strong></td>
+<td>Automated Validation</td>
+<td>Alerters allow you to send messages to chat services (like Teams, Slack, etc.) from within your pipelines. This is useful to immediately get notified when failures happen, for general monitoring/reporting, and also for building human-in-the-loop ML.</td>
+</tr>
+<tr>
+<td><strong>Feature store</strong></td>
+<td>Reproducibility</td>
+<td>Feature stores allow data teams to serve data via an offline store and an online low-latency store where data is kept in sync between the two. It also offers a centralized registry where features (and feature schemas) are stored for use within a team or wider organization.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../../../../resources/images/developer_handbook/mlops/landscape.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Its important to note that there are many tools used to achieve a good MLOps pipeline. Sometimes it may be difficult to find out what you should use. Also, a lot of these tools are not mutual exclusive, meaning that some tools can do multiple stack operations. For example, MLFlow can act as an experiment tracker and a model registry. A good website for reading up on the different options is <a href="https://mymlops.com"><strong>https://mymlops.com</strong></a>. The list isn't extensive but its a good place to start and to see what integrates nicely together.</p>
+<h2 id="levels-of-mlops-readiness">Levels of MLOps Readiness</h2>
+<p>To understand where you are within the stages of bringing a ML project to production, its useful categorize the readiness of your ML Pipeline. For this we have 3 levels:</p>
+<details class="failure" open="open">
+<summary>Level 0:</summary>
+<ul>
+<li>Proof-of-concept <ul>
+<li>In this stage the project is in proof-of-concept or expoloratory analysis phase</li>
+<li>Code is standalone, normally consisting of just notebooks </li>
+<li>Think “Kaggle competition”</li>
+</ul>
+</li>
+<li>Infrastructure is minimal or nonexistent at this stage</li>
+<li>There is requirement for model monitoring, productionatization or inference, therefore MLOps not neccessary </li>
+<li>This is the lowest form of readiness, suited for smaller teams in the early stages</li>
+</ul>
+</details>
+<details class="warning" open="open">
+<summary>Level 1:</summary>
+<ul>
+<li>At this level, there is some sort of pipeline emerging. More time is spent thinking about reusability and automation.</li>
+<li>Scripts are organized reusable components (utilities)</li>
+<li>Process of training models are standardised, making it easier for adding new models.</li>
+<li>Artifacts are tracked, meaning there is some type of versioning on datasets or models</li>
+<li>Ability to retrain models easily can prevent model drift.</li>
+<li>Time to go to production is reduced. </li>
+<li>This level of readiness is required for small to medium sized teams and ML projects that are in development</li>
+</ul>
+</details>
+<details class="success" open="open">
+<summary>Level 2:</summary>
+<ul>
+<li>Continuous integration and continuous deployment (CICD)<ul>
+<li>Every change in the components that passes the tests is merged automatically </li>
+<li>Every change that passes the tests is released in the production pipeline</li>
+</ul>
+</li>
+<li>Continuous training<ul>
+<li>New pipeline is automatically triggered when model/data drift is found within the model monitoring tests</li>
+</ul>
+</li>
+<li>Rapid iterations on prod pipelines.</li>
+<li>Customers see continuous improvements</li>
+<li>This level of pipeline readiness is essential for large teams or projects that are supposed to go into production.</li>
+</ul>
+</details>
+<!-- ### ------------------------ -->
+
+<h2 id="1-data-validation">1. Data Validation</h2>
+<p>When you're at <a href="./#levels-of-mlops-readiness">level 0</a> of pipeline readiness, you would have likely extracted data manually from some datasource and done some exploratory data analysis to ensure quality and integrity of the data. This may include finding columns that are redundant, have erroneous or missing data. You would have gotten a sense of what the data should or shouldn't look like for your usecase. The same way that models training is iterative, so too should your data validation. Each time an extract occurs you should make sure you setup a process to preventatively catch problems in your data that may cause issues further down in the pipeline.</p>
+<p>This can be done in a number of ways:</p>
+<h3 id="types-of-drift">Types of Drift</h3>
+<ul>
+<li><strong>Data drift:</strong> Data drift is when the input data has changed and distribution of the variables is significantly different. Generally, a consequence of seasonal changes or changes in consumer preferences over time. For instance, educational data collected before Covid shows a lesser preference for online learning than post-covid. Data drift can also occur at the expense of being trained on specific data but being exposed to a wider scope of data upon production. Spam detection is a good case in point. </li>
+<li><strong>Concept drift:</strong> Contrary to data drift, where the data changes, concept drift occurs when the model’s predicted target or its statistical properties change over time. The distributions might remain the same. Instead, the relationships between the model inputs and outputs change. Concept drift can happen suddenly or gradually. For example, spammer's trying to change how they make spam emails over time.</li>
+</ul>
+<h3 id="deterministic-tests">Deterministic Tests</h3>
+<p>Deterministic when we are measuring something that can be measured without uncertainty. Some examples of this could be:</p>
+<ul>
+<li>The number of columns, its a definite number</li>
+<li>The amount of unique values for a categorical variable</li>
+<li>Numeric values are within expected ranges (like age being greater than 0 or less than 120)</li>
+</ul>
+<p>It will depend on what language you want to use, but this can be done in python using PyTest. Here is an example of a deterministic test using fixtures to load in data. Here is <a href="https://python.plainenglish.io/how-to-validate-your-dataframes-with-pytest-b238d2891d12">another example</a> of data validation using PyTest.</p>
+<div class="highlight"><span class="filename">conftest.py</span><pre><span></span><code><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">• conftest is used to share fixtures across all tests</span>
+<span class="sd">• Also used to host code needed to handle command line params</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import data as a fixture to be importing </span>
+<span class="sd">    within testing </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">reference_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ref_path</span><span class="p">)</span> <span class="c1"># previous dataset</span>
+    <span class="n">sample_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sample_path</span><span class="p">)</span> <span class="c1"># new data</span>
+
+    <span class="k">return</span> <span class="n">reference_data</span><span class="p">,</span> <span class="n">sample_data</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">test_data.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">test_column_presence_and_type</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert the types of columns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ignore reference data </span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> 
+
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;patient_id&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">,</span>
+        <span class="s2">&quot;body_weight&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_float_dtype</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_string_dtype</span><span class="p">,</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Check column presence</span>
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">required_columns</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+    <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">format_verification_funct</span> <span class="ow">in</span> <span class="n">required_columns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">assert</span> <span class="n">format_verification_funct</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col_name</span><span class="p">]),</span> <span class="sa">f</span><span class="s2">&quot;Column </span>
+        <span class="p">{</span><span class="n">col_name</span><span class="p">}</span> <span class="n">failed</span> <span class="n">test</span> <span class="p">{</span><span class="n">format_verification_funct</span><span class="p">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">test_column_ranges</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assert the age ranges are correct</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+        <span class="o">.</span> <span class="o">.</span> <span class="o">.</span> 
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col_name</span><span class="si">}</span><span class="s2"> failed the test. Should be between </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">maximum</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;instead min=</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> and max=</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span> 
+</code></pre></div>
+<h3 id="non-deterministic-tests">Non-deterministic Tests</h3>
+<p>Non-deterministic test evolves measuring quantity with uncertainty, such as dealing with random variable or a distribution of a column within a dataset. Non-deterministic test use hypothesis testing and, for the most part, are used to compare one dataset to another. For example, measuring the mean or standard deviation of items within the dataset. The <strong>null hypothesis</strong> is that the average is the roughly the same, the <strong>alternative hypothesis</strong> is that they deviate a lot from eachother. You can see how this is useful in preventing misleading model predictions, as you can use the rejection of the null hypothesis as a trigger to spin up a new training pipeline run. This is done because the data used to train our model doesn't look like the data in it's current state. You can read more about hypothesis testing <a href="https://towardsdatascience.com/precision-and-recall-trade-off-and-multiple-hypothesis-testing-family-wise-error-rate-vs-false-71a85057ca2b">here</a>. The example below shows an example of using a statistical measure to test our new sample data against the previous dataset.</p>
+<div class="highlight"><span class="filename">test_data.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">test_kolmogorov_smirnov</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ks_alpha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Kolmogorov-Smirnov test is used to test whether </span>
+<span class="sd">    or not or not a sample comes from a certain distribution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">sample1</span><span class="p">,</span> <span class="n">sample2</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;col1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;col2&quot;</span><span class="p">,</span>
+        <span class="o">.</span> <span class="o">.</span> <span class="o">.</span> 
+    <span class="p">]</span>
+
+    <span class="n">alpha_prime</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ks_alpha</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="n">ts</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">sample1</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">sample2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+        <span class="c1"># NOTE: as always, the p-value should be interpreted as the probability of</span>
+        <span class="c1"># obtaining a test statistic (TS) equal or more extreme that the one we got</span>
+        <span class="c1"># by chance, when the null hypothesis is true. If this probability is not</span>
+        <span class="c1"># large enough, this dataset should be looked at carefully, hence we fail</span>
+        <span class="k">assert</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="n">alpha_prime</span>
+</code></pre></div>
+<p><a href="https://en.wikipedia.org/wiki/Kolmogorov–Smirnov_test">Kolmogorov-Smirnov</a> tests are primarily used on smaller datasets. For larger datasets you can use <a href="https://en.wikipedia.org/wiki/Wasserstein_metric">Wasserstein distance</a> for numeric features. <a href="https://en.wikipedia.org/wiki/Jensen–Shannon_divergence">Jensen–Shannon divergence</a> and <a href="https://en.wikipedia.org/wiki/Chi-squared_test">Chi-squared test</a> can be used for categorical features. You can read an article by Evidently.ai comparing different types of tests <a href="https://www.evidentlyai.com/blog/data-drift-detection-large-datasets">here</a> </p>
+<h3 id="third-party-tools">Third-party Tools</h3>
+<p>The examples above show how you can implement some data validation heuristics, but you can also make use of thirdparty tools to do some of the heavy lifting for you. Some examples of tools such as:</p>
+<ul>
+<li><a href="https://www.evidentlyai.com/">Evidently.ai</a></li>
+<li><a href="https://greatexpectations.io/">GreatExpectation</a></li>
+<li><a href="https://www.tensorflow.org/tfx/tutorials/data_validation/tfdv_basic">TFDV</a> - Read our docs on TFDV <a href="../../../engineering/data_validation/tfdv/"><strong>here</strong></a></li>
+</ul>
+<hr />
+<h2 id="2-data-versioning">2. Data Versioning</h2>
+<p><img src="../../../../resources/images/developer_handbook/mlops/data_version.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Data versioning is defined as organising data by assigning some unique identifier to state that it's in. Here are some of the reasons why data versioning is important:</p>
+<ul>
+<li>As Data Scientists we know that to develop a Machine Learning model, is not all about code, but also about data and the right parameters. In order to get the optimal result experimentation is required, which makes the process <strong>highly iterative</strong> and extremely important to keep track of the changes made as well as their impacts on the end results. This becomes even more important in a complex environment where multiple data scientists are collaborating. It is crucial for <strong>reproducibility</strong>  to have a snapshot of the data used to develop a certain instance of the model and have it versioned. It makes the iterative process of model development not only easier but also trackable.</li>
+<li>The ability to track data version provided by version control tools is the first step to have companies data sources ready for compliance, and an essential step in maintaining a strong and robust audit train and risk management processes around data.</li>
+</ul>
+<h3 id="third-party-tools_1">Third-party Tools</h3>
+<ul>
+<li><a href="https://dvc.org/">DVC</a>: The concept of data versioning is very similary to version control, as seen with Git and Github. Infact, the most popular data version control software, suitably named Data Version Control, was built on top of git and shares similar syntax.</li>
+</ul>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th><strong>Git</strong></th>
+<th><strong>DVC</strong></th>
+<th><strong>Usage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git init</code></td>
+<td><code>dvc init</code></td>
+<td>Initialize the project</td>
+</tr>
+<tr>
+<td><code>git add</code></td>
+<td><code>dvc add</code></td>
+<td>Track item in staging area</td>
+</tr>
+<tr>
+<td><code>git push</code></td>
+<td><code>dvc push</code></td>
+<td>Upload tracked files or directories to remote location</td>
+</tr>
+<tr>
+<td><code>git pull</code></td>
+<td><code>dvc pull</code></td>
+<td>Download tracked files or directories from remote location</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<ul>
+<li>Some other tools include: <a href="https://github.com/git-lfs/git-lfs">Git LFS</a>, <a href="https://lakefs.io">LakeFS</a>, <a href="https://github.com/dagshub/fds#-aka-fds">FastDS</a></li>
+</ul>
+<hr />
+<h2 id="3-experiment-tracking">3. Experiment Tracking</h2>
+<p><img src="../../../../resources/images/developer_handbook/mlops/experiment_tracking.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Experiment tracking is the process of saving all experiment related information that you care about for every experiment you run. This “metadata you care about” will strongly depend on your project, but it may include:</p>
+<ul>
+<li>Scripts used for running the experiment</li>
+<li>Environment configuration files </li>
+<li>Versions of the data used for training and evaluation</li>
+<li>Parameter configurations</li>
+<li>Evaluation metrics </li>
+<li>Model weights</li>
+<li>Performance visualizations (confusion matrix, ROC curve)  </li>
+</ul>
+<p>So why do we do this? Model training is an iterative process, and shouldn't just be confined to using a single set of parameters or version of the data. You will need to experiment with a plethora of different configurations. Therefore its crucial to persist this information to have a <strong>data-centric</strong> approach for choosing which model gets deployed to production.</p>
+<h3 id="third-party-tools_2">Third-party Tools</h3>
+<ul>
+<li><a href="https://mlflow.org/docs/latest/tracking.html">MLFlow</a></li>
+<li><a href="https://wandb.ai/site/experiment-tracking">Weights &amp; Biases</a></li>
+<li><a href="https://neptune.ai">Neptune</a></li>
+</ul>
+<hr />
+<h2 id="4-artifact-tracking">4. Artifact Tracking</h2>
+<h3 id="components-and-artifacts">Components and Artifacts</h3>
+<p>You can think of ML Pipelines as an <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Direct Acyclic graphic</a> (DAG). Conceptually, parts of the pipeline can be classified as one of the two categories: components and artifacts.</p>
+<p><center> </p>
+<table>
+<thead>
+<tr>
+<th><strong>Terminology</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Components</strong></td>
+<td>Think of an action or verb - something that performs a task. <br>Components can be scripts, notebooks or executables.</td>
+</tr>
+<tr>
+<td><strong>Artifacts</strong></td>
+<td>An artifact is any data file or directory produced within a run of the pipeline. <br>Artifacts from one component may be used as the input to the next component. <br>Every artifact should be automatically tracked and versioned.</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<h3 id="artifact-store">Artifact Store</h3>
+<p><img src="../../../../resources/images/developer_handbook/mlops/components.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>The Artifact Store is a central component in any MLOps stack. As the name suggests, it acts as a data persistence layer where artifacts (e.g. datasets, models, images etc) generated by a component are stored. Its often the case that an artifact from one component (step) is fed into the next component. For example: The output artifact from a <code>data preprocessing</code> component would be the input artifact for a <code>train</code> component. </p>
+<p>It's not only a place to store items necessary for the ML pipeline to run successfully, we can store supplementary artifacts also. Let's say we periodically perform EDA in our ML Pipeline, and we have some graphs we want to keep for each experiment. These should be tracked and stored for future inspection.</p>
+<hr />
+<h2 id="6-deployment">6. Deployment</h2>
+<p>Deployment isn't as simple as exposing a model binary through some API or having a CRON job perform batch inference to generate a csv. Not having a process where you can deploy a model to production with minimal friction will acrue technical debt as projects scale and the number of projects grows. Manually deploying models increases risk of downtime, which isn't acceptable for a commercial product. To avoid these hurdles there needs to be a robust deployment strategy. Regardless of your deployment type, be it Batch,  Service or Real-time (streaming) these concepts still apply:</p>
+<h3 id="inference-pipeline">Inference Pipeline</h3>
+<p><img src="../../../../resources/images/developer_handbook/mlops/train_serve.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>So you've written the code, trained the model and evaluated the results and now want to put a model into production. Firstly you need to be aware of inference pipelines. In machine learning, it's expected the data your model is exposed to is prepared in the same way as the data that was used to train it. This means you need to ensure all the same data preprocessing operations from development are applied to inference data in production. This is called <strong>Development Production Symmetry</strong>. So if we need to perform the same actions during training/inference time then we <strong>SHOULD</strong> reuse the same code. Don't duplicate the code. 
+An <strong>Inference Pipeline</strong> constitutes two items: </p>
+<ol>
+<li>the preprocessing pipeline </li>
+<li>the model</li>
+</ol>
+<h3 id="inference-artifact">Inference Artifact</h3>
+<p>When training is complete then the preprocessing pipeline and model is serialized (<em>eg. saved to disk</em>). Inference Artifact is an instance of the Inference Pipeline containing the preprocessing code and a trained model. This inference artifact is then marked for production and deployed as a working component in the project pipeline. The reason why we make instances of an "inference artifact" rather than just reference code from the training pipeline is so that we can version our preprocessing code and model for each iteration. Sometimes the code or model maybe what changes, sometimes it's both. </p>
+<h3 id="model-bias">Model Bias</h3>
+<p>When learning about ML you will have likely gained a habit of believing you should just optimization your model to have good metrics. Low error on test set isn't the be-all and end-all. If performance on disproportionately important samples aren't good, then the model is not fit for production.</p>
+<p>Bias is a systematic error from an erroneous assumption in the machine learning algorithm’s modeling. The algorithm tends to systematically learn the wrong signals by not considering all the information contained within the data. Model bias may lead an algorithm to miss the relevant relationship between data inputs (features) and targeted outputs (predictions). In essence, bias arises when an algorithm has insufficient capability in learning the appropriate signal from the dataset. For decades, bias in machine learning has been recognized as a potential concern, but it remains a complex and challenging issue for machine learning researchers and engineers when deploying models into production. You can read more on the different types of bias <a href="https://www.telusinternational.com/insights/ai-data/article/7-types-of-data-bias-in-machine-learning"><strong>here</strong></a></p>
+<p>One way of checking for bias is through <strong>Data Slicing</strong>. Data slicing is when you computing a performance metric holding a feature or output fixed.
+So rather than evaluating performance on the entire test set, you extend it by evaluating breaking down by the feature you're concern with. For example: Gender, ethnicity, rare classes. Given the example below, we can see a hypothetical model that performs very well. However, after performing data slicing on features such as race we can see that hispanics are disproportionately scoring lower than others. This form of auditing can prevent potential legal or productional issues down the line. </p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th>Race</th>
+<th>Model Accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black</td>
+<td>87.7%</td>
+</tr>
+<tr>
+<td>South East Asian</td>
+<td>91.4%</td>
+</tr>
+<tr>
+<td><strong>Hispanic</strong></td>
+<td><strong>58%</strong></td>
+</tr>
+<tr>
+<td>White</td>
+<td>88.3%</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<h3 id="model-cards">Model Cards</h3>
+<p><img src="../../../../resources/images/developer_handbook/mlops/card.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Beside data versioning, artifact and experiment tracking - another important method of logging information about a model is by writing a "model card". Model cards aim to encapsulate all the key details about the model for future reference. It isn't a hard requirement, but it should be done for models that are deployed to production. The information could include:</p>
+<ul>
+<li>Data used</li>
+<li>How model should be interacted with</li>
+<li>Caveats, warnings or any shortcomings</li>
+<li>Metrics</li>
+<li>Parameters</li>
+</ul>
+<h3 id="when-to-deploy-a-model">When to deploy a model</h3>
+<p>Before deploying a model into production, you should first go through the predeployment checklist:</p>
+<p>✅ Test Performance (Choose the best performing model) <br>
+✅ Check for Bias <br>
+✅ Write a Model Card <br></p>
+<p>If you believe everything looks good, then you can mark that model for production. If you aren't using a model registry then you can use a dedicated folder for the inference pipeline to point to. If you are using a model registry, you would most likely need to tag the model with a <code>:prod</code> or <code>:latest</code> tag. Additionally, you should aim to automate the items in this checklist so you can reduce the amount of manual interactions needed.</p>
+<h3 id="third-party-tools_3">Third-party Tools</h3>
+<ul>
+<li><a href="http://aequitas.dssg.io">Aequitas</a> - Bias and Fairness Audit Toolkit</li>
+<li><a href="https://blog.fastforwardlabs.com/2017/03/09/fairml-auditing-black-box-predictive-models.html">FairML</a> - Python library that audits black-box predictive models</li>
+</ul>
+<hr />
+<h2 id="7-monitoring-maintenance">7. Monitoring &amp; Maintenance</h2>
+<p><img src="../../../../resources/images/developer_handbook/mlops/monitoring.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>The cascading affects of something changing upstream can be catostrophic for processes that are downstream. By monitoring aspects of the project we can see trends of our</p>
+<ul>
+<li>Infrastructure compute</li>
+<li>Statistics from data validation</li>
+<li>Concept and Data drift</li>
+<li>etc.</li>
+</ul>
+<p>The first thing you should do is a team-brainstorm of all the possible scenarios where things can go wrong, like Number of missing values over time, server load over time and memory usage, to mention a few. It's common practice to set alerts for thresholds for certain metrics. For example: we can see a trend that the an increase in requests to a model API is putting strain on the server's performance. By using monitoring we can see in advance that we should scale-up the compute power of the API.</p>
+<h3 id="model-decay">Model Decay</h3>
+<p>The definition of model decay is the occurence of a model in production, when <a href="https://www.jeremyjordan.me/evaluating-a-machine-learning-model/">evaulated</a> over time, performs worse that is previously did. The cause of this is due to "data drift" as nothing is actually changing in the model itself - but just to differentiate it from the data drift seen in the <a href="./#1-data-validation">Data validation section</a> lets refer to it as model decay.
+There are 3 ways to assess for model drift:</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Raw comparison test</strong></td>
+<td>A raw comparison is just a simple check to see if the target evaluation metric performed worse the previous version(s) of the model.</td>
+</tr>
+<tr>
+<td><strong>Parametric Significance test</strong></td>
+<td>Raw comparison test may indicate model drift has occurred, but this may be due to random chance or the score difference is so minuscule that it really isn’t significant (ie: not worth training another model). Using a paremteric significance test provides more reasonable condition to check against for model drift. To do this you must: <br> 1. Calculate mean and STD of all previous model scores (bell curve) <br> 2.  If the new model score is at least 2 standard deviations from the mean, we can conclude model drift has occurred.</td>
+</tr>
+<tr>
+<td><strong>Non-parametric outlier test</strong></td>
+<td>Paremteric significance tests assume that the distribution going to be in a bell curve (paremetric). This isn't appropraite for all cases, as it's senstive to outliers. A non-parametric measurment such as the <a href="https://www.thoughtco.com/what-is-the-interquartile-range-rule-3126244">Interquartile Range Rule</a> (IQR) to measure how far a datapoint is from the rest of the data. Essentially, this is to find outliers (in this case, the new model results if model drift occurred). Note: depending on what your target evaluation metric is the way you use IQR will be different. <ul><li>For metrics where higher values indicate worse performance, you need to look for upper outliers</li><li>For metrics where lower values indicate worse performance, you need to look out for lower outliers.</li></ul></td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<h3 id="handling-decay-with-continuous-deployment">Handling Decay with Continuous Deployment</h3>
+<p><img src="../../../../resources/images/developer_handbook/mlops/model_drift.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Okay so you know how to assess for model decay, now what? The purpose of this is to have a data-centric approach to deciding when your model needs to be updated. For example, lets say once a month you check for model drift. New data is given to the model and it's performance is evaluated. Using the the evaluation metric(s) we perform a model decay test to compare to older evaluations. You should make an automated process to spin off run of the training pipeline if the model scores considerably worse. Having the ability to continously deliver new models without manual interaction speeds up "time-to-production" and reduces down-time.</p>
+<h3 id="third-party-tools_4">Third-party Tools</h3>
+<ul>
+<li><a href="https://prometheus.io/">Prometheus</a></li>
+<li><a href="https://www.evidentlyai.com/">Evidently.ai</a></li>
+<li><a href="https://grafana.com/">Grafana</a></li>
+</ul>
+<hr />
+<h2 id="8-pipeline-orchestration">8. Pipeline Orchestration</h2>
+<p>Traditionally, using Cronjobs was the default for scheduling events. However, some issues with this approach include poor failure handling, difficulty monitoring current and past processes and lack of scalability. Airflow aims to remedy these issues. See our Airflow documentation <a href="../../../engineering/orchestration/airflow/">here</a></p>
+<h3 id="third-party-tools_5">Third-party Tools</h3>
+<ul>
+<li><a href="https://airflow.apache.org">Airflow Offical Documentations</a></li>
+<li><a href="https://github.com/features/actions">Github Actions</a></li>
+</ul>
+<hr />
+<details class="tip" open="open">
+<summary>Suggested</summary>
+<ul>
+<li><a href="../../git/git_actions/">GitHub Actions</a></li>
+<li><a href="https://mymlops.com">My MLOps - Stack Builder</a></li>
+<li><a href="https://arxiv.org/ftp/arxiv/papers/2205/2205.02302.pdf">Machine Learning Operations (MLOps): Overview, Definition, and Architecture - Kreuzberger et al.</a></li>
+<li><a href="https://docs.zenml.io/component-gallery/categories">Categories of MLOps Tools</a></li>
+<li><a href="https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf">Hidden Technical Debt in Machine Learning Systems</a></li>
+<li><a href="https://neptune.ai/blog">Netune AI MLOps Blog</a></li>
+<li><a href="https://towardsdatascience.com/data-drift-part-1-types-of-data-drift-16b3eb175006">Types of Data Drift</a></li>
+</ul>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../git/git_actions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Actions" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Actions
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../project_planning/scoping/overview/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Overview
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.bd0b6b67.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1664 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ar.github.io/developer_notes/engineering/orchestration/airflow/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
+    
+    
+      
+        <title>Apache Airflow - AR Assistant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#airflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-header__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AR Assistant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Apache Airflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-tabs__link">
+        Project Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Developer Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-nav__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AR Assistant Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+         
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Project Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Project Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scoping" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Developer Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        📚 Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_1" type="checkbox" id="__nav_3_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_1">
+          Github
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Github" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Github
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_intro/" class="md-nav__link">
+        Git Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_2">
+          MLOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MLOps" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          MLOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/mlops/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3" type="checkbox" id="__nav_3_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3">
+          Project Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Planning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Project Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3_1" type="checkbox" id="__nav_3_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3_1">
+          Project Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Scoping" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/hlp/" class="md-nav__link">
+        Human Level Performance (HLP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Orchestration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Orchestration" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Orchestration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Apache Airflow
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Apache Airflow
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    Core Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dags" class="md-nav__link">
+    DAGs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operators" class="md-nav__link">
+    Operators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-lifecycle" class="md-nav__link">
+    Task Lifecycle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-docker" class="md-nav__link">
+    Setup Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-puckeldocker-airflow" class="md-nav__link">
+    1. Puckel/docker-airflow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-official-docker-compose" class="md-nav__link">
+    2. Official Docker Compose
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to" class="md-nav__link">
+    How To:
+  </a>
+  
+    <nav class="md-nav" aria-label="How To:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schedule-a-dag" class="md-nav__link">
+    Schedule a DAG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-dag" class="md-nav__link">
+    Make a DAG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-task-metadata-xcoms" class="md-nav__link">
+    Share Task Metadata (XComs)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-a-db" class="md-nav__link">
+    Connect to a DB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-python-packages" class="md-nav__link">
+    Install Python Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensors" class="md-nav__link">
+    Sensors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    Caveats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheatsheet" class="md-nav__link">
+    Cheatsheet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Data Validation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Validation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Validation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_validation/tfdv/" class="md-nav__link">
+        TFDV
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-concepts" class="md-nav__link">
+    Core Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dags" class="md-nav__link">
+    DAGs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    Tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operators" class="md-nav__link">
+    Operators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-lifecycle" class="md-nav__link">
+    Task Lifecycle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-docker" class="md-nav__link">
+    Setup Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-puckeldocker-airflow" class="md-nav__link">
+    1. Puckel/docker-airflow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-official-docker-compose" class="md-nav__link">
+    2. Official Docker Compose
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to" class="md-nav__link">
+    How To:
+  </a>
+  
+    <nav class="md-nav" aria-label="How To:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schedule-a-dag" class="md-nav__link">
+    Schedule a DAG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-dag" class="md-nav__link">
+    Make a DAG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#share-task-metadata-xcoms" class="md-nav__link">
+    Share Task Metadata (XComs)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-a-db" class="md-nav__link">
+    Connect to a DB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-python-packages" class="md-nav__link">
+    Install Python Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensors" class="md-nav__link">
+    Sensors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    Caveats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheatsheet" class="md-nav__link">
+    Cheatsheet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    Known issues
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/developer_notes/engineering/orchestration/airflow.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="airflow">Airflow</h1>
+<details class="danger" open="open">
+<summary>Prerequisites</summary>
+<ul>
+<li>To use AirFlow it is required that you have basic knowledge of Python and Docker.</li>
+<li>When downloading images from DockerHub you may need to disconnect from the company VPN.</li>
+</ul>
+</details>
+<h2 id="overview">Overview</h2>
+<p>Apache Airflow is an open-source tool made by AirBnB for developing, scheduling, and monitoring batch-oriented workflows using code. Airflow’s extensible Python framework enables you to build workflows connecting with virtually any technology. A web interface helps manage the state of your workflows. Airflow is deployable in many ways, varying from a single process on your laptop to a distributed setup to support even the biggest workflows. Airflow follows a "workflow-as-code" principle. Traditionally, using Cronjobs was the default for scheduling events. However, some issues with this approach include poor failure handling, difficulty monitoring current and past processes and lack of scalability. Airflow aims to remedy these issues.</p>
+<details class="success" open="open">
+<summary>Some nice features</summary>
+<ul>
+<li>Can handle upstream/downstream dependencies gracefully. For example: if a step is dependent on another previous step to complete, it won't run until it passes successfully. If a  prior task fails Airflow can automatically retry that step.</li>
+<li>Easy to see historical workflow runs</li>
+<li>Ease of deployment - easy <a href="https://airflow.apache.org/docs/#providers-packagesdocsapache-airflow-providersindexhtml">integration with other technologies</a>. You can also create your own provider packages.</li>
+<li>You can implement trigger event to spin off tasks</li>
+</ul>
+</details>
+<hr />
+<h2 id="core-concepts">Core Concepts</h2>
+<h3 id="dags">DAGs</h3>
+<p>A workflow in Airflow is represented a direct acyclic graph (DAG). A DAG is a collection of all the tasks you want to run, and in what order. Read more <a href="https://airflow.apache.org/docs/apache-airflow/1.10.13/concepts.html?highlight=dag#dags">here</a> </p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/dag.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<h3 id="tasks">Tasks</h3>
+<p>So what is a task within a DAG? A task is defined as a unit of work. Represented as a node in the DAG graph. Tasks are written in Python. As you can see the graph above, task C is a downstream task of task A. </p>
+<h3 id="operators">Operators</h3>
+<p>Operators call the thing you want to run. This could be a shell script, a bash command, a python script etc. There are many operators that can be used, and you can use multiple operators types within a DAG.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/operators.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<details class="- tip">
+<summary>Some terminology</summary>
+<ul>
+<li><strong>Dag Run:</strong> An instantiation of a DAG <br></li>
+<li><strong>Task Instance:</strong> Specific point in time a task is executed <br></li>
+<li><strong>Execution Date:</strong> Date and time when a dag run occurred <br></li>
+</ul>
+</details>
+<h3 id="task-lifecycle">Task Lifecycle</h3>
+<p>There are 11 different states a task can be in, and these are represented with status colours within the dashboard UI. This tells us if there was any issues with the specific task, if it was successful and more. Read me <a href="https://airflow.apache.org/docs/apache-airflow/1.10.13/concepts.html?highlight=task%20status#task-lifecycle">here</a></p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/task_status.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>The <strong>scheduler</strong> within Airflow will take each task and determine which state it should be in. If there was no upstream issues, the task will be scheduled. From there it is picked up by the <strong>executor</strong> and queue it to be executed by the <strong>worker</strong>. Once complete, the task will be marked as success or failed.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/lifecycle1.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>If the task is failed, or is prematurely cancelled, it will be marked as <strong>up for retry</strong> state. It will then become rescheduled for execution.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/lifecycle2.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<hr />
+<h3 id="architecture">Architecture</h3>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/architecture.png" style="width: 100%; display: block; margin-right: auto; margin-left: auto;"></p>
+<ul>
+<li><strong><code>WebServer</code></strong>: Used to serve the Airflow user interface.</li>
+<li><strong><code>User Interface</code></strong>: Used to manage DAGs within a dashboard.</li>
+<li><strong><code>Scheduler</code></strong>: Used to queue up new tasks for the Executor</li>
+<li><strong><code>Workers</code></strong>: The component responsible for executing the task</li>
+<li><strong><code>DAGs</code></strong>: Python files listing out workflows. These are visible by the UI, Scheduler, Workers and Executor</li>
+<li><strong><code>Executor</code></strong>: The component that executes the task the has been queued.</li>
+<li><strong><code>Metadata DB</code></strong>: In order for Airflow to be aware of the past and current state of the DAG, metadata is stored in a database. This can be an SQLite, MySQL or Postgres.</li>
+<li><strong><code>airflow.cfg</code></strong>: The setup is configured by a data engineer within this file. This includes what DB to use, type of executor etc. </li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Official documentation <a href="https://airflow.apache.org/docs/apache-airflow/stable/start.html"><strong>here</strong></a></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Airflow needs a home. `~/airflow` is the default, but you can put it</span>
+<span class="c1"># somewhere else if you prefer (optional)</span>
+<span class="nb">export</span> <span class="nv">AIRFLOW_HOME</span><span class="o">=</span>~/airflow
+
+<span class="c1"># Install Airflow using the constraints file</span>
+<span class="nv">AIRFLOW_VERSION</span><span class="o">=</span><span class="m">2</span>.4.3
+<span class="nv">PYTHON_VERSION</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>python  --version <span class="p">|</span> cut -d <span class="s2">&quot; &quot;</span> -f <span class="m">2</span> <span class="p">|</span> cut -d <span class="s2">&quot;.&quot;</span> -f <span class="m">1</span>-2<span class="k">)</span><span class="s2">&quot;</span>
+<span class="c1"># For example: 3.7</span>
+<span class="nv">CONSTRAINT_URL</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/apache/airflow/constraints-</span><span class="si">${</span><span class="nv">AIRFLOW_VERSION</span><span class="si">}</span><span class="s2">/constraints-</span><span class="si">${</span><span class="nv">PYTHON_VERSION</span><span class="si">}</span><span class="s2">.txt&quot;</span>
+<span class="c1"># For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.4.3/constraints-3.7.txt</span>
+pip install <span class="s2">&quot;apache-airflow==</span><span class="si">${</span><span class="nv">AIRFLOW_VERSION</span><span class="si">}</span><span class="s2">&quot;</span> --constraint <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONSTRAINT_URL</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># The Standalone command will initialise the database, make a user,</span>
+<span class="c1"># and start all components for you.</span>
+airflow standalone
+
+<span class="c1"># Visit localhost:8080 in the browser and use the admin account details</span>
+<span class="c1"># shown on the terminal to login.</span>
+<span class="c1"># Enable the example_bash_operator dag in the home page</span>
+</code></pre></div>
+<h2 id="setup-docker">Setup Docker</h2>
+<p>You can run Airflow within a virtual environment and conda environment. However, Docker is the most suitable choice.
+There are two approaches you can take for spinning up Airflow within a docker environment:</p>
+<h3 id="1-puckeldocker-airflow">1. Puckel/docker-airflow</h3>
+<p>This provides an automated build of Docker for Airflow, and is suggested in the Microsoft documentation. However, this can be intimidating if you have never used Airflow before. It's worth mentioning that it appears to no longer be supported, therefore it is riddled with deprecation warnings. See github repo <a href="https://github.com/puckel/docker-airflow">here</a>. The main commands you will need:</p>
+<div class="highlight"><pre><span></span><code>docker build --rm --build-arg <span class="nv">AIRFLOW_DEPS</span><span class="o">=</span><span class="s2">&quot;datadog,dask&quot;</span> --build-arg <span class="nv">PYTHON_DEPS</span><span class="o">=</span><span class="s2">&quot;flask_oauthlib&gt;=0.9&quot;</span> -t puckel/docker-airflow:latest .
+
+docker run -d -p <span class="m">8080</span>:8080 puckel/docker-airflow webserver
+</code></pre></div>
+<h3 id="2-official-docker-compose">2. Official Docker Compose</h3>
+<p>Airflow provide a docker run-through, but give the warning that it would be difficult to configure this if you are not experienced with docker. See Official documentation <a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html">here</a>. You can run through this setup guide. Unless you are using a Windows machine, you will need to run this command before spinning up anything:</p>
+<ul>
+<li><code>echo -e "AIRFLOW_UID=$(id -u)" &gt; .env</code></li>
+</ul>
+<p>Here are the most useful commands you'll need:</p>
+<ul>
+<li><code>docker-compose up airflow-init</code> need to run the first time your initializing the DB and base container.</li>
+<li><code>docker-compose up</code> will spin up the containers in the background (add <code>-d</code> to run in background and free up the terminal)</li>
+<li><code>docker compose down</code> will shutdown and clear all containers (add <code>-v</code> to remove all containers)</li>
+</ul>
+<h2 id="how-to">How To:</h2>
+<h3 id="schedule-a-dag">Schedule a DAG</h3>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">DAG</span><span class="p">(</span><span class="n">dag_id</span> <span class="o">=</span> <span class="s2">&quot;example_dag&quot;</span><span class="p">,</span> 
+        <span class="n">default_args</span> <span class="o">=</span> <span class="n">default_args</span><span class="p">,</span> 
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;example dag&quot;</span><span class="p">,</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span> <span class="c1">#12:51 pm 2nd December 2022</span>
+        <span class="n">schedule_interval</span> <span class="o">=</span> <span class="s2">&quot;@daily&quot;</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+</code></pre></div>
+<p>You can schedule in what interval you would like to run a DAG, <a href="https://airflow.apache.org/docs/apache-airflow/1.10.1/scheduler.html#dag-runs">see here</a> different cadences you can set the scheduler to run. This defined using the <code>schedule_interval</code> argument.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/daily.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>It's worth noting that if you change the frequency of the DAG run, the metadata store will still persist the history of the previous runs, and highlight the future planned runs. You can see this in the calender tab of the dashboard. See the image below, where the cadence has been set to weekly.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/weekly.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>You can also use CRON expressions to set the cadence of when the DAG will run. See <a href="https://crontab.guru/">here</a> for help on creating cron expressions. Again, you use the <code>schedule_interval</code> parameter for this:
+<div class="highlight"><pre><span></span><code><span class="n">schedule_interval</span> <span class="o">=</span> <span class="s2">&quot;0 0 * * *&quot;</span>
+</code></pre></div></p>
+<h3 id="make-a-dag">Make a DAG</h3>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/dag_ex.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Lets say we want to make a DAG made up of tasks like the one shown above. Making a task can be easily done by instantiating the desired operator for your usecase. In this example below, we have 5 tasks using the <code>BashOperator</code> for executing bash commands, and the <code>PythonOperator</code> which has the ability to invoke python methods.</p>
+<div class="highlight"><pre><span></span><code><span class="n">task_one</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_one&quot;</span><span class="p">,</span>
+    <span class="n">bash_command</span> <span class="o">=</span> <span class="s2">&quot;echo hello world &quot;</span>
+<span class="p">)</span>
+
+<span class="n">task_two</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_two&quot;</span><span class="p">,</span>
+    <span class="n">bash_command</span> <span class="o">=</span> <span class="s2">&quot;echo task 2&quot;</span>
+<span class="p">)</span>
+
+<span class="n">task_three</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_three&quot;</span><span class="p">,</span>
+    <span class="n">bash_command</span> <span class="o">=</span> <span class="s2">&quot;echo task 3&quot;</span>
+<span class="p">)</span>
+
+<span class="n">task_four</span> <span class="o">=</span> <span class="n">BashOperator</span><span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_four&quot;</span><span class="p">,</span>
+    <span class="n">bash_command</span> <span class="o">=</span> <span class="s2">&quot;echo task 4&quot;</span>
+<span class="p">)</span>
+
+<span class="n">task_five</span> <span class="o">=</span> <span class="n">PythonOperator</span> <span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_five&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span> <span class="o">=</span> <span class="n">some_function</span><span class="p">,</span>
+    <span class="c1"># protip: you can pass variables to the function you call </span>
+    <span class="c1"># within the PythonOperator using the op_kwargs parameter</span>
+    <span class="n">op_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;string&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>So now that we have defined our individual tasks, we need to link them up into a directed graph. This can be done a number of ways. Traditionally, you would have used the <code>.set_upstream()</code> and <code>.set_downstream()</code> functions to indicate that the task object is dependent on another task object. </p>
+<div class="highlight"><pre><span></span><code><span class="n">task_one</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task_two</span><span class="p">)</span> 
+<span class="n">task_one</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task_three</span><span class="p">)</span>
+<span class="n">task_two</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task_four</span><span class="p">)</span>
+<span class="n">task_three</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task_four</span><span class="p">)</span>
+<span class="n">task_four</span><span class="o">.</span><span class="n">set_downstream</span><span class="p">(</span><span class="n">task_five</span><span class="p">)</span>
+</code></pre></div>
+<p>Alternatively, since Airflow 1.8, this can be done with the Python <code>&gt;&gt;</code> and <code>&lt;&lt;</code> operators. This is called <a href="https://airflow.apache.org/docs/apache-airflow/1.10.3/concepts.html?highlight=trigger#bitshift-composition">BitShift Composition</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">task_one</span> <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">task_two</span><span class="p">,</span> <span class="n">task_three</span><span class="p">]</span>
+<span class="n">task_two</span> <span class="o">&gt;&gt;</span> <span class="n">task_four</span>
+<span class="n">task_three</span> <span class="o">&gt;&gt;</span> <span class="n">task_four</span>
+<span class="n">task_four</span> <span class="o">&gt;&gt;</span> <span class="n">task_five</span>
+</code></pre></div>
+<p>There is a shorthand way of doing this using what's known as the Task Flow API. By using python decorators you can considerably decrease the code line-count. This approach isn't as verbose as the previous, so knowing where dependencies and flow of the tasks are not as intuitive. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">airflow.decorators</span> <span class="kn">import</span> <span class="n">dag</span><span class="p">,</span> <span class="n">task</span>
+
+<span class="nd">@dag</span><span class="p">(</span><span class="n">dag_id</span><span class="o">=</span><span class="s1">&#39;taskflow_dag_v1&#39;</span><span class="p">,</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span> <span class="c1">#12 pm 2nd December 2022</span>
+    <span class="n">schedule_interval</span> <span class="o">=</span> <span class="s2">&quot;@weekly&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world_etl</span><span class="p">():</span>
+
+    <span class="nd">@task</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&quot;Jonas&quot;</span>
+
+    <span class="nd">@task</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">get_name</span><span class="p">()</span>
+    <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">example_dag</span> <span class="o">=</span> <span class="n">hello_world_etl</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="share-task-metadata-xcoms">Share Task Metadata (XComs)</h3>
+<p>Airflow gives you the ability to share information across different tasks using XComs (short for “cross-communications”). You can view the XComs table by navigating to <code>Admin</code> in the navigation bar.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/xcoms.png" style="width: 30%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Airflow Operators implicitly pass the context variable <code>ti</code>, which is specific to airflow and stands for <strong>task instance</strong>.
+By default, every return value automatically gets added to XComs which can later be referenced in different task. You can also achieve this by using the <code>ti.xcom_push()</code> function.  Using <code>ti.xcom_pull()</code> you can pull the metadata that was added to xcoms by passing the <code>task_id</code>. In the example below the log output from task_two will be <code>"Hello, i am Jerry Seinfield!"</code>. It's worth mentioning that XComs is not for large data sharing, as the maximum XComs variable size is 48KB. So it should only be used for passing around strings or paths to larger files, not the data itself.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">ti</span><span class="p">):</span>
+    <span class="c1"># print(f&quot;Hello, i am {ti.xcom_pull(task_ids=&#39;task_one&#39;, key=&#39;name&#39;)}!&quot;)</span>
+    <span class="c1"># OR</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, i am </span><span class="si">{</span><span class="n">ti</span><span class="o">.</span><span class="n">xcom_pull</span><span class="p">(</span><span class="n">task_ids</span><span class="o">=</span><span class="s1">&#39;task_one&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">ti</span><span class="p">):</span>
+    <span class="c1"># ti.xcom_push(key=&quot;name&quot;, value=&quot;Jerry Seinfield&quot;)</span>
+    <span class="c1"># OR</span>
+    <span class="k">return</span> <span class="s1">&#39;Jerry Seinfield&#39;</span>
+
+<span class="n">task_one</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_one&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span> <span class="o">=</span> <span class="n">get_name</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">task_two</span> <span class="o">=</span> <span class="n">PythonOperator</span> <span class="p">(</span>
+    <span class="n">task_id</span> <span class="o">=</span> <span class="s2">&quot;task_two&quot;</span><span class="p">,</span>
+    <span class="n">python_callable</span> <span class="o">=</span> <span class="n">greet</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="connect-to-a-db">Connect to a DB</h3>
+<p>Lets say we want to expose the database to Airflow to store some data or log some important values. Firstly we need expose some ports in our database so we can query it using DBeaver. Within the <code>docker-compose.yaml</code> expose the postgres instance using the port <code>5432</code></p>
+<div class="highlight"><span class="filename">docker-compose.yaml</span><pre><span></span><code><span class="nt">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:13</span><span class="w"></span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow</span><span class="w"></span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow</span><span class="w"></span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow</span><span class="w"></span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-db-volume:/var/lib/postgresql/data</span><span class="w"></span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432:5432</span><span class="w"></span>
+</code></pre></div>
+<p>Go to the <code>Admin</code> tab in the dashboard, and click <code>Connections</code>. Give it a connection name, this will be used to reference in the python code. You will see under <code>Connection Type</code> that we have a lot of different connections we can make. In this example we are using Postgres. When using docker you must use <code>host.docker.internal</code>, as <code>localhost</code> will not work in this instance. Lastly, provide the Airflow admin username and password and specify the <code>5432</code> port.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/connection.png" style="width: 80%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>You have use the <code>PostgresOperator</code> to interact with Postgres resources within a DAG. In this example we simply connect to posgres and create a table called <code>dag_runs</code>, then add the data and DAG ID to a row in the table.  Note that the <code>{{ }}</code> symbols allow you to access environment variables, otherwise <a href="https://airflow.apache.org/docs/apache-airflow/1.10.5/macros.html">known as macros</a>, within Airflow. For example <code>{{ ds }}</code> corresponds with the date.</p>
+<div class="highlight"><span class="filename">docker-compose.yaml</span><pre><span></span><code><span class="n">task1</span> <span class="o">=</span> <span class="n">PostgresOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;create_postgres_table&#39;</span><span class="p">,</span>
+    <span class="n">postgres_conn_id</span><span class="o">=</span><span class="s1">&#39;postgres_local&#39;</span><span class="p">,</span> <span class="c1">#conn_id in dashboard: airflow/admin/connections</span>
+    <span class="n">sql</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        create table if not exists dag_runs (</span>
+<span class="s2">            dt date,</span>
+<span class="s2">            dag_id character varying,</span>
+<span class="s2">            primary key (dt, dag_id)</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="p">)</span>
+
+<span class="n">task3</span> <span class="o">=</span> <span class="n">PostgresOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;insert_into_table&#39;</span><span class="p">,</span>
+    <span class="n">postgres_conn_id</span><span class="o">=</span><span class="s1">&#39;postgres_local&#39;</span><span class="p">,</span>
+    <span class="n">sql</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        insert into dag_runs (date, dag_id) values (&#39;{{ ds }}&#39;, &#39;{{ dag.dag_id }}&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>You can see here DBeaver is used to query the database table and values we just created with airflow. </p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/dbeaver.png" style="width: 90%; display: block; margin-right: auto; margin-left: auto;"></p>
+<h3 id="install-python-packages">Install Python Packages</h3>
+<p>It's most likely the case that you will just be using Airflow to orchestrate jobs in different environments. In the case that you need to install some dependencies in your Airflow container then you will need to <em>extend</em> the Airflow image. For this example we will be installing DVC. Firstly, you need to make the two files as seen below. By stating <code>FROM apache/airflow:2.4.3</code> that means we are extending the base image, IE: adding a little something extra. We copy the <code>requirements.txt</code> and run a <code>pip install</code> which will make sure DVC is present in the docker container at runtime.</p>
+<div class="highlight"><span class="filename">requirements.txt</span><pre><span></span><code>dvc&gt;=2.1.0
+</code></pre></div>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">apache/airflow:2.4.3</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt /requirements.txt
+<span class="k">RUN</span><span class="w"> </span>pip install --user --upgrade pip
+<span class="k">RUN</span><span class="w"> </span>pip install --no-cache-dir --user -r /requirements.txt
+</code></pre></div>
+<p>Now that you have defined the dependencies, you need to build the image. <br>
+This can be done using: <code>docker build . --tag &lt;new_image_name&gt;:latest</code> replacing <code>new_image_name</code> with whatever name you like.
+You will now need to edit the <code>docker-compose.yaml</code>, replacing <code>apache/airflow:2.4.3</code> with the name you just created.</p>
+<div class="highlight"><span class="filename">docker-compose.yaml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3&#39;</span><span class="w"></span>
+<span class="nt">x-airflow-common</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nl">&amp;airflow-common</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># In order to add custom dependencies or upgrade provider packages you can use your extended image.</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml</span><span class="w"></span>
+<span class="w">  </span><span class="c1"># and uncomment the &quot;build&quot; line below, Then run `docker-compose build` to build the images.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${AIRFLOW_IMAGE_NAME:-extended_airflow_image:latest}</span><span class="w"></span>
+</code></pre></div>
+<p>Then run <code>docker compose up</code> to spin up the docker containers. Lets make a simple task that proves DVC has been installed successfully.</p>
+<div class="highlight"><span class="filename">extended_dag.py</span><pre><span></span><code><span class="k">def</span> <span class="nf">print_version</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">dvc</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dvc</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">task1</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+    <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;print_version&#39;</span><span class="p">,</span>
+    <span class="n">python_callable</span><span class="o">=</span><span class="n">print_version</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>You will see in the Airflow task logs that the version was printed out as expected. We have successfully extended our docker image.</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/extend_deps.png" style="width: 90%; display: block; margin-right: auto; margin-left: auto;"></p>
+<h3 id="sensors">Sensors</h3>
+<p>A <a href="https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html">Sensor</a> is a special type of operator that waits for event to occur. This is useful in cases where some task is dependent on a file, but you don't have certainty on when it will be available. You can view a list of the available Azure Sensor Operators <a href="https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/_api/airflow/providers/microsoft/azure/sensors/index.html#module-airflow.providers.microsoft.azure.sensors">here</a>.</p>
+<p>In this example we will connect our local Airflow containers to the our teams Azure cloud subscription, and set up a listener to print "hello new file" when a new file appears within blob storage. Firstly, go to the Azure portal and find the blob container you'd like to apply the sensor to. Go to <strong>Access Keys</strong> and copy the <strong>connection string</strong>.</p>
+<p>Go to the Airflow Dashboard and make a new connection. Make note of the connection ID because you will need to reference this in the python code later. Fill out the rest of form similar to the screenshot below and paste in the Azure connection string in <strong>Blob Storage Connection String (optional)</strong></p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/azure.png" style="width: 90%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Within your python script, make a <code>WasbBlobSensor</code> object using the name of the container, the file its looking for. Make sure to give <code>wasb_conn_id</code> the connection ID you made earlier. </p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="n">dag_id</span><span class="o">=</span><span class="s1">&#39;dag_with_sensor&#39;</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+    <span class="n">wait_for_blob</span> <span class="o">=</span> <span class="n">WasbBlobSensor</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;wait_for_blob&quot;</span><span class="p">,</span>
+        <span class="n">container_name</span> <span class="o">=</span> <span class="s1">&#39;blob&#39;</span><span class="p">,</span>
+        <span class="n">blob_name</span> <span class="o">=</span> <span class="s1">&#39;test_sensor_file.csv&#39;</span><span class="p">,</span>
+        <span class="n">wasb_conn_id</span>  <span class="o">=</span> <span class="s1">&#39;azure_blob_connect&#39;</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>This task will run continously until the criteria has been met (that the "test_sensor_file.csv" blob/file is within the container). I manually uploaded a file to show what this would look like in the real world. You should see something like this in the logs for the file that was uploaded:</p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/upload_blob.png" style="width: 100%; display: block; margin-right: auto; margin-left: auto;"></p>
+<p><img src="../../../../resources/images/developer_handbook/orchestration/success_log.png" style="width: 100%; display: block; margin-right: auto; margin-left: auto;"></p>
+<hr />
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Airflow is not meant to be used for streaming workloads, it is only used for batch processing. Look into Apache Kafka as an alternative.</li>
+<li>You need some coding experience to use Airflow, as its discourages to use the UI.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>Airflow:<ul>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html">How-to Guides</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html">Configuration Reference</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html#howto-connection-wasb">Connecting to Azure</a></li>
+</ul>
+</li>
+<li>Microsoft:<ul>
+<li><a href="https://azure.microsoft.com/en-us/blog/deploying-apache-airflow-in-azure-to-build-and-run-data-pipelines/">Deploying Apache Airflow in Azure to build and run data pipelines</a></li>
+</ul>
+</li>
+<li>Youtube:<ul>
+<li><a href="https://www.youtube.com/watch?v=K9AnJ9_ZAXE">Airflow Tutorial for Beginners - Full Course in 2 Hours 2022</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="cheatsheet">Cheatsheet</h2>
+<ul>
+<li><code>airflow db init</code> to initialize the sqllite database, </li>
+<li><code>airflow users create</code> to make a new user</li>
+<li><code>airflow scheduler</code> to turn on the scheduler</li>
+<li><code>docker compose up</code> will start the scheduler, webserver, triggerer </li>
+</ul>
+<h2 id="known-issues">Known issues</h2>
+<ul>
+<li><code>sudo chmod 666 /var/run/docker.sock</code></li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../../operations/project_planning/scoping/hlp/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Human Level Performance (HLP)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Human Level Performance (HLP)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../data_validation/tfdv/" class="md-footer__link md-footer__link--next" aria-label="Next: TFDV" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              TFDV
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.bd0b6b67.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+    
+  </body>
+</html>
