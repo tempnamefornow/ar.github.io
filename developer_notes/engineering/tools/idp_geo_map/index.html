@@ -1,0 +1,1266 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ar.github.io/developer_notes/engineering/tools/idp_geo_map/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
+    
+    
+      
+        <title>Idp geo map - AR Assistant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-header__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AR Assistant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Idp geo map
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-tabs__link">
+        Project Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link">
+        Developer Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-nav__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AR Assistant Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+         
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Project Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Project Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scoping" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Developer Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        📚 Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_1" type="checkbox" id="__nav_3_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_1">
+          Github
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Github" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Github
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_intro/" class="md-nav__link">
+        Git Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_2">
+          MLOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MLOps" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          MLOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/mlops/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3" type="checkbox" id="__nav_3_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3">
+          Project Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Planning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Project Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3_1" type="checkbox" id="__nav_3_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3_1">
+          Project Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Scoping" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/hlp/" class="md-nav__link">
+        Human Level Performance (HLP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Orchestration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Orchestration" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Orchestration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../orchestration/airflow/" class="md-nav__link">
+        Apache Airflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Data Validation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Validation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Validation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_validation/tfdv/" class="md-nav__link">
+        TFDV
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview 👋
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datasources" class="md-nav__link">
+    Datasources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use" class="md-nav__link">
+    How to use
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/developer_notes/engineering/tools/idp_geo_map.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+  <h1>Idp geo map</h1>
+
+<p><img src="../../../../resources/images/developer_handbook/tools/logo.png" style="height: 300px; display: block; margin-right: auto; margin-left: auto;"> </p>
+<h2 id="overview">Overview 👋</h2>
+<p>The <b>Optum-geo</b> library is a tool developed for python to convert datasets from one geo-location to another. Lets say for example you have a time series dataset that is on a county (FIPS) level, but you want to convert it to a state level. This will aggregate all the relevant data respective to each county within each state. </p>
+<p>This isn't just restricted to county to state mappings. Check the available mappings below: </p>
+<ul>
+<li>Zip3 → FIPS</li>
+<li>FIPS → CBSA</li>
+<li>FIPS → CSA</li>
+<li>FIPS → State</li>
+<li>FIPS → Micropolitan Statistical Area</li>
+<li>FIPS → Metropolitan Statistical Area</li>
+</ul>
+<details class="- question">
+<summary>Understanding USE Geo Resolutions🗺</summary>
+<p><h2>County Level FIPS</h2> </p>
+<ul>
+<li>FIPS the lowest resolution in this library. A Federal Information Processing Series is 5 digit numeric code. The first two digits relate to US states and the three digits relate to the county. (3142 counties)</li>
+<li>Example: <code>FIPS 06071 relates to, 06-California and 071-San Bernardino County</code> </li>
+</ul>
+<hr />
+<p><h2>Core Based Statistical Areas (CBSA)</h2>
+CBSAs represent geographic entities based on the concept of a core area with a large population nucleus, plus adjacent communities having a high degree of social and economic integration with that core. </p>
+<ul>
+<li>A CBSA consists of a U.S. county or counties associated with at least one urban core ( with a population of at least 10,000) along with any adjacent counties having a high degree of social and economic integration with the core as measured through commuting ties with the counties containing the core. </li>
+<li>The offical list of CBSA can be obtained from <a href="https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html">US Census Delineation Files</a></li>
+<li>CBSA are further categorized as <ul>
+<li><strong>Metropolitian statisitical area MSA</strong> where the urbanized core of the CBSA is 50,000 or more population (392 such areas, 1180 counites,  representing 86.1% of the US population)</li>
+<li><strong>Micropolitan statistical areas</strong> where the urban cluster is of at least</li>
+</ul>
+</li>
+<li>10,000 and less than 50,000 population (546 such areas, 661 counites, representing 8.3% of the US population) </li>
+<li><code>Codes for Metropolitan and Micropolitan Statistical Areas and Metropolitan Divisions fall within the 10000 to 49999 range and are assigned in alphabetical order by area title. Metropolitan Divisions are 
+distinguished by a5-digit code ending in 4.</code> </li>
+</ul>
+<hr />
+<p><h2>Combined Statiscal Areas (CSA)</h2>
+are adjacent Metropolitan and Micropolitan Statistical Areas, in various combinations,  that have social and economic ties as measured by commuting, but at lower levels than are found among counties within CBSAs. This can be characterized as representing larger regions that reflect broader social and economic interactions, such as wholesaling, commodity distribution, and weekend recreation activities. (175 such areas, representing 551 metro &amp; micro CBSA)
+- <code>Combined Statistical Area and Combined NECTA(New England City &amp; Town Areas) codes are 3 digits in length. Combined Statistical Area codes fall within the 100 to 599 range. Combined NECTA codes fall within the 700 to 799 range.</code> </p>
+<p><em>A detailed explanation of the above can be found at <a href="https://www.whitehouse.gov/wp-content/uploads/2020/03/Bulletin-20-01.pdf">Office of Management Budget</a>.</em></p>
+<p><img src="../../../../resources/images/developer_handbook/tools/geo_readme.png" style="height: 300px; display: block; margin-right: auto; margin-left: auto;"> </p>
+<hr />
+<p><h2>Zone Improvement Plan ZIP Codes </h2>
+are probably the most recognisable of all geo codes. Zip codes are not drawn according to to county boundaries. They are created by the the United States Postal Service. </p>
+<ul>
+<li>20% of ZIP codes lie in more than 1 county. </li>
+</ul>
+<p><code>ZIP is broken down along national area (digit 1), region or city (digit 2-3), delivery/postal office area(digts 4-5)</code> </p>
+<p><img src="../../../../resources/images/developer_handbook/tools/zip_code_map.png" style="height: 400px; display: block; margin-right: auto; margin-left: auto;"> </p>
+</details>
+<h2 id="example">Example</h2>
+<p>Here is an example of how the library will convert FIPS level data to CBSA level. The CBSA 26700 is made up of two counties (46073 and 46005). Alternatively, see <a href="https://github.com/uhg-internal/idp-geo-mapper/blob/master/notebooks/examples.ipynb">the examples notebook</a> for more examples on how to use it.</p>
+<p><strong>Input</strong></p>
+<ul>
+<li>Example of a datafame in FIPS level with 46073 and 46005 FIPS</li>
+<li>This data is used as input</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>fips</th>
+<th>county</th>
+<th>province_state</th>
+<th>country</th>
+<th>date</th>
+<th>confirmed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>46073</td>
+<td>Jerauld</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-05</td>
+<td>39</td>
+</tr>
+<tr>
+<td>46073</td>
+<td>Jerauld</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-06</td>
+<td>39</td>
+</tr>
+<tr>
+<td>46073</td>
+<td>Jerauld</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-07</td>
+<td>39</td>
+</tr>
+<tr>
+<td>46073</td>
+<td>Jerauld</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-08</td>
+<td>39</td>
+</tr>
+<tr>
+<td>46073</td>
+<td>Jerauld</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-09</td>
+<td>39</td>
+</tr>
+<tr>
+<td>46005</td>
+<td>Beadle</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-05</td>
+<td>540</td>
+</tr>
+<tr>
+<td>46005</td>
+<td>Beadle</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-06</td>
+<td>541</td>
+</tr>
+<tr>
+<td>46005</td>
+<td>Beadle</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-07</td>
+<td>545</td>
+</tr>
+<tr>
+<td>46005</td>
+<td>Beadle</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-08</td>
+<td>549</td>
+</tr>
+<tr>
+<td>46005</td>
+<td>Beadle</td>
+<td>South Dakota</td>
+<td>US</td>
+<td>2020-07-09</td>
+<td>551</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output</strong></p>
+<ul>
+<li>The package will output an aggregated version on a CBSA level</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>confirmed</th>
+<th>cbsa_name</th>
+<th>state</th>
+<th>date</th>
+<th>cbsa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>579</td>
+<td>Huron, SD</td>
+<td>South Dakota</td>
+<td>2020-07-05</td>
+<td>26700</td>
+</tr>
+<tr>
+<td>580</td>
+<td>Huron, SD</td>
+<td>South Dakota</td>
+<td>2020-07-06</td>
+<td>26700</td>
+</tr>
+<tr>
+<td>584</td>
+<td>Huron, SD</td>
+<td>South Dakota</td>
+<td>2020-07-07</td>
+<td>26700</td>
+</tr>
+<tr>
+<td>588</td>
+<td>Huron, SD</td>
+<td>South Dakota</td>
+<td>2020-07-08</td>
+<td>26700</td>
+</tr>
+<tr>
+<td>590</td>
+<td>Huron, SD</td>
+<td>South Dakota</td>
+<td>2020-07-09</td>
+<td>26700</td>
+</tr>
+</tbody>
+</table>
+<h2 id="datasources">Datasources</h2>
+<p>Source files that are used to make mapping files in <code>/src/optum_geo/data</code> are named by the <i>source_target resolution_year update</i> and are saved in their respective folders.</p>
+<div class="admonition danger">
+<p><strong>Warning:</strong> As the census bureau updates these resolutions roughly once a year, ensure that you are using the most up to data mappings.</p>
+</div>
+<!-- <div style="display: block; margin-right: auto; margin-left: auto;">  -->
+
+<table>
+<thead>
+<tr>
+<th>Resolution</th>
+<th>Source Link</th>
+<th>Census Bureau</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FIPS to CBSA</td>
+<td><a href="https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html">source</a></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>FIPS to CSA</td>
+<td><a href="https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/delineation-files.html">source</a></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>FIPS to State</td>
+<td><a href="https://www.census.gov/geographies/reference-files/2017/demo/popest/2017-fips.html">source</a> (second file)</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>FIPS to MSA</td>
+<td><a href="https://www2.census.gov/programs-surveys/metro-micro/geographies/reference-files/2020/delineation-files/list1_2020.xls">source</a></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ZIP3 to FIPS</td>
+<td>Optum Maps</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<!-- </div> -->
+
+<hr />
+<h2 id="installation">Installation</h2>
+<p>The optum-geo libary is very easy to get up and running. To do this you need to:</p>
+<ul>
+<li>Open your terminal </li>
+<li>clone the <a href="https://github.com/uhg-internal/idp-geo-mapper">repo</a>.</li>
+<li><code>cd ./optum-geo-standard</code></li>
+</ul>
+<p>Now you will need to install like any other pip installable package. (make sure you have activated your conda environment)</p>
+<div class="highlight"><pre><span></span><code>pip install .
+</code></pre></div>
+<p>Boom! now you have the <strong>idp geo mapper</strong> library installed 👍</p>
+<h2 id="how-to-use">How to use</h2>
+<p>To use the package you import it like any other python package. 
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">optum_geo.aggregation</span> <span class="kn">import</span> <span class="n">aggregator</span>
+</code></pre></div></p>
+<p>Now you are ready to start converting your data. Here is an example below of how to convert a fips time series dataset into a CBSA dataset</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">aggregator</span><span class="o">.</span><span class="n">aggregate_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                                <span class="n">current_res</span> <span class="o">=</span> <span class="s1">&#39;fips&#39;</span><span class="p">,</span>
+                                <span class="n">target_res</span> <span class="o">=</span> <span class="s1">&#39;CBSA&#39;</span><span class="p">,</span>
+                                <span class="n">current_res_col</span> <span class="o">=</span> <span class="s1">&#39;fips&#39;</span><span class="p">,</span>
+                                <span class="n">group_by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>
+                                <span class="n">convert_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;confirmed&#39;</span><span class="p">],</span> 
+                                <span class="n">collect_unmappable</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                                <span class="n">mapping_file</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                <span class="n">map_type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                <span class="n">mapping_src</span> <span class="o">=</span> <span class="s1">&#39;census&#39;</span><span class="p">)</span>
+</code></pre></div>
+<details>
+<summary>aggregator.aggregate_data</summary>
+<p>Function takes in a data frame and converts the current geographical
+resolution to a higher one. Optum-geo uses data provided by the US census bureau for 
+it's mapping files, with the exception of mapping Zip3 to FIPS which is provided by the <strong>Optum Maps</strong> team. </p>
+<p><strong>Args:</strong></p>
+<ul>
+<li>
+<p><code>data (pd.DataFrame)</code>: the dataframe a user wishes to convert; be careful the given dataframe will be modified</p>
+</li>
+<li>
+<p><code>current_res (str)</code>: the current geographical resolution column the data is in</p>
+</li>
+<li>
+<p><code>target_res (str)</code>: the resolution the user wants to convert to [fips, zip3, CBSA, CSA]</p>
+</li>
+<li>
+<p><code>group_by (str)</code>: these columns will be used - in addition to <code>target_res</code> - to group 
+    the dataframe rows and aggregate the <code>convert_columns</code></p>
+</li>
+<li>
+<p><code>convert_columns (list)</code>: the columns they wish to aggregate [ex: <code>confirmed_cases</code>, <code>deaths</code> etc.]</p>
+</li>
+<li>
+<p><code>mapping_file</code>: if you have a file that is not included, it can be imported 
+                (target resolution must be lowercas and acronym only)</p>
+</li>
+<li>
+<p><code>map_type(str or None)</code>: only need to be specified if a custom <code>mapping_file</code> is used;
+    must be <code>MAP_TYPE_FUNCTION</code> (a current res maps to at most one target) or
+    <code>MAP_TYPE_ONE_TO_MANY</code> (a current res can map to multiple targets)</p>
+</li>
+<li>
+<p><code>collect_unmappable(bool)</code>: if set to <code>True</code>, maps everything that cannot be mapped to a <code>target_res</code> to <code>None</code> instead</p>
+</li>
+<li>
+<p><code>mapping_src (string)</code>: Choose the source from where the mapping files are generated [ex: census or optum_maps]</p>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<ul>
+<li><code>pd.DataFrame</code>: result of aggregation in a dataframe and a dictionary containing meta information</li>
+</ul>
+</details>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.bd0b6b67.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+    
+  </body>
+</html>

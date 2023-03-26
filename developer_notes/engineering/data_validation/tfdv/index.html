@@ -1,0 +1,1315 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ar.github.io/developer_notes/engineering/data_validation/tfdv/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
+    
+    
+      
+        <title>TFDV - AR Assistant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tensorflow-data-validation-tfdv" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-header__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AR Assistant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TFDV
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-tabs__link">
+        Project Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Developer Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-nav__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AR Assistant Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+         
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Project Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Project Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scoping" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Developer Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        📚 Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_1" type="checkbox" id="__nav_3_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_1">
+          Github
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Github" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Github
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_intro/" class="md-nav__link">
+        Git Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_2" type="checkbox" id="__nav_3_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_2">
+          MLOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MLOps" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          MLOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/mlops/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3" type="checkbox" id="__nav_3_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3">
+          Project Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Planning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Project Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2_3_1" type="checkbox" id="__nav_3_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2_3_1">
+          Project Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Scoping" data-md-level="4">
+        <label class="md-nav__title" for="__nav_3_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/hlp/" class="md-nav__link">
+        Human Level Performance (HLP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_1" type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1">
+          Orchestration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Orchestration" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Orchestration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../orchestration/airflow/" class="md-nav__link">
+        Apache Airflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3_2" type="checkbox" id="__nav_3_3_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2">
+          Data Validation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Validation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Validation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          TFDV
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        TFDV
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-dataset-statistics" class="md-nav__link">
+    Visualize Dataset Statistics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-data-schema" class="md-nav__link">
+    Create a Data Schema
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-train-vs-evaluation-datasets" class="md-nav__link">
+    Comparing Train vs Evaluation Datasets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#displaying-anomalies" class="md-nav__link">
+    Displaying Anomalies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-schema" class="md-nav__link">
+    Updating the Schema
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anomaly-detection-criteria" class="md-nav__link">
+    Anomaly Detection Criteria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-domain-value" class="md-nav__link">
+    Adding New Domain Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numerical-range-criteria" class="md-nav__link">
+    Numerical Range Criteria
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-slicing" class="md-nav__link">
+    Data Slicing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualize-dataset-statistics" class="md-nav__link">
+    Visualize Dataset Statistics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-data-schema" class="md-nav__link">
+    Create a Data Schema
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-train-vs-evaluation-datasets" class="md-nav__link">
+    Comparing Train vs Evaluation Datasets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#displaying-anomalies" class="md-nav__link">
+    Displaying Anomalies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-the-schema" class="md-nav__link">
+    Updating the Schema
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating the Schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anomaly-detection-criteria" class="md-nav__link">
+    Anomaly Detection Criteria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-new-domain-value" class="md-nav__link">
+    Adding New Domain Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numerical-range-criteria" class="md-nav__link">
+    Numerical Range Criteria
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-slicing" class="md-nav__link">
+    Data Slicing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/developer_notes/engineering/data_validation/tfdv.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="tensorflow-data-validation-tfdv">TensorFlow Data Validation (TFDV)</h1>
+<details class="note" open="open">
+<summary>Note</summary>
+<ul>
+<li>The dataset used in this example below is the <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">Census Income Dataset</a>, a dataset that can be used to predict if an individual earns more than or less than 50k US Dollars annually </li>
+</ul>
+</details>
+<h2 id="overview">Overview</h2>
+<p>TFDV helps to understand, validate, and monitor production machine learning data at scale. It provides insight into some key questions in the data analysis process such as:</p>
+<ul>
+<li>What are the underlying statistics of my data?</li>
+<li>What does my training dataset look like?</li>
+<li>How does my evaluation and serving datasets compare to the training dataset?</li>
+<li>How can I find and fix data anomalies?</li>
+</ul>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/tfdv.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>As shown, you can use TFDV to compute descriptive statistics of the training data and generate a schema. You can then validate new datasets (e.g. the serving dataset from your customers) against this schema to detect and fix anomalies. This helps prevent the different types of skew. That way, you can be confident that your model is training on or predicting data that is consistent with the expected feature types and distribution.</p>
+<p>This tutorial will show you how to:</p>
+<ol>
+<li>Generate and visualize statistics from a dataset</li>
+<li>Detect and fix anomalies in an evaluation dataset</li>
+</ol>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code>pip install tensorflow
+pip install tensorflow_data_validation
+</code></pre></div>
+<h2 id="visualize-dataset-statistics">Visualize Dataset Statistics</h2>
+<p>You can compute your dataset statistics by using the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_dataframe">generate_statistics_from_dataframe</a> method. Under the hood, it distributes the analysis via Apache Beam which allows it to scale over large datasets. In this example we have two datasets, a <code>train_df</code> and <code>eval_df</code>.</p>
+<div class="highlight"><pre><span></span><code>train_stats = tfdv.generate_statistics_from_dataframe(train_df)
+</code></pre></div>
+<p>TFDV accepts three input formats: TensorFlow’s TFRecord, Pandas Dataframe, and CSV file. This will generate stats on the following data types</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Numerical Data</th>
+<th style="text-align: center;">Categorical Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Count of data records</td>
+<td style="text-align: center;">Count of data records</td>
+</tr>
+<tr>
+<td style="text-align: center;">% of missing data records</td>
+<td style="text-align: center;">% of missing data records</td>
+</tr>
+<tr>
+<td style="text-align: center;">Mean, std, min, max</td>
+<td style="text-align: center;">unique records</td>
+</tr>
+<tr>
+<td style="text-align: center;">% of zero values</td>
+<td style="text-align: center;">Avg string length</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<p>To visualize the results, you can use <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/visualize_statistics">visualize_statistics</a>. This will show tables for both numeric and categorical features. Within this table you can see the frequency, percentage of missing values and some basic statistics.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/vis.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<h2 id="create-a-data-schema">Create a Data Schema</h2>
+<p>Simply put, a schema describes standard characteristics of your data such as column data types and expected data value range. The schema is created on a dataset that you consider as reference, and can be reused to validate other incoming datasets. TFDV allows you to automatically generate an initial version of the schema using the <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/infer_schema">infer_schema()</a> method. This returns a Schema protocol buffer containing the result. As mentioned in the TFX paper (Section 3.3), the results of the schema inference can be summarized as follows:</p>
+<ul>
+<li>The expected type of each feature.</li>
+<li>The expected presence of each feature, in terms of a minimum count and fraction of examples that must contain the feature.</li>
+<li>The expected valency of the feature in each example, i.e., minimum and maximum number of values.</li>
+<li>The expected domain of a feature, i.e., the small universe of values for a string feature, or range for an integer feature.</li>
+</ul>
+<p>Note: TFDV will not automatically create a domain for numerical types.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/schema.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<h2 id="comparing-train-vs-evaluation-datasets">Comparing Train vs Evaluation Datasets</h2>
+<p>So right now we have made a schema for the training dataset (<code>train_df</code>). Now we need to generate statistics on the evaluation set (<code>eval_df</code>). The purpose of this is to allow you to compare statistics between the two sets to see if the values of the features lie within the same distribution. If not, then there is some type of skew occuring. TFDV allows you to do this by passing a few additional parameters to <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/visualize_statistics">visualize_statistics</a>. </p>
+<ul>
+<li><code>lhs_statistics</code>: Required parameter. Expects an instance of DatasetFeatureStatisticsList.</li>
+<li><code>rhs_statistics</code>: Expects an instance of DatasetFeatureStatisticsList to compare with lhs_statistics.</li>
+<li><code>lhs_name</code>: Name of the lhs_statistics dataset.</li>
+<li><code>rhs_name</code>: Name of the rhs_statistics dataset.</li>
+</ul>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/compare.png" style="display: block; margin-right: auto; margin-left: auto;">
+<img src="../../../../resources/images/developer_handbook/data_validation/missing.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>As seen above, we can see that <code>age</code> do not share the same characteristics across the two datasets as min and max values are <code>0</code> and <code>1000</code> respectively. You can also see that 0.02% of the data is missing from the <code>workclass</code> feature.
+We can remove any rows that do not fit our expected values</p>
+<h2 id="displaying-anomalies">Displaying Anomalies</h2>
+<p>We can use the reference schema that was made eariler to check for anomalies in the evaluation data. This is done using the <code>validate_statistics</code> and <code>display_anomalies</code> methods. Detected anomalies can either be considered a real error that needs to be cleaned, or depending on your domain knowledge and the specific case, they can be accepted. You can see below that TFDV caught a value for categorical variables that weren't expected. For example: some values in the <code>race</code> feature in the evaluation data wasn't in the schema. </p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/anomalies.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>Lets say you encode these categorical variables and feed them as input features to the model, the model will break as the number of input features would not be the same as they were in training. You can see how catching anomalies like this is crucial for productionizing ML models.</p>
+<h2 id="updating-the-schema">Updating the Schema</h2>
+<p>TFDV provides a set of utility methods and parameters that you can use for revising the inferred schema. This reference lists down the type of anomalies and the parameters that you can edit but we'll focus only on a couple here.</p>
+<h3 id="anomaly-detection-criteria">Anomaly Detection Criteria</h3>
+<p>If you want to allow some anomalies up to a certain point can relax the criteria for raising anomalies by using the <code>distribution_constraints</code>. As described here under <a href="https://www.tensorflow.org/tfx/data_validation/anomalies"><code>ENUM_TYPE_UNEXPECTED_STRING_VALUES</code></a> the detection criteria is calculated by </p>
+<p><div class="highlight"><pre><span></span><code>(num of features not in domain / tot values) &gt; (1 - feature.distribution_constraints.min_domain_mass
+</code></pre></div>
+In code this looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="n">country_feature</span> <span class="o">=</span> <span class="n">tfdv</span><span class="o">.</span><span class="n">get_feature</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="s1">&#39;native-country&#39;</span><span class="p">)</span>
+<span class="n">country_feature</span><span class="o">.</span><span class="n">distribution_constraints</span><span class="o">.</span><span class="n">min_domain_mass</span> <span class="o">=</span> <span class="mf">0.9</span>
+</code></pre></div>
+<h3 id="adding-new-domain-value">Adding New Domain Value</h3>
+<p>From our example earlier, imagine we want to actually have the value of <code>Asian</code> in our schema. This can be done with the following</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add new value to the domain of the feature `race`</span>
+<span class="n">race_domain</span> <span class="o">=</span> <span class="n">tfdv</span><span class="o">.</span><span class="n">get_domain</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">)</span>
+<span class="n">race_domain</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Asian&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="numerical-range-criteria">Numerical Range Criteria</h3>
+<p>As mentioned earlier, TFDV doesn't automatically make a domain for numeric values. If you recall from the display of statistics earlier that there was an age value of 1000. We can set a min and max value for this feature using the <code>set_domain</code> method. Now we can be sure we catch anomalies like that again in the future.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/new_schema.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>If we run <code>validate_statistics</code> and <code>display_anomalies</code> again, after updating our schema and removing some anomalous rows, we can see that no anomalies are found.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/no_anomalies.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<h2 id="data-slicing">Data Slicing</h2>
+<p>TDFV allows you to analyze specific slices of your dataset, which can be used to see if each feature is well-represented in the dataset. For this example we will compare <code>male</code> vs <code>female</code> in the <code>sex</code> column. For this we used the <a href="https://github.com/tensorflow/data-validation/blob/master/tensorflow_data_validation/utils/slicing_util.py"><code>slicing_util</code></a> provided by TFDV. <code>None</code> in this context is used if you want to use the entire domain.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tensorflow_data_validation.utils</span> <span class="kn">import</span> <span class="n">slicing_util</span>
+<span class="n">slice_fn</span> <span class="o">=</span> <span class="n">slicing_util</span><span class="o">.</span><span class="n">get_feature_value_slicer</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+</code></pre></div>
+<p>You need to tell TFDV that you need statistics for the features you set and you can do that through the <code>slice_functions</code> argument of <a href="https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/StatsOptions"><code>tfdv.StatsOptions</code></a>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Declare stats options</span>
+<span class="n">slice_stats_options</span> <span class="o">=</span> <span class="n">tfdv</span><span class="o">.</span><span class="n">StatsOptions</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span>
+                                        <span class="n">slice_functions</span><span class="o">=</span><span class="p">[</span><span class="n">slice_fn</span><span class="p">],</span>
+                                        <span class="n">infer_type_from_schema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Generating sliced statistics only works for CSVs so you will need to convert the Pandas dataframe to a CSV. Passing the <code>slice_stats_options</code> to <code>generate_statistics_from_dataframe()</code> will not produce the expected results. Therefore, you will need to use <code>generate_statistics_from_csv()</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert dataframe to CSV since `slice_functions` works only with `tfdv.generate_statistics_from_csv`</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s1">&#39;slice_sample.csv&#39;</span>
+<span class="n">train_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+
+<span class="c1"># Calculate statistics for the sliced dataset</span>
+<span class="n">sliced_stats</span> <span class="o">=</span> <span class="n">tfdv</span><span class="o">.</span><span class="n">generate_statistics_from_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">,</span> <span class="n">stats_options</span><span class="o">=</span><span class="n">slice_stats_options</span><span class="p">)</span>
+</code></pre></div>
+<p>With that, you now have the statistics for the set slice. These are packed into a <code>DatasetFeatureStatisticsList</code> protocol buffer. You can see the dataset names below. The first element in the list (i.e. index=0) is named <code>All_Examples</code> which just contains the statistics for the entire dataset. The next two elements (i.e. named <code>sex_Male</code> and <code>sex_Female</code>) are the datasets that contain the stats for the slices. It is important to note that these datasets are of the type: <code>DatasetFeatureStatistics</code>. You will see why this is important after the cell below.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/sliced.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>You can then visualize the statistics as before to examine the slices. An important caveat is <code>visualize_statistics()</code> accepts a <code>DatasetFeatureStatisticsList</code> type instead of <code>DatasetFeatureStatistics</code>. Thus, at least for this version of TFDV, you will need to convert it to the correct type.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tensorflow_metadata.proto.v0.statistics_pb2</span> <span class="kn">import</span> <span class="n">DatasetFeatureStatisticsList</span>
+
+<span class="c1"># Convert `Male` statistics (index=1) to the correct type and get the dataset name</span>
+<span class="n">male_stats_list</span> <span class="o">=</span> <span class="n">DatasetFeatureStatisticsList</span><span class="p">()</span>
+<span class="n">male_stats_list</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">sliced_stats</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">male_stats_name</span> <span class="o">=</span> <span class="n">sliced_stats</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+
+<span class="c1"># Convert `Female` statistics (index=2) to the correct type and get the dataset name</span>
+<span class="n">female_stats_list</span> <span class="o">=</span> <span class="n">DatasetFeatureStatisticsList</span><span class="p">()</span>
+<span class="n">female_stats_list</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">sliced_stats</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">female_stats_name</span> <span class="o">=</span> <span class="n">sliced_stats</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+
+<span class="c1"># Visualize the two slices side by side</span>
+<span class="n">tfdv</span><span class="o">.</span><span class="n">visualize_statistics</span><span class="p">(</span>
+    <span class="n">lhs_statistics</span><span class="o">=</span><span class="n">male_stats_list</span><span class="p">,</span>
+    <span class="n">rhs_statistics</span><span class="o">=</span><span class="n">female_stats_list</span><span class="p">,</span>
+    <span class="n">lhs_name</span><span class="o">=</span><span class="n">male_stats_name</span><span class="p">,</span>
+    <span class="n">rhs_name</span><span class="o">=</span><span class="n">female_stats_name</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>As you can see below, we have a similar view of the data. However, this time the results are stratified by the different <code>sex</code> column values. You can see here that within this dataset <code>Male</code> is disproportionately more represented than <code>Female</code>.</p>
+<p><img src="../../../../resources/images/developer_handbook/data_validation/sliced_dataset.png" style="display: block; margin-right: auto; margin-left: auto;"></p>
+<p>As mentioned in our <a href="../../../operations/mlops/overview/">MLOps documentation</a> data slicing is a useful method for asses your model for bias. These steps can be refactored for assessing slices of data after the model has produced output.</p>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.tensorflow.org/tfx/tutorials/data_validation/tfdv_basic">TensorFlow Data Validation (TFDV)</a></li>
+<li><a href="https://stevenwhang.com/tfx_paper.pdf">TFX: A TensorFlow-Based Production-Scale Machine Learning Platform</a></li>
+<li><a href="../../../../resources/images/developer_handbook/data_validation/lab.html">Example Notebook</a></li>
+<li><a href="https://medium.com/@deeptij2007/tensorflow-data-validation-tfdv-5e36fc74d19a">Medium: Data validation pipeline for production ML: Tensor flow data validation(TFDV)</a></li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../orchestration/airflow/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Apache Airflow" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Apache Airflow
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.bd0b6b67.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+    
+  </body>
+</html>
