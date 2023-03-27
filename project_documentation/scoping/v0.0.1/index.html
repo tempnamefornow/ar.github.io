@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://ar.github.io/project_documentation/scoping/overview/">
+        <link rel="canonical" href="https://ar.github.io/project_documentation/scoping/v0.0.1/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
     
     
       
-        <title>Overview - AR Assistant Documentation</title>
+        <title>v0.0.1 - AR Assistant Documentation</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#scoping-project-v001" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              v0.0.1
             
           </span>
         </div>
@@ -412,9 +412,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          v0.0.1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
-        Overview
+        v0.0.1
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#brainstorm-of-feature-ideas" class="md-nav__link">
+    Brainstorm of Feature Ideas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-system-architecture" class="md-nav__link">
+    Proposed system Architecture
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -864,6 +902,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#brainstorm-of-feature-ideas" class="md-nav__link">
+    Brainstorm of Feature Ideas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-system-architecture" class="md-nav__link">
+    Proposed system Architecture
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -874,13 +934,42 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/project_documentation/scoping/overview.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/project_documentation/scoping/v0.0.1.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-<h1 id="overview">Overview</h1>
+<h1 id="scoping-project-v001">Scoping Project v0.0.1</h1>
+<p><em>26th March 2023</em></p>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>This is done without any field research done. Its just initial brainstorming and building an intuition of how the system <em>might</em> look. </p>
+</details>
+<h2 id="brainstorm-of-feature-ideas">Brainstorm of Feature Ideas</h2>
+<ul>
+<li>Lets say a blind or visually imparied person is looking for something in a market or a library, imagine they have an AI assistant that aids them in their daily tasks. <ul>
+<li>The user could talk to their assistant and say "Hey, i'm going to go to the market to pick up some milk and bread". The assistant should have the ability to maintain that information and understand the context in which way it should help. IE: When the assistant sees that the user is in the store, it should be able to recall the previous prompt or conversation when the user was talking about the items they required. For this a a few technologies would be required: <ol>
+<li><strong>Computer vision</strong> for classifying video feed. Its uncertain if this inference can be done on the edge device or if it must be done in the cloud. Most likely will be cloud, </li>
+<li><strong>A Large Language Model</strong>. This is used for maintaining a conversational aspect to the assistant. LLM's such as ChatGPT have blown all other methods of producing chatbots we have ever seen. Big bets were placed on previous attempts such as Facebooks Chatbot developer SDK which allowed developers to create chatbots using Messenger. However, these chatbots where mostly rule based and did not provide a natural feeling experience. It really just slowed done being able to find the information you need that could have been easily solved by a simple google search. Therefore, using a generalized pretrained model is crucial for providing the feeling of authenticity within the conversations the user may have with it. Some alteratioins will be needed to this model. The details are unkown as of yet, but this LLM will need to have the ability to intake data from the output of the computer vision algorithm. This would require either two LLMs (one for conversations and another for interpreting what the CV algorithm is classifying in the moment), alternatively; a refactored model that takes two inputs: user input or classification input. There would also need to be a system that ties all of these together in real-time. </li>
+<li><strong>Speech To Text</strong> will be needed to interpret what is being said by the user into data that the LLM can work with (tokens). Its currently unknown if this could be done on edge or if it would require transcription to be done in the cloud.</li>
+<li><strong>Text To Speech</strong> is required to provide a vocal output to the user. The output response from the LLM system would be synthesized by some speech synthesis model. It would need to be omptimized for quick inference times to improve latency. Possible the audio could be generated on edge by sending instructions to the device. Its also possible that the audio could be transferred from the cloud, via <a href="https://www.fcc.gov/general/voice-over-internet-protocol-voip#:~:text=Voice%20over%20Internet%20Protocol%20(VoIP)%2C%20is%20a%20technology%20that,(or%20analog)%20phone%20line.">VoIP</a></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>Personality Module:</strong> To provide a unique experience and the illusion of the assistant having a personality would require some regulatory system running in the background. It should be able to have a configurable personality setting, where the user can select on which scale that what certain aspects of the assistants "personality" should be. This should be based on a valid personality traid model. There are many personality models out there, but the <strong>The Big Five Personality Traits</strong> model is generally considered the most widely accepted and used model for measuring personality. The Big Five model has gained popularity due to its ability to provide a comprehensive understanding of personality and its applicability in various fields, including psychology, organizational behavior, and marketing. Moreover, research has supported the validity and reliability of the Big Five model across cultures and languages.
+<img src="../../../resources/images/project_documentation/scoping/big_5_trait.jpeg" style="width:400px; display: block; margin-right: auto; margin-left: auto;">
+The configurations of the assistants persona should be interpretable by the LLM, and should influence the type of response the LLM produces. This system should be dynamic, meaning the parameters for the persona should be updating consistently throughout the span of conversations had with the assitant. The responses returned from the LLM should be analysis using sentiment analysis. Some system should be in place the use the output of the sentiment analysis to regulate the persona parameters. For example: If the user speaks with apathy towards the assistant then the responses wouldn't be as cheerful. Doing so would break the illusion of an authentic artificial personality. </li>
+<li><strong>Edge Device:</strong> Ideally, to provide the best experience this should be wearable device such as glasses.</li>
+</ul>
+<h2 id="proposed-system-architecture">Proposed system Architecture</h2>
+<p><img src="../../../resources/diagrams/system_architecture_v1.jpg" style="height:500px; display: block; margin-right: auto; margin-left: auto;"></p>
+<ol>
+<li>User speaks to edge device. It is unknown as of yet whether or not speech to text happens on the edge device or on the cloud. Right now it's assumed that is doesn't.</li>
+<li>The request reaches an endpoint, to where its sends the speech audio to a Text-To-Speech model to be turne</li>
+<li>...</li>
+</ol>
 
               
             </article>
