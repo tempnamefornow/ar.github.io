@@ -11,7 +11,7 @@ nav:
     - " ": index.md
   - Project Documentation:
     - Scoping:
-      - Overview: project_documentation/scoping/v1.md
+      - v0.0.1: project_documentation/scoping/v0.0.1.md
     # - Features:
     #   - Overview: project_documentation/scoping/overview.md
     # - System Architecture:
