@@ -70,4 +70,29 @@
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/computer_vision_models/v0.0.1/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/edge_devices/v0.0.1/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/large_language_models/v0.0.1/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/speech_to_text_models/v0.0.1/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/text_to_speech_models/v0.0.1/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
