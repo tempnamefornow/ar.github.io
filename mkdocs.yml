@@ -12,10 +12,16 @@ nav:
   - Project Documentation:
     - Scoping:
       - v0.0.1: project_documentation/scoping/v0.0.1.md
-    # - Features:
-    #   - Overview: project_documentation/scoping/overview.md
-    # - System Architecture:
-    #   - Overview: project_documentation/scoping/overview.md
+      - Computer Vision Models:  
+        - v0.0.1: project_documentation/scoping/computer_vision_models/v0.0.1.md
+      - Large Language Models:   
+        - v0.0.1: project_documentation/scoping/large_language_models/v0.0.1.md
+      - Text To Spech Models:
+        - v0.0.1: project_documentation/scoping/text_to_speech_models/v0.0.1.md
+      - Edge Devices:            
+        - v0.0.1: project_documentation/scoping/edge_devices/v0.0.1.md
+      - Speech To Text Models:
+        - v0.0.1: project_documentation/scoping/speech_to_text_models/v0.0.1.md
   - Developer Notes: 
     - developer_notes/index.md
     - Operations:
