@@ -66,7 +66,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/planning/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/glossary/glossary/</loc>
+         <lastmod>2023-03-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/planning/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -81,27 +86,37 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/scoping/computer_vision_models/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/scoping/computer_vision_models/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/scoping/edge_devices/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/scoping/datasets/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/scoping/large_language_models/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/scoping/edge_devices/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/scoping/speech_to_text_models/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/scoping/large_language_models/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ar.github.io/project_documentation/scoping/text_to_speech_models/v0.0.1/</loc>
+         <loc>https://ar.github.io/project_documentation/scoping/papers/overview/</loc>
+         <lastmod>2023-03-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/speech_to_text_models/overview/</loc>
+         <lastmod>2023-03-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/text_to_speech_models/overview/</loc>
          <lastmod>2023-03-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
