@@ -7,10 +7,9 @@ repo_url: 'https://github.com/tempnamefornow/ar.github.io'
 
 nav:
 # Homepage
-  - "About":
-    - " ": index.md
   - Project Documentation:
     - Scoping:
+      - v0.0.2: project_documentation/scoping/v0.0.2.md
       - v0.0.1: project_documentation/scoping/v0.0.1.md
       - Computer Vision Models:  
         - v0.0.1: project_documentation/scoping/computer_vision_models/v0.0.1.md
@@ -80,3 +79,10 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+plugins:
+  - mkdocs-video:
+      is_video: True
+      video_muted: False
+      video_controls: True
+      css_style:
+        width: "50%"
