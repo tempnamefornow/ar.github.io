@@ -10,16 +10,24 @@ nav:
     - Scoping:
       - v0.0.2: project_documentation/scoping/v0.0.2.md
       - v0.0.1: project_documentation/scoping/v0.0.1.md
-      - Computer Vision Models:  
-        - v0.0.1: project_documentation/scoping/computer_vision_models/v0.0.1.md
+      - Papers:
+        - Overview: project_documentation/scoping/papers/overview.md
+      - Data:
+        - Overview: project_documentation/scoping/datasets/overview.md
       - Large Language Models:   
-        - v0.0.1: project_documentation/scoping/large_language_models/v0.0.1.md
+        - Overview: project_documentation/scoping/large_language_models/overview.md
       - Text To Spech Models:
-        - v0.0.1: project_documentation/scoping/text_to_speech_models/v0.0.1.md
+        - Overview: project_documentation/scoping/text_to_speech_models/overview.md
       - Edge Devices:            
-        - v0.0.1: project_documentation/scoping/edge_devices/v0.0.1.md
+        - Overview: project_documentation/scoping/edge_devices/overview.md
       - Speech To Text Models:
-        - v0.0.1: project_documentation/scoping/speech_to_text_models/v0.0.1.md
+        - Overview: project_documentation/scoping/speech_to_text_models/overview.md
+      - Computer Vision Models:  
+        - Overview: project_documentation/scoping/computer_vision_models/overview.md
+    - Planning:
+      - Overview: project_documentation/planning/overview.md
+    - Glossary: 
+      - Glossary: project_documentation/glossary/glossary.md
         
   - Developer Notes: 
     - developer_notes/index.md
