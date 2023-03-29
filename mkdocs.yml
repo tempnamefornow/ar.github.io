@@ -6,7 +6,6 @@ repo_url: 'https://github.com/tempnamefornow/ar.github.io'
 ############################################################################################
 
 nav:
-# Homepage
   - Project Documentation:
     - Scoping:
       - v0.0.2: project_documentation/scoping/v0.0.2.md
@@ -21,6 +20,7 @@ nav:
         - v0.0.1: project_documentation/scoping/edge_devices/v0.0.1.md
       - Speech To Text Models:
         - v0.0.1: project_documentation/scoping/speech_to_text_models/v0.0.1.md
+        
   - Developer Notes: 
     - developer_notes/index.md
     - Operations:
