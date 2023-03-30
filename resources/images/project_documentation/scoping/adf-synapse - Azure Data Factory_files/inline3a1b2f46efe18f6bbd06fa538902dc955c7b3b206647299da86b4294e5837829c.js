@@ -1,1 +1,0 @@
-const themeClass=["light","dark","tealLight","tealDark"];let currentTheme=localStorage.getItem("ADF_Portal_Theme");currentTheme=themeClass.includes(currentTheme)?currentTheme:"light",document.body.classList.add(currentTheme);
