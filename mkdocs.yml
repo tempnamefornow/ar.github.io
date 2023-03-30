@@ -8,6 +8,7 @@ repo_url: 'https://github.com/tempnamefornow/ar.github.io'
 nav:
   - Project Documentation:
     - Scoping:
+      - v0.0.3: project_documentation/scoping/v0.0.3.md
       - v0.0.2: project_documentation/scoping/v0.0.2.md
       - v0.0.1: project_documentation/scoping/v0.0.1.md
       - Papers:
