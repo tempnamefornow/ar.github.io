@@ -17,8 +17,9 @@ nav:
         - Overview: project_documentation/scoping/papers/overview.md
       - Data:
         - Overview: project_documentation/scoping/datasets/overview.md
-      - Large Language Models:   
-        - Overview: project_documentation/scoping/large_language_models/overview.md
+      - Models:   
+        - Overview: project_documentation/scoping/models/overview.md
+        - Transformers: project_documentation/scoping/models/transformers.md
       - Text To Spech Models:
         - Overview: project_documentation/scoping/text_to_speech_models/overview.md
       - Edge Devices:            
@@ -31,7 +32,8 @@ nav:
       - Overview: project_documentation/planning/overview.md
     - Glossary: 
       - Glossary: project_documentation/glossary/glossary.md
-        
+    - Youtube Channels: 
+      - Channels: project_documentation/youtube_channels/channels.md       
   - Developer Notes: 
     - developer_notes/index.md
     - Operations:
