@@ -2,147 +2,152 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ar.github.io/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/engineering/data_validation/tfdv/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/engineering/orchestration/airflow/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/engineering/tools/idp_geo_map/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/engineering/tools/idp_retain/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/engineering/tools/idp_tools/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/git/git_actions/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/git/git_intro/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/mlops/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/project_planning/agile/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/project_planning/scoping/hlp/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/developer_notes/operations/project_planning/scoping/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/glossary/glossary/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/planning/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/v0.0.1/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/v0.0.2/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/v0.0.3/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/v0.0.4/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/v0.0.5/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ar.github.io/project_documentation/scoping/v0.0.6/</loc>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/computer_vision_models/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/datasets/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/edge_devices/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/models/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/models/transformers/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/papers/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/speech_to_text_models/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/scoping/text_to_speech_models/overview/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ar.github.io/project_documentation/youtube_channels/channels/</loc>
-         <lastmod>2023-04-13</lastmod>
+         <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
