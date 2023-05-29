@@ -1489,10 +1489,12 @@
 <div><h1 id="project-scoping-v0011">Project Scoping v0.0.11</h1>
 <p><em>29th May 2023</em></p>
 <ul>
-<li>I took a bit of a break from writing. Time to get back into it. Anyways, some interesting stuff has been happening in terms of new Open sourced models. There has been some cool applications of langchain. ~</li>
+<li>I took a bit of a break from writing. Time to get back into it. Anyways, some interesting stuff has been happening in terms of new Open sourced models. There has been some cool applications of langchain. </li>
 <li>In my own langchain work, i half-made a Langchain application that took a URL (in this case it was hacker news) and web scrape the latest titles on the main webpage. I told the LLM to extract the title and the url if it contained any mention of AI/ML/GPT/LLM's etc. The model would then use an agent to iteratively go through the links and produce a summary of the article. I didn't get this far for a few reasons: The SerpAPI, used for searching google, is super expensive. And because i got busy so i didn't have the time.. I will come back to it eventually. </li>
 </ul>
-<p><img src="../../../resources/images/project_documentation/scoping/hackernews.png" style="height:400px; display: block; margin-right: auto; margin-left: auto;"></p>
+<p></p><center>
+<img src="../../../resources/images/project_documentation/scoping/hackernews.png" style="height:400px; display: block; margin-right: auto; margin-left: auto;">
+</center>
 <ul>
 <li>I also did some introductory tutorials with Langchain. Heres <a href="https://github.com/tempnamefornow/ar-assistant/pull/3">the PR</a> for that work</li>
 <li>Discovered streamlit, which is a lightweight python library for making dashboards. <a href="https://streamlit.io">https://streamlit.io</a></li>
@@ -1515,6 +1517,17 @@
 <p></p><center>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Meet Samantha<br>{ by Eric Hartford } from <a href="https://twitter.com/hashnode?ref_src=twsrc%5Etfw">@hashnode</a> <a href="https://t.co/sfuuOeeYaa">https://t.co/sfuuOeeYaa</a><br>I released models on huggingface, samantha-7b and samantha-13b.<br>As many have asked me why and how, I have written a blog post to explain.<a href="https://t.co/J89ti3RwWu">https://t.co/J89ti3RwWu</a><a href="https://t.co/hiJfq3kii5">https://t.co/hiJfq3kii5</a></p>— Eric Hartford (@erhartford) <a href="https://twitter.com/erhartford/status/1662931139638751232?ref_src=twsrc%5Etfw">May 28, 2023</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p></p></center>
+<ul>
+<li><strong>Tree of Thoughts: Deliberate Problem Solving with Large Language Models</strong>: An effective way of problem solving, whereby you don't accept the first answer from an LLM, but create a tree search over the outputs of the model. The LLM Rates the outputs of these tree states. This helps in cases where investigation and planning is needed in a task. </li>
+<li>From Google deep mind.</li>
+<li><a href="https://arxiv.org/abs/2305.10601">Paper</a></li>
+</ul>
+<p></p><center>
+<img src="../../../resources/images/project_documentation/scoping/tot.png" style="height:400px; display: block; margin-right: auto; margin-left: auto;">
+</center>
+<p></p><center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ut5kp56wW_4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <p></p></center></div></html>
 
 
