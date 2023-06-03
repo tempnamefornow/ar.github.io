@@ -59,6 +59,8 @@ nav:
         - Apache Airflow: developer_notes/engineering/orchestration/airflow.md
       - Data Validation:
         - TFDV: developer_notes/engineering/data_validation/tfdv.md
+      - Langchain:
+        - Overview: developer_notes/engineering/langchain/overview.md
 
 ############################################################################################
 
