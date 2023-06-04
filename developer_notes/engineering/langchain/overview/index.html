@@ -1,0 +1,2665 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ar.github.io/developer_notes/engineering/langchain/overview/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.1">
+    
+    
+      
+        <title>Overview - AR Assistant Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#langchain-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-header__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AR Assistant Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../project_documentation/scoping/v0.0.11/" class="md-tabs__link">
+        Project Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../" class="md-tabs__link md-tabs__link--active">
+        Developer Notes
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="AR Assistant Documentation" class="md-nav__button md-logo" aria-label="AR Assistant Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AR Assistant Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/tempnamefornow/ar.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ar.github.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Project Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_1">
+          Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Notes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.11/" class="md-nav__link">
+        v0.0.11
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.10/" class="md-nav__link">
+        v0.0.10
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.9/" class="md-nav__link">
+        v0.0.9
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.8/" class="md-nav__link">
+        v0.0.8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.7/" class="md-nav__link">
+        v0.0.7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.6/" class="md-nav__link">
+        v0.0.6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.5/" class="md-nav__link">
+        v0.0.5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.4/" class="md-nav__link">
+        v0.0.4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.3/" class="md-nav__link">
+        v0.0.3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.2/" class="md-nav__link">
+        v0.0.2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/v0.0.1/" class="md-nav__link">
+        v0.0.1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scoping" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_1" type="checkbox" id="__nav_1_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_1">
+          Papers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Papers" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Papers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/papers/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_2" type="checkbox" id="__nav_1_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_2">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/datasets/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_3" type="checkbox" id="__nav_1_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_3">
+          Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Models" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/models/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/models/transformers/" class="md-nav__link">
+        Transformers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_4" type="checkbox" id="__nav_1_2_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_4">
+          Text To Spech Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Text To Spech Models" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Text To Spech Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/text_to_speech_models/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_5" type="checkbox" id="__nav_1_2_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_5">
+          Edge Devices
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Edge Devices" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Edge Devices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/edge_devices/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_6" type="checkbox" id="__nav_1_2_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_6">
+          Speech To Text Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Speech To Text Models" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Speech To Text Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/speech_to_text_models/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_7" type="checkbox" id="__nav_1_2_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2_7">
+          Computer Vision Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Computer Vision Models" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Computer Vision Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/scoping/computer_vision_models/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Planning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/planning/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_4">
+          Glossary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Glossary" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Glossary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/glossary/glossary/" class="md-nav__link">
+        Glossary
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_5">
+          Youtube Channels
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Youtube Channels" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Youtube Channels
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../project_documentation/youtube_channels/channels/" class="md-nav__link">
+        Channels
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Developer Notes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Notes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Notes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        📚 Developer Notes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Operations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Operations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1">
+          Github
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Github" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Github
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_intro/" class="md-nav__link">
+        Git Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/git/git_actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2">
+          MLOps
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="MLOps" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          MLOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/mlops/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3">
+          Project Planning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Planning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Project Planning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_3_1" type="checkbox" id="__nav_2_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3_1">
+          Project Scoping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Project Scoping" data-md-level="4">
+        <label class="md-nav__title" for="__nav_2_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Project Scoping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../operations/project_planning/scoping/hlp/" class="md-nav__link">
+        Human Level Performance (HLP)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_1">
+          Orchestration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Orchestration" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Orchestration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../orchestration/airflow/" class="md-nav__link">
+        Apache Airflow
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_2" type="checkbox" id="__nav_2_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_2">
+          Data Validation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Validation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Data Validation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_validation/tfdv/" class="md-nav__link">
+        TFDV
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_3" type="checkbox" id="__nav_2_3_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_3">
+          Langchain
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Langchain" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Langchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Overview
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompts" class="md-nav__link">
+    Prompts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexes" class="md-nav__link">
+    Indexes
+  </a>
+  
+    <nav class="md-nav" aria-label="Indexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-splitters" class="md-nav__link">
+    Text Splitters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrievers" class="md-nav__link">
+    Retrievers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-stores" class="md-nav__link">
+    Vector Stores
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chains" class="md-nav__link">
+    Chains
+  </a>
+  
+    <nav class="md-nav" aria-label="Chains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-functionality" class="md-nav__link">
+    Generic Functionality
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-tos" class="md-nav__link">
+    How-To's:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    Schema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompts" class="md-nav__link">
+    Prompts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexes" class="md-nav__link">
+    Indexes
+  </a>
+  
+    <nav class="md-nav" aria-label="Indexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-splitters" class="md-nav__link">
+    Text Splitters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrievers" class="md-nav__link">
+    Retrievers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-stores" class="md-nav__link">
+    Vector Stores
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chains" class="md-nav__link">
+    Chains
+  </a>
+  
+    <nav class="md-nav" aria-label="Chains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-functionality" class="md-nav__link">
+    Generic Functionality
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-tos" class="md-nav__link">
+    How-To's:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/tempnamefornow/ar.github.io/edit/master/docs/developer_notes/engineering/langchain/overview.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<div><h1 id="langchain-overview">Langchain Overview</h1>
+<ul>
+<li><a href="https://docs.langchain.com/docs/">Conceptual Docs</a></li>
+<li><a href="https://python.langchain.com/en/latest/index.html">Python Docs</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>LangChain is a framework for developing applications powered by language models. Two principles: <strong>Data aware and agentic</strong>. </p>
+<ul>
+<li>
+<p><strong>Components</strong>: LangChain offers modular abstractions and implementations for working with language models. They are designed to be user-friendly, whether you use the full LangChain framework or not.</p>
+</li>
+<li>
+<p><strong>Use-Case Specific Chains:</strong> Chains combine these components to achieve specific use cases. They provide a user-friendly starting point and can be customized.</p>
+</li>
+</ul>
+<hr>
+<h2 id="concepts">Concepts</h2>
+<h3 id="schema">Schema</h3>
+<details class="tip">
+<summary>ChatMessages</summary>
+<p><strong>SystemChatMessage:</strong> A chat message representing information that should be instructions to the AI system.</p>
+<p><strong>HumanChatMessage:</strong> A chat message representing information coming from a human interacting with the AI system.</p>
+<p><strong>AIChatMessage</strong>: A chat message representing information coming from the AI system.</p>
+</details>
+<details class="tip">
+<summary>Examples</summary>
+<p>The documentation is explaining the concept of examples within the LangChain framework, which is an application framework for Language Model (LM) development.</p>
+<p>In this context, examples refer to input/output pairs that represent inputs to a function or LM and their corresponding expected outputs. These examples are used for both training and evaluating models.</p>
+<p>The documentation highlights that examples can be utilized for both models and chains within the LangChain framework. Models refer to individual language models, while chains represent a sequence of components or models working together.</p>
+<p>Examples for a model are used specifically for fine-tuning the model. Fine-tuning involves adjusting the model's parameters using the provided inputs and expected outputs, thereby improving its performance.</p>
+<p>On the other hand, examples for a chain are used to evaluate the end-to-end chain. This means assessing the overall performance of the entire sequence of components or models working together. Additionally, examples for a chain may even be used to train a model that can replace the entire chain, simplifying the process and potentially enhancing efficiency.</p>
+<p>Overall, the documentation clarifies the purpose and usage of examples within the LangChain framework, emphasizing their role in training, evaluating, fine-tuning models, and assessing end-to-end chains.</p>
+</details>
+<details class="tip">
+<summary>Documents</summary>
+<p>The documentation explains the concept of a "document" within the LangChain framework.</p>
+<p>In this context, a document refers to a piece of unstructured data. It can be any form of textual information, such as a webpage, a paragraph, or a document in a natural language format.</p>
+<p>A document consists of two main components: <code>page_content</code> and metadata.</p>
+<ul>
+<li>
+<p><strong>Page_content:</strong> This refers to the actual content of the data within the document. It represents the textual information that the document contains. For example, in the case of a webpage document, the page_content would be the HTML or plain text of the webpage.</p>
+</li>
+<li>
+<p><strong>Metadata:</strong> Metadata refers to auxiliary pieces of information that describe attributes of the data within the document. It provides additional context or details about the document. This can include information such as the author, creation date, title, tags, or any other relevant attributes associated with the document. Metadata helps provide a broader understanding of the document and can be used for categorization, retrieval, or other analysis purposes.</p>
+</li>
+</ul>
+<p>In summary, a document in the LangChain framework is an unstructured piece of data that consists of the <code>page_content</code>, representing the actual textual content, and metadata, providing auxiliary information about the attributes of the data.</p>
+</details>
+<hr>
+<h3 id="models">Models</h3>
+<p>The documentation introduces three types of models used in LangChain:</p>
+<ol>
+<li>
+<p><strong>LLMs (Large Language Models):</strong> These models process text input and generate text output. They are designed for large-scale language processing tasks.</p>
+</li>
+<li>
+<p><strong>Chat Models:</strong> These models have structured APIs and are typically backed by language models. They accept a list of Chat Messages as input and provide a response in the form of a Chat Message. They are designed for structured chat interactions.</p>
+</li>
+<li>
+<p><strong>Text Embedding Models:</strong> These models convert text input into a list of floats, representing numerical embeddings. They are used to generate numerical representations of text.</p>
+</li>
+</ol>
+<hr>
+<h3 id="prompts">Prompts</h3>
+<p>The documentation introduces prompts as the new method of programming models in LangChain. Prompts are constructed from multiple components using PromptTemplate. LangChain provides classes and functions to facilitate prompt construction and usage. The documentation is divided into four sections: </p>
+<ul>
+<li>PromptValue</li>
+<li>Prompt Templates</li>
+<li>Example Selectors</li>
+<li>Output Parsers. </li>
+</ul>
+<p>These sections cover the representation of input values, constructing prompts, dynamically selecting examples, and parsing model output for structured information. The goal is to make prompt construction and working with prompts easier within the LangChain framework.</p>
+<details class="danger">
+<summary>PromptValue</summary>
+<p>The documentation explains the concept of <code>PromptValue</code> in LangChain.</p>
+<ul>
+<li>A prompt refers to the input passed to the underlying model, and LangChain's abstractions for prompts primarily deal with text data.</li>
+<li><code>PromptValue</code> is a class in LangChain that allows for consistent handling of prompts across different model types.</li>
+<li>Different models may expect different data formats for prompts, and <code>PromptValue</code> provides methods to convert prompts into the specific input types required by each model type.</li>
+<li>Currently, <code>PromptValue</code> supports text and ChatMessages as input types.</li>
+<li>The goal of <code>PromptValue</code> is to ensure flexibility and compatibility when using prompts with different model types in LangChain.</li>
+</ul>
+</details>
+<details class="danger">
+<summary>PromptTemplate</summary>
+<p>In LangChain, a <code>PromptValue</code> is the input passed to the model. It is dynamically created using user input, non-static information, and a template string. The PromptTemplate object generates the <code>PromptValue</code> by taking input variables and returning it.</p>
+</details>
+<details class="danger">
+<summary>ExampleSelector</summary>
+<p>An <code>ExampleSelector</code> is an object that facilitates the selection of examples to be included in a prompt. Rather than being hardcoded, these examples can be dynamically chosen based on user input. The <code>ExampleSelector</code> class defines a <code>select_examples</code> method, which takes input variables and returns a list of selected examples. The specific implementation of an <code>ExampleSelector</code> determines the selection criteria. LangChain provides various example selectors, such as 
+<a href="https://python.langchain.com/en/latest/modules/prompts/example_selectors/examples/custom_example_selector.html">Make a Custom Example Selector</a></p>
+<ul>
+<li>LengthBased ExampleSelector</li>
+<li>Maximal Marginal Relevance ExampleSelector</li>
+<li>NGram Overlap ExampleSelector</li>
+<li>and Similarity ExampleSelector.</li>
+</ul>
+<p>Additionally, custom example selectors can be created as needed.</p>
+</details>
+<details class="danger">
+<summary>OutputParser</summary>
+<ul>
+<li>Output parsers enable obtaining more structured information from language model outputs than just plain text.</li>
+<li>
+<p>LangChain provides various types of output parsers:</p>
+<ul>
+<li>CommaSeparatedListOutputParser</li>
+<li>Datetime</li>
+<li>Enum Output Parser</li>
+<li>OutputFixingParser</li>
+<li>PydanticOutputParser</li>
+<li>RetryOutputParser</li>
+<li>Structured Output Parser.</li>
+</ul>
+</li>
+</ul>
+<p>example:
+Let's consider an <code>OutputParser</code> called <code>JSONOutputParser</code> that structures language model responses into JSON format. Here's an example scenario:</p>
+<p>The language model generates a response string: <code>"{"name": "John", "age": 30}".</code>
+The <code>JSONOutputParser</code> is applied to the response string.
+The parse() method of <code>JSONOutputParser</code> is invoked, which parses the response string and converts it into a JSON object or dictionary: <code>{"name": "John", "age": 30}.</code>
+The structured output, the JSON object, can now be easily utilized in further processing or integration with other systems.
+Here is a visual representation of the scenario:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Language</span> <span class="n">Model</span> <span class="n">Response</span> <span class="nb">String</span><span class="p">:</span>
+<span class="s">"{</span><span class="se">\"</span><span class="s">name</span><span class="se">\"</span><span class="s">: </span><span class="se">\"</span><span class="s">John</span><span class="se">\"</span><span class="s">, </span><span class="se">\"</span><span class="s">age</span><span class="se">\"</span><span class="s">: 30}"</span>
+
+    <span class="o">|</span>
+    <span class="o">|</span>  <span class="n">Apply</span> <span class="n">OutputParser</span>
+    <span class="n">V</span>
+
+<span class="n">OutputParser</span><span class="p">:</span> <span class="n">JSONOutputParser</span>
+
+    <span class="o">|</span>
+    <span class="o">|</span>  <span class="n">parse</span><span class="p">()</span>
+    <span class="n">V</span>
+
+<span class="n">Structured</span> <span class="n">Output</span> <span class="p">(</span><span class="n">JSON</span> <span class="n">Object</span><span class="p">):</span>
+<span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span> <span class="s">"age"</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+</code></pre></div>
+<p>In this example, the <code>JSONOutputParser</code> takes the response string, performs the necessary parsing logic, and outputs a structured JSON object that can be easily utilized in applications or systems that expect JSON format.</p>
+</details>
+<hr>
+<h3 id="indexes">Indexes</h3>
+<p>LangChain is a framework that focuses on creating indexes for efficient document retrieval. The core component of LangChain is the Retriever interface, defined by the <code>BaseRetriever</code> class. Here's an example of the <code>BaseRetriever</code> class:</p>
+<p></p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="k">class</span> <span class="nc">BaseRetriever</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="nd">@abstractmethod</span>
+<span class="k">def</span> <span class="nf">get_relevant_documents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="sd">"""Get texts relevant for a query.</span>
+
+<span class="sd">Args:</span>
+<span class="sd">    query: string to find relevant texts for</span>
+
+<span class="sd">Returns:</span>
+<span class="sd">    List of relevant documents</span>
+<span class="sd">"""</span>
+</code></pre></div>
+The <code>get_relevant_documents</code> method needs to be implemented in a subclass of <code>BaseRetriever</code>. It takes a query as input and returns a list of relevant documents.
+<p>One of the main types of retrievers in LangChain is the Vectorstore retriever. This type of retriever relies on vector embeddings for indexing and retrieval. To demonstrate the usage of Vectorstore retrievers, LangChain provides a convenient example of question answering over documents.</p>
+<p>The example consists of four steps:</p>
+<ol>
+<li>Create an index</li>
+<li>Create a retriever from the index</li>
+<li>Create a question answering chain</li>
+<li>Ask questions</li>
+</ol>
+<p>Here's a walkthrough of the example code:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">RetrievalQA</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes</span> <span class="kn">import</span> <span class="n">VectorstoreIndexCreator</span>
+
+<span class="c1"># Specify the document loader</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">'../state_of_the_union.txt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf8'</span><span class="p">)</span>
+
+<span class="c1"># Create the index using the VectorstoreIndexCreator</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">VectorstoreIndexCreator</span><span class="p">()</span><span class="o">.</span><span class="n">from_loaders</span><span class="p">([</span><span class="n">loader</span><span class="p">])</span>
+
+<span class="c1"># Create a retriever from the index</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">vectorstore</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">()</span>
+
+<span class="c1"># Create a question answering chain</span>
+<span class="n">qa</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">(),</span> <span class="n">chain_type</span><span class="o">=</span><span class="s2">"stuff"</span><span class="p">,</span> <span class="n">retriever</span><span class="o">=</span><span class="n">retriever</span><span class="p">)</span>
+
+<span class="c1"># Ask questions</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">"What did the president say about Ketanji Brown Jackson"</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+<p>The above code demonstrates how to create an index using the <code>VectorstoreIndexCreator</code>, which internally handles document splitting, embedding creation, and indexing. It then retrieves relevant documents based on a question using the retriever, and finally, the question answering chain processes the query and returns the response.</p>
+<p>By understanding LangChain's indexing and retrieval capabilities, you can create powerful retrievers for various applications.</p>
+<h4 id="text-splitters">Text Splitters</h4>
+<p>Text splitters are used to divide long pieces of text into smaller, semantically meaningful chunks. This allows for better handling and processing of the text, while maintaining the context between the chunks. Here's an overview of text splitters and their customization options:</p>
+<details class="example">
+<summary>Character Text Splitter</summary>
+<p>The Character Text Splitter splits text into chunks based on a specified number of characters. It is a simple and straightforward method to divide text based on character count.
+</p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+Use the Character Text Splitter when you need to split text into fixed-size chunks based on the number of characters. This approach can be useful when working with models or systems that have specific character-based limitations or requirements.
+</details>
+<details class="example">
+<summary>CodeTextSplitter</summary>
+<p>The <code>CodeTextSplitter</code> is specifically designed to handle code snippets or programming languages. It considers code-specific patterns and structures to split the text.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CodeTextSplitter</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CodeTextSplitter</span><span class="p">()</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the <code>CodeTextSplitter</code> when you need to process and analyze code snippets separately. It can be beneficial for code documentation, code analysis, or any task that requires code-specific understanding.</p>
+</details>
+<details class="example">
+<summary>NLTK Text Splitter</summary>
+<p>The NLTK (Natural Language Toolkit) is a popular library for natural language processing tasks. NLTK provides various tools and utilities, including tokenizers and text splitting functionalities.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">NLTKTextSplitter</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'punkt'</span><span class="p">)</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">NLTKTextSplitter</span><span class="p">()</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the NLTK Text Splitter when you require more advanced text processing and analysis, such as sentence or word-level tokenization. It is suitable for tasks that involve natural language understanding, language modeling, or sentiment analysis.</p>
+</details>
+<details class="example">
+<summary>Recursive Character Text Splitter</summary>
+<p>The Recursive Character Text Splitter is a more sophisticated text splitter that recursively splits text based on a list of characters. It attempts to keep semantically related pieces of text together, such as paragraphs, sentences, and words.
+</p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the Recursive Character Text Splitter when you want to split text while maintaining the integrity of paragraphs, sentences, or words. This approach can be useful for tasks that involve text summarization, topic modeling, or any scenario where preserving the semantic structure of the text is important.</p>
+</details>
+<details class="example">
+<summary>spaCy Text Splitter</summary>
+<p>spaCy is a popular open-source library for advanced natural language processing. The spaCy Text Splitter utilizes the spaCy tokenizer to split text into chunks based on a specified chunk size.
+</p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">SpacyTextSplitter</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"en_core_web_sm"</span><span class="p">)</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">SpacyTextSplitter</span><span class="p">(</span><span class="n">nlp</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the spaCy Text Splitter when you need more advanced linguistic processing capabilities, such as part-of-speech tagging or named entity recognition, in addition to text splitting. This approach is suitable for tasks like text classification, entity extraction, or syntactic analysis.</p>
+</details>
+<details class="example">
+<summary>Hugging Face Tokenizer</summary>
+<p>Hugging Face is a popular platform for natural language processing, providing a wide range of pre-trained models and tokenizers. The Hugging Face tokenizer, such as GPT2TokenizerFast, allows you to tokenize text and measure the chunk size in terms of tokens.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">GPT2TokenizerFast</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">GPT2TokenizerFast</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">"gpt2"</span><span class="p">)</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="o">.</span><span class="n">from_huggingface_tokenizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>Use the Hugging Face Tokenizer when you want to work with pre-trained models or utilize specific tokenization features provided by the Hugging Face library. It is particularly useful when dealing with transformer-based models like GPT-2 or BERT.</p>
+</details>
+<hr>
+<h4 id="retrievers">Retrievers</h4>
+<p>A Retriever is a component in Langchain that is responsible for finding and returning relevant documents in response to a user's query. Retrievers are typically backed by an index, which is a data structure that stores information about the documents in a corpus. When a user queries a Retriever, the Retriever will use the index to find the documents that are most likely to be relevant to the query, and then return those documents to the user.</p>
+<details class="example">
+<summary>VectorStoreRetriever</summary>
+<p>The <code>VectorStoreRetriever</code> is the most commonly used Retriever in Langchain. This Retriever is backed by a VectorStore, which is a type of index that stores the vector representations of documents. Vector representations are a way of representing documents as points in a high-dimensional space. This allows the Retriever to find documents that are semantically similar to the query by finding documents that are close to the query in the vector space.</p>
+<p>The following is an example of how to use the <code>VectorStoreRetriever</code> to find relevant documents for the query "what did he say about ketanji brown jackson":</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">'../../../state_of_the_union.txt'</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">FAISS</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">()</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="s2">"what did he say about ketanji brown jackson"</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>This code will print the following text:</p>
+<p>He said that Judge Jackson has the experience, temperament, and intellect to serve on the Supreme Court. He also said that she is a brilliant jurist who will be a great addition to the Court.</p>
+<p>As you can see, the VectorStoreRetriever was able to find relevant documents for the query "what did he say about ketanji brown jackson". These documents were found by finding documents that were semantically similar to the query in the vector space.</p>
+<p>Here is a breakdown of the code:</p>
+<p>The <code>TextLoader</code> class is used to load the documents from the file state_of_the_union.txt.
+The <code>CharacterTextSplitter</code> class is used to split the documents into characters.
+The <code>OpenAIEmbeddings</code> class is used to create embeddings for the characters in the documents.
+The <code>FAISS</code> class is used to create a VectorStore index from the embeddings.
+The retriever object is created from the VectorStore index.
+The <code>get_relevant_documents()</code> method on the retriever object is used to find the relevant documents for the query.
+The for loop iterates over the docs list and prints the text of each document.</p>
+</details>
+<details class="example">
+<summary>Self-QueryRetriever</summary>
+<ol>
+<li>It first uses a Language Model (LLM) to generate a structured query. The LLM is a large language model that has been trained on a massive dataset of text and code. It can generate text, translate languages, write different kinds of creative content, and answer your questions in an informative way.</li>
+<li>The structured query is then used to query a VectorStore. A VectorStore is a data structure that stores documents as vectors. Each vector represents the document's content, and the vectors are stored in a way that allows them to be compared to each other.</li>
+<li>The VectorStore returns a list of documents that are similar to the query. The Self-Query Retriever then ranks the documents in the list, and returns the top N documents.
+Here is an example of how the Self-Query Retriever would work if you asked it the question "What are some movies about dinosaurs?"</li>
+</ol>
+<p>The LLM would generate the following structured query:
+</p><div class="highlight"><pre><span></span><code>SELECT * FROM movies WHERE genre = "dinosaur"
+</code></pre></div>
+<p>The VectorStore would return a list of documents that match the query. The list might include the following documents:</p>
+<p></p><div class="highlight"><pre><span></span><code>* Jurassic Park
+* The Lost World: Jurassic Park
+* Jurassic World
+* The Land Before Time
+* Dinosaur
+</code></pre></div>
+The Self-Query Retriever would rank the documents in the list, and return the top 5 documents. The top 5 documents might be the following:
+<div class="highlight"><pre><span></span><code>1. Jurassic Park
+2. The Lost World: Jurassic Park
+3. Jurassic World
+4. The Land Before Time
+5. Dinosaur
+</code></pre></div>
+<p>The Self-Query Retriever is a powerful tool that can be used to find information in a variety of ways. It is easy to use and can be used to find information in a variety of ways.</p>
+</details>
+<details class="example">
+<summary>Time Weighted VectorStore Retriever</summary>
+<p>The Time Weighted VectorStore Retriever is a type of Retriever that uses a combination of semantic similarity and a time decay. The algorithm for scoring documents is as follows:</p>
+<div class="highlight"><pre><span></span><code>semantic_similarity + (1.0 - decay_rate) ** hours_passed
+</code></pre></div>
+<ul>
+<li><code>semantic_similarity</code> is the similarity between the query and the document</li>
+<li><code>decay_rate</code> is a number between 0 and 1 that controls how quickly documents are forgotten, and <code>hours_passed</code> is the number of hours since the document was last accessed.</li>
+</ul>
+<p>Steps:</p>
+<ol>
+<li>The user submits a query.</li>
+<li>The Retriever calculates the semantic similarity between the query and each document in the index.</li>
+<li>The Retriever calculates the time decay for each document.</li>
+<li>The Retriever scores each document by adding its semantic similarity and time decay.</li>
+<li>The Retriever returns the top N documents with the highest scores.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">faiss</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">langchain.docstore</span> <span class="kn">import</span> <span class="n">InMemoryDocstore</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain.retrievers</span> <span class="kn">import</span> <span class="n">TimeWeightedVectorStoreRetriever</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+
+<span class="c1"># Define your embedding model</span>
+<span class="n">embeddings_model</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">()</span>
+
+<span class="c1"># Initialize the vectorstore as empty</span>
+<span class="n">embedding_size</span> <span class="o">=</span> <span class="mi">1536</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">faiss</span><span class="o">.</span><span class="n">IndexFlatL2</span><span class="p">(</span><span class="n">embedding_size</span><span class="p">)</span>
+<span class="n">vectorstore</span> <span class="o">=</span> <span class="n">FAISS</span><span class="p">(</span><span class="n">embeddings_model</span><span class="o">.</span><span class="n">embed_query</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">InMemoryDocstore</span><span class="p">({}),</span> <span class="p">{})</span>
+
+<span class="c1"># Create the retriever</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">TimeWeightedVectorStoreRetriever</span><span class="p">(</span>
+    <span class="n">vectorstore</span><span class="o">=</span><span class="n">vectorstore</span><span class="p">,</span>
+    <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Add some documents to the retriever</span>
+<span class="n">yesterday</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">retriever</span><span class="o">.</span><span class="n">add_documents</span><span class="p">([</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">"what is the capital of france"</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">"last_accessed_at"</span><span class="p">:</span> <span class="n">yesterday</span><span class="p">}),</span>
+    <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">"Paris is the capital of France"</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="c1"># Get the top 10 most relevant documents for the query "what is the capital of france"</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="s2">"what is the capital of france"</span><span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span>
+</code></pre></div>
+<p>output:
+</p><div class="highlight"><pre><span></span><code>Paris is the capital of France
+</code></pre></div>
+</details>
+<hr>
+<h4 id="vector-stores">Vector Stores</h4>
+<p>A vectorstore is a data structure that stores documents and their corresponding vector representations. Vector representations are numerical representations of text that capture the meaning of the text. They are often used for natural language processing tasks such as question answering, document retrieval, and text classification.</p>
+<p>In Langchain, vectorstores are used to store the documents that are used to train and evaluate natural language processing models. Langchain provides a number of different vectorstores that can be used, including Chroma.</p>
+<details class="success">
+<summary>Chroma</summary>
+<p>Chroma is a vectorstore that is built on top of the open-source DuckDB database. DuckDB is a high-performance, in-memory database that is designed for fast data access. Chroma uses the OpenAI GPT-3 family of language models to generate high-quality vector representations for documents.</p>
+<p><strong>Get Documents</strong></p>
+<p>Example of how to use Chroma to store and retrieve documents:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">chroma</span>
+
+<span class="c1"># Create a list of documents</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"This is a document about dogs."</span><span class="p">,</span>
+    <span class="s2">"This is a document about cats."</span><span class="p">,</span>
+    <span class="s2">"This is a document about birds."</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Create a Chroma instance</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">chroma</span><span class="o">.</span><span class="n">Chroma</span><span class="p">()</span>
+
+<span class="c1"># Add the documents to the Chroma instance</span>
+<span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+<span class="c1"># Get the document with the id "dogs"</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_document</span><span class="p">(</span><span class="s2">"dogs"</span><span class="p">)</span>
+
+<span class="c1"># Print the document</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">document</span> <span class="n">about</span> <span class="n">dogs</span><span class="o">.</span>
+</code></pre></div>
+<p><strong>Get Answers</strong></p>
+<p>This method takes a question as input and returns a list of answers, ranked by relevance.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ask a question</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">"What is the capital of France?"</span>
+
+<span class="c1"># Get the answers</span>
+<span class="n">answers</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_answers</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+
+<span class="c1"># Print the answers</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="p">[</span><span class="s2">"Paris"</span><span class="p">,</span>
+<span class="s2">"Lyon"</span><span class="p">,</span>
+<span class="s2">"Marseille"</span>
+<span class="p">]</span>
+</code></pre></div>
+<p><strong>Get Relevant Documents</strong></p>
+<p>To retrieve documents that are relevant to a given topic, you can use the Chroma <code>get_relevant_documents()</code> method. This method takes a topic as input and returns a list of documents, ranked by relevance.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get the documents that are relevant to the topic "dogs"</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="s2">"dogs"</span><span class="p">)</span>
+
+<span class="c1"># Print the documents</span>
+<span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+
+<span class="o">&gt;</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">document</span> <span class="n">about</span> <span class="n">dogs</span><span class="o">.</span>
+<span class="o">&gt;</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">another</span> <span class="n">document</span> <span class="n">about</span> <span class="n">dogs</span><span class="o">.</span>
+<span class="o">&gt;</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">third</span> <span class="n">document</span> <span class="n">about</span> <span class="n">dogs</span><span class="o">.</span>
+</code></pre></div>
+<p><strong>Classify Document</strong></p>
+<p>To classify a document into a particular category, you can use the Chroma <code>classify_document()</code> method. This method takes a document as input and returns the category that the document is most likely to belong to.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Classify the document "This is a document about dogs"</span>
+<span class="n">category</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">classify_document</span><span class="p">(</span><span class="s2">"This is a document about dogs"</span><span class="p">)</span>
+
+<span class="c1"># Print the category</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="n">dogs</span>
+</code></pre></div>
+</details>
+<h2 id="chains">Chains</h2>
+<p>Chains are a powerful tool for building complex applications that use natural language processing. Chains are made up of a sequence of modular components, such as <code>PromptTemplates</code>, <code>Models</code>, and <code>Guardrails</code>. These components can be combined in a variety of ways to create applications that can do things like generate text, translate languages, and answer questions.</p>
+<p>Aside from <strong>call</strong> and run methods shared by all Chain object </p>
+<p><strong>Apply</strong>
+</p><div class="highlight"><pre><span></span><code><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"socks"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"computer"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"product"</span><span class="p">:</span> <span class="s2">"shoes"</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Generate</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">outputs</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">input_list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>predict</strong>
+</p><div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="generic-functionality">Generic Functionality</h3>
+<details class="tip">
+<summary>Async API</summary>
+<p>Async API for Chain allows you to run chains asynchronously. This can be useful for tasks that take a long time to complete, such as summarization or question answering.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a SequentialChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">SequentialChain</span><span class="p">(</span>
+    <span class="n">chains</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">LLMChain</span><span class="p">(</span>
+            <span class="n">llm</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(),</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+                <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"product"</span><span class="p">],</span>
+                <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{product}</span><span class="s2">?"</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">),</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">TransformationChain</span><span class="p">(</span>
+            <span class="n">transform_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the chain asynchronously</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run_async</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Get the result</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>LLM Chain</summary>
+<p>LLM Chains are a type of Chain that uses a large language model (LLM) as its Model. LLMs are a type of artificial intelligence (AI) that can generate human-like text. LLM Chains are often used for tasks such as generating text, translating languages, and answering questions.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a PromptTemplate</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"product"</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{product}</span><span class="s2">?"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Create an LLMChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">LLMChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(),</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the chain</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Custom Chain</summary>
+<p>Creating a custom Chain allows you to create your own chains that can be used to perform a variety of tasks.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a custom chain</span>
+<span class="k">class</span> <span class="nc">MyChain</span><span class="p">(</span><span class="n">langchain</span><span class="o">.</span><span class="n">Chain</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Add a transformation chain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_chain</span><span class="p">(</span><span class="n">langchain</span><span class="o">.</span><span class="n">TransformationChain</span><span class="p">(</span>
+            <span class="n">transform_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+        <span class="p">))</span>
+
+        <span class="c1"># Add an API chain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_chain</span><span class="p">(</span><span class="n">langchain</span><span class="o">.</span><span class="n">APIChain</span><span class="p">(</span>
+            <span class="n">api_name</span><span class="o">=</span><span class="s2">"weather_api"</span><span class="p">,</span>
+            <span class="n">query</span><span class="o">=</span><span class="s2">"London"</span><span class="p">,</span>
+        <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_text</span><span class="p">):</span>
+        <span class="c1"># Run the transformation chain</span>
+        <span class="n">transformed_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">input_text</span><span class="p">)</span>
+
+        <span class="c1"># Run the API chain</span>
+        <span class="n">weather_forecast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="c1"># Return the results</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"transformed_text"</span><span class="p">:</span> <span class="n">transformed_text</span><span class="p">,</span>
+            <span class="s2">"weather_forecast"</span><span class="p">:</span> <span class="n">weather_forecast</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<span class="c1"># Create an instance of the custom chain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">MyChain</span><span class="p">()</span>
+
+<span class="c1"># Run the chain</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Router Chains</summary>
+<p>A router chain is a type of chain that can dynamically select the next chain to use for a given input. This is done by using a router, which is a component that takes an input and produces a probability distribution over the destination chains. The destination chain with the highest probability is then selected.</p>
+<p>There are two main types of router chains:</p>
+<ol>
+<li>LLM Router Chains: These routers use an LLM to determine how to route things. The LLM is given the input and generates a probability distribution over the destination chains. The destination chain with the highest probability is then selected.</li>
+<li>Embedding Router Chains: These routers use embeddings and similarity to determine how to route things. The input is embedded and then compared to the embeddings of the destination chains. The destination chain with the highest similarity is then selected.</li>
+</ol>
+<p>Router chains can be used for a variety of tasks, such as:</p>
+<ul>
+<li>Question answering: Router chains can be used to create question-answering systems. For example, a router chain could be used to answer questions about physics, math, or history.</li>
+<li>Natural language generation: Router chains can be used to generate natural language text. For example, a router chain could be used to generate summaries of factual topics or to create stories.</li>
+<li>Chatbots: Router chains can be used to create chatbots. For example, a router chain could be used to answer questions about a product or service, or to provide customer support.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMRouterChain</span><span class="p">,</span> <span class="n">EmbeddingRouterChain</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+<span class="kn">from</span> <span class="nn">langchain.chains.llm</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Create the LLMRouterChain</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+<span class="n">router_template</span> <span class="o">=</span> <span class="s2">"""You are a very smart person. You are great at answering questions about a variety of topics. When you don't know the answer to a question you admit that you don't know.</span>
+
+<span class="s2">Here is a question:</span>
+<span class="si">{input}</span><span class="s2">"""</span>
+<span class="n">router_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">router_template</span><span class="p">,</span> <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"input"</span><span class="p">])</span>
+<span class="n">router_chain</span> <span class="o">=</span> <span class="n">LLMRouterChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">router_prompt</span><span class="p">)</span>
+
+<span class="c1"># Create the ConversationChain</span>
+<span class="n">conversation_chain</span> <span class="o">=</span> <span class="n">ConversationChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">output_key</span><span class="o">=</span><span class="s2">"text"</span><span class="p">)</span>
+
+<span class="c1"># Create the destination chains</span>
+<span class="n">physics_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s2">"What is </span><span class="si">{topic}</span><span class="s2">?"</span><span class="p">))</span>
+<span class="n">math_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s2">"What is the </span><span class="si">{operation}</span><span class="s2"> of </span><span class="si">{number1}</span><span class="s2"> and </span><span class="si">{number2}</span><span class="s2">?"</span><span class="p">))</span>
+
+<span class="c1"># Add the destination chains to the router chain</span>
+<span class="n">router_chain</span><span class="o">.</span><span class="n">add_destination_chain</span><span class="p">(</span><span class="n">physics_chain</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"physics"</span><span class="p">)</span>
+<span class="n">router_chain</span><span class="o">.</span><span class="n">add_destination_chain</span><span class="p">(</span><span class="n">math_chain</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"math"</span><span class="p">)</span>
+
+<span class="c1"># Create the question-answering chain</span>
+<span class="n">question_answering_chain</span> <span class="o">=</span> <span class="n">MultiPromptChain</span><span class="p">(</span><span class="n">router_chain</span><span class="o">=</span><span class="n">router_chain</span><span class="p">,</span> <span class="n">destination_chains</span><span class="o">=</span><span class="p">[</span><span class="n">physics_chain</span><span class="p">,</span> <span class="n">math_chain</span><span class="p">],</span> <span class="n">default_chain</span><span class="o">=</span><span class="n">conversation_chain</span><span class="p">)</span>
+
+<span class="c1"># Ask a question</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">"What is black body radiation?"</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">question_answering_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+
+<span class="c1"># Print the answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</code></pre></div>
+<p>This code will run the router chain and select the best prompt template based on the user's input. In this case, the user input is "colorful socks". The router chain will then select the prompt template that is most relevant to the user's input, which is "What is a good name for a company that makes {color} products?". The chain will then run the selected prompt template and generate the following output "Socktastic":</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a RouterChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">RouterChain</span><span class="p">(</span>
+    <span class="n">prompt_templates</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"product"</span><span class="p">],</span>
+            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{product}</span><span class="s2">?"</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"color"</span><span class="p">],</span>
+            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{color}</span><span class="s2"> products?"</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the chain</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Sequential Chain</summary>
+<p>Sequential chains are a type of chain that can be used to perform a series of tasks in a specific order. This is useful for tasks that require multiple steps, such as generating a creative text format, translating a language, or writing different kinds of creative content.</p>
+<p>There are two main types of sequential chains:</p>
+<ol>
+<li>
+<p><strong>Simple Sequential Chains</strong>: These chains are the simplest type of sequential chain. They consist of a series of individual chains that are called in a deterministic order.</p>
+</li>
+<li>
+<p><strong>Sequential Chains</strong>: These chains are a more general type of sequential chain. They allow for multiple inputs and outputs, and they can be used to perform more complex tasks.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">SequentialChain</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Create the LLMChains</span>
+<span class="n">source_llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+<span class="n">target_llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+
+<span class="c1"># Create the PromptTemplates</span>
+<span class="n">source_template</span> <span class="o">=</span> <span class="s2">"""You are a translator. You are great at translating languages. When you don't know how to translate a word, you admit that you don't know.</span>
+
+<span class="s2">Here is a sentence in the source language:</span>
+<span class="si">{input}</span><span class="s2">"""</span>
+
+<span class="n">target_template</span> <span class="o">=</span> <span class="s2">"""You are a translator. You are great at translating languages. When you don't know how to translate a word, you admit that you don't know.</span>
+
+<span class="s2">Here is a sentence in the target language:</span>
+<span class="si">{input}</span><span class="s2">"""</span>
+
+<span class="c1"># Create the LLMChains</span>
+<span class="n">source_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">source_llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">source_template</span><span class="p">)</span>
+<span class="n">target_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">target_llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">target_template</span><span class="p">)</span>
+
+<span class="c1"># Create the SequentialChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">SequentialChain</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">source_chain</span><span class="p">,</span> <span class="n">target_chain</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Translate a sentence</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="s2">"I love you"</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+<span class="c1"># Print the output</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+<p><code>SimpleSequentialChain</code> is a simpler type of chain that consists of a series of individual chains that are called in a deterministic order. This means that the order in which the chains are called is always the same. <code>SequentialChain</code>, on the other hand, is a more general type of chain that allows for multiple inputs and outputs, and it can be used to perform more complex tasks.</p>
+<p></p><center>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>SimpleSequentialChain</th>
+<th>SequentialChain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of inputs</td>
+<td>1</td>
+<td>Multiple</td>
+</tr>
+<tr>
+<td>Number of outputs</td>
+<td>1</td>
+<td>Multiple</td>
+</tr>
+<tr>
+<td>Order of execution</td>
+<td>Deterministic</td>
+<td>Non-deterministic</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>Simple</td>
+<td>Complex</td>
+</tr>
+</tbody>
+</table>
+<p></p></center>
+</details>
+<h3 id="how-tos">How-To's:</h3>
+<details class="tip">
+<summary>Loading a Chain - LangChainHub</summary>
+<p>Loading from LangChainHub allows you to load chains from LangChainHub. This can be useful for finding chains that have already been created and tested.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Load a chain from LangChainHub</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">load_chain</span><span class="p">(</span><span class="s2">"https://langchainhub.com/chains/my_chain"</span><span class="p">)</span>
+
+<span class="c1"># Run the chain</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Serialization</summary>
+<p>Serialization is the process of converting an object or data structure into a sequence of bytes that can be stored or transmitted. This can be done for a variety of purposes, such as storing data for later retrieval, transmitting data over a network, or saving data to a file.</p>
+<p>There are two main types of serialization in LangChain:</p>
+<ul>
+<li>JSON: JSON is a lightweight data-interchange format. It is easy to read and write, and it is supported by many programming languages.</li>
+<li>YAML: YAML is a human-readable data serialization language. It is similar to JSON, but it is more flexible and allows for more complex data structures.</li>
+</ul>
+</details>
+<details class="tip">
+<summary>Parsing output</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">CommaSeparatedListOutputParser</span>
+
+<span class="n">output_parser</span> <span class="o">=</span> <span class="n">CommaSeparatedListOutputParser</span><span class="p">()</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s2">"""List all the colors in a rainbow"""</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">input_variables</span><span class="o">=</span><span class="p">[],</span> <span class="n">output_parser</span><span class="o">=</span><span class="n">output_parser</span><span class="p">)</span>
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+
+<span class="c1"># Use predict to generate a string output</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+
+<span class="c1"># The output is a string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="n">Red</span><span class="p">,</span> <span class="n">orange</span><span class="p">,</span> <span class="n">yellow</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">indigo</span><span class="p">,</span> <span class="n">violet</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Initialize a Chain From a String</summary>
+<p>There are a few reasons why you might want to initialize an LLMChain from a string.</p>
+<ul>
+<li>Convenience: It can be more convenient to initialize an LLMChain from a string than from a PromptTemplate object. This is because you can simply type the string template directly into the code, rather than having to create a PromptTemplate object first.</li>
+<li>Flexibility: The from_string method allows you to define the variables and their types in the string template itself. This gives you more flexibility in how you define the chain.</li>
+<li>Reusability: The from_string method can be used to create a chain that can be reused multiple times. This can be useful if you have a chain that you use frequently.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s2">"""Tell me a </span><span class="si">{adjective}</span><span class="s2"> joke about </span><span class="si">{subject}</span><span class="s2">."""</span>
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+
+<span class="c1"># This chain can now be used to generate jokes multiple times.</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">llm_chain</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">adjective</span><span class="o">=</span><span class="s2">"sad"</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s2">"ducks"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">Q</span><span class="p">:</span> <span class="n">What</span> <span class="n">did</span> <span class="n">the</span> <span class="n">duck</span> <span class="n">say</span> <span class="n">when</span> <span class="n">his</span> <span class="n">friend</span> <span class="n">died</span><span class="err">?</span>
+<span class="o">&gt;</span> <span class="n">A</span><span class="p">:</span> <span class="n">Quack</span><span class="p">,</span> <span class="n">quack</span><span class="p">,</span> <span class="n">goodbye</span><span class="o">.</span>
+</code></pre></div>
+</details>
+<hr>
+<details class="tip">
+<summary>Chatbot</summary>
+<p>Chatbots: Chatbots are a type of chain that uses a conversational AI (CAI) model to interact with users in a natural way. Chatbots are often used for customer service, education, and other applications.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a Chatbot</span>
+<span class="n">chatbot</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">Chatbot</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(),</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">ChatPromptTemplate</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># Start a conversation</span>
+<span class="n">chatbot</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Ask a question</span>
+<span class="n">chatbot</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s2">"What is the capital of France?"</span><span class="p">)</span>
+
+<span class="c1"># Get the answer</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">chatbot</span><span class="o">.</span><span class="n">get_answer</span><span class="p">()</span>
+
+<span class="c1"># Print the answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Virtual Assistants</summary>
+<p>Virtual assistants are a type of chain that uses a CAI model to help users with tasks such as scheduling appointments, making travel arrangements, and playing music. Virtual assistants are often used in homes and businesses.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a Virtual Assistant</span>
+<span class="n">assistant</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">VirtualAssistant</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(),</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="n">langchain</span><span class="o">.</span><span class="n">VirtualAssistantPromptTemplate</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># Start a conversation</span>
+<span class="n">assistant</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Give a command</span>
+<span class="n">assistant</span><span class="o">.</span><span class="n">give_command</span><span class="p">(</span><span class="s2">"Open Google Chrome"</span><span class="p">)</span>
+
+<span class="c1"># Get the result</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">assistant</span><span class="o">.</span><span class="n">get_result</span><span class="p">()</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Router Chains</summary>
+<p>This code will run the router chain and select the best prompt template based on the user's input. In this case, the user input is "colorful socks". The router chain will then select the prompt template that is most relevant to the user's input, which is "What is a good name for a company that makes {color} products?". The chain will then run the selected prompt template and generate the following output "Socktastic":</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
+
+<span class="c1"># Create a RouterChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">RouterChain</span><span class="p">(</span>
+    <span class="n">prompt_templates</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"product"</span><span class="p">],</span>
+            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{product}</span><span class="s2">?"</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
+            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"color"</span><span class="p">],</span>
+            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{color}</span><span class="s2"> products?"</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the chain</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details></div></html>
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../data_validation/tfdv/" class="md-footer__link md-footer__link--prev" aria-label="Previous: TFDV" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              TFDV
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.bd0b6b67.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.8aa65030.min.js"></script>
+      
+    
+  </body>
+</html>
