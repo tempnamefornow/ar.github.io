@@ -14,9 +14,8 @@ LangChain is a framework for developing applications powered by language models.
 
 ---
 
-## Concepts
 
-### Schema
+## Schema
 
 ??? tip "ChatMessages"
     **SystemChatMessage:** A chat message representing information that should be instructions to the AI system.
@@ -55,7 +54,7 @@ LangChain is a framework for developing applications powered by language models.
 
 ---
 
-### Models
+## Models
 
 
 The documentation introduces three types of models used in LangChain:
@@ -69,7 +68,7 @@ The documentation introduces three types of models used in LangChain:
 
 ---
 
-### Prompts
+## Prompts
 
 The documentation introduces prompts as the new method of programming models in LangChain. Prompts are constructed from multiple components using PromptTemplate. LangChain provides classes and functions to facilitate prompt construction and usage. The documentation is divided into four sections: 
 
@@ -147,7 +146,7 @@ These sections cover the representation of input values, constructing prompts, d
 
 ---
 
-### Indexes
+## Indexes
 
 LangChain is a framework that focuses on creating indexes for efficient document retrieval. The core component of LangChain is the Retriever interface, defined by the `BaseRetriever` class. Here's an example of the `BaseRetriever` class:
 
@@ -210,7 +209,7 @@ The above code demonstrates how to create an index using the `VectorstoreIndexCr
 By understanding LangChain's indexing and retrieval capabilities, you can create powerful retrievers for various applications.
 
 
-#### Text Splitters
+### Text Splitters
 
 Text splitters are used to divide long pieces of text into smaller, semantically meaningful chunks. This allows for better handling and processing of the text, while maintaining the context between the chunks. Here's an overview of text splitters and their customization options:
 
@@ -292,7 +291,7 @@ Text splitters are used to divide long pieces of text into smaller, semantically
 
 ---
 
-#### Retrievers
+### Retrievers
 
 A Retriever is a component in Langchain that is responsible for finding and returning relevant documents in response to a user's query. Retrievers are typically backed by an index, which is a data structure that stores information about the documents in a corpus. When a user queries a Retriever, the Retriever will use the index to find the documents that are most likely to be relevant to the query, and then return those documents to the user.
 
@@ -435,7 +434,7 @@ A Retriever is a component in Langchain that is responsible for finding and retu
 
 ---
 
-#### Vector Stores
+### Vector Stores
 
 A vectorstore is a data structure that stores documents and their corresponding vector representations. Vector representations are numerical representations of text that capture the meaning of the text. They are often used for natural language processing tasks such as question answering, document retrieval, and text classification.
 
@@ -528,6 +527,8 @@ In Langchain, vectorstores are used to store the documents that are used to trai
     > dogs
     ```
 
+---
+
 ## Chains
 
 Chains are a powerful tool for building complex applications that use natural language processing. Chains are made up of a sequence of modular components, such as `PromptTemplates`, `Models`, and `Guardrails`. These components can be combined in a variety of ways to create applications that can do things like generate text, translate languages, and answer questions.
@@ -568,7 +569,7 @@ print(output)
 
 ```
 
-### Generic Functionality
+### Generic Functionality Chains
 
 ??? tip "Async API"
     Async API for Chain allows you to run chains asynchronously. This can be useful for tasks that take a long time to complete, such as summarization or question answering.
@@ -812,7 +813,125 @@ print(output)
     
     </center>
 
-### How-To's:
+??? tip "Transformation Chains"
+    A transformation chain is a type of chain that can be used to transform data. Transformation chains can be used to perform a variety of tasks, such as:
+
+    - **Filtering data:** Transformation chains can be used to filter data by removing unwanted data or by keeping only certain data.
+    - **Formatting data:** Transformation chains can be used to format data in a specific way, such as by converting it to a different format or by adding or removing certain elements.
+    - **Calculating data:** Transformation chains can be used to calculate data, such as by summing or averaging data.
+
+    Transformation chains are created using the `TransformChain` class. 
+    The TransformChain class has the following constructor arguments:
+
+    - `input_variables`: A list of the names of the input variables.
+    - `output_variables`: A list of the names of the output variables.
+    - `transform`: A function that takes the input variables and returns the output variables.
+
+    ```python
+    from langchain.chains import TransformChain
+
+    def transform_func(inputs: dict) -> dict:
+        text = inputs["text"]
+        shortened_text = "\n\n".join(text.split("\n\n")[:3])
+        return {"output_text": shortened_text}
+
+    transform_chain = TransformChain(input_variables=["text"], output_variables=["output_text"], transform=transform_func)
+
+    state_of_the_union = """
+    The speaker addresses the nation, noting that while last year they were kept apart due to COVID-19, this year they are together again. They are reminded that regardless of their political affiliations, they are all Americans.
+
+    The speaker then goes on to discuss the economy, healthcare, and education. They end their speech by calling on the nation to come together and work towards a better future.
+    """
+
+    transform_chain.run(state_of_the_union)
+
+    output = transform_chain.get_output("output_text")
+
+    print(output)
+
+    ```
+
+    Transformation chains can be used in conjunction with other types of chains, such as LLMChains. For example, the following code shows how to use a transformation chain to filter a text and then use an `LLMChain` to summarize the filtered text:
+
+
+    ```python
+    from langchain.chains import TransformChain, LLMChain, SimpleSequentialChain
+    from langchain.llms import OpenAI
+    from langchain.prompts import PromptTemplate
+
+    def transform_func(inputs: dict) -> dict:
+        text = inputs["text"]
+        shortened_text = "\n\n".join(text.split("\n\n")[:3])
+        return {"output_text": shortened_text}
+
+    transform_chain = TransformChain(input_variables=["text"], output_variables=["output_text"], transform=transform_func)
+
+    template = """Summarize this text:
+
+    {output_text}
+
+    Summary:"""
+    prompt = PromptTemplate(input_variables=["output_text"], template=template)
+
+    llm_chain = LLMChain(llm=OpenAI(), prompt=prompt)
+
+    sequential_chain = SimpleSequentialChain(chains=[transform_chain, llm_chain])
+
+    sequential_chain.run(state_of_the_union)
+
+    output = sequential_chain.get_output("summary")
+
+    print(output)
+
+    ```
+
+    In summary, transformation chains allow you to insert python functions to a "chain" to alter data. They are pythonic and don't call a model at any point unless chained with other chains.
+
+
+
+### Index-Related Chains
+
+Index-Related Chains are a set of tools in LangChain that allow you to interact with indexes. An index is a data structure that allows you to quickly find information in a large dataset. For example, you could use an index to find all the documents that contain a certain word or phrase. The index-related chains in LangChain provide a way to combine the retriever and the language model. The index-related chains can be used to perform tasks such as question answering, summarization, and recommendation.
+
+
+Here is a table that summarizes the pros and cons of each method for passing multiple documents to the language model:
+
+
+| Method | Pros | Cons |
+|--------|------|----------|
+| **Stuffing**   | Only makes a single call to the LLM. When generating text, the LLM has access to all the data at once.| Most LLMs have a context length, and for large documents (or many documents) this will not work as it will result in a prompt larger than the context length. |
+| **MapReduce**  | Can scale to larger documents (and more documents) than StuffDocumentsChain. The calls to the LLM on individual documents are independent and can therefore be parallelized. | Requires many more calls to the LLM than StuffDocumentsChain. Loses some information during the final combined call.|
+| **Refine**     | Can pull in more relevant context, and may be less lossy than `MapReduceDocumentsChain`.| Requires many more calls to the LLM than StuffDocumentsChain. The calls are also NOT independent, meaning they cannot be paralleled like `MapReduceDocumentsChain`. There is also some potential dependencies on the ordering of the documents. |
+| **Map-Rerank** | Similar pros as `MapReduceDocumentsChain`. Requires fewer calls, compared to `MapReduceDocumentsChain`. | Cannot combine information between documents. This means it is most useful when you expect there to be a single simple answer in a single document.|
+
+Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771a725046af3c02cf4c15a3e18ec54a/docs/modules/chains/index_examples/summarize.ipynb)
+
+
+
+
+??? "load_qa_chain"
+
+??? "load_qa_with_sources_chain"
+
+??? "load_summarize_chain"
+
+??? "AnalyzeDocumentChain"
+
+??? "ConversationalRetrievalChain"
+
+??? "GraphQAChain"
+
+??? "HypotheticalDocumentEmbedder"
+
+??? "MapReduceDocumentsChain"
+
+??? "MapReduceChain"
+
+??? "RetrievalQA"
+
+??? "RetrievalQAWithSourcesChain"
+
+### Quick How-To Guides
 
 ??? tip "Loading a Chain - LangChainHub"
     Loading from LangChainHub allows you to load chains from LangChainHub. This can be useful for finding chains that have already been created and tested.
@@ -934,29 +1053,19 @@ print(output)
     print(result)
     ```
 
-??? tip "Router Chains"
-    This code will run the router chain and select the best prompt template based on the user's input. In this case, the user input is "colorful socks". The router chain will then select the prompt template that is most relevant to the user's input, which is "What is a good name for a company that makes {color} products?". The chain will then run the selected prompt template and generate the following output "Socktastic":
 
-    ```python
-    import langchain
 
-    # Create a RouterChain
-    chain = langchain.RouterChain(
-        prompt_templates=[
-            langchain.PromptTemplate(
-                input_variables=["product"],
-                template="What is a good name for a company that makes {product}?",
-            ),
-            langchain.PromptTemplate(
-                input_variables=["color"],
-                template="What is a good name for a company that makes {color} products?",
-            ),
-        ],
-    )
+---
 
-    # Run the chain
-    result = chain.run("colorful socks")
+## Misc
 
-    # Print the result
-    print(result)
-    ```
+??? "Difference between Indexes, Retrievers and Index Related Chains"
+    - Index-related chains are a set of tools that allow you to interact with indexes. An index is a data structure that stores information about documents, such as their title, content, and the keywords that they contain. The index can be used to quickly find documents that are relevant to a particular query.
+    - Indexes are data structures that store information about documents. The most common type of index is a vector index, which stores a vector representation of each document. The vector representation is a numerical representation of the document that is created by using a technique called word embedding. Word embedding is a process of converting words into a vector representation that captures the meaning of the word.
+    - Retrievers are classes that provide a way to store data so that it can be queried by a language model. The retriever must implement the get_relevant_texts method, which takes in a string and returns a list of documents. The retriever uses the index to find the most relevant documents to the query.
+    
+    | Feature | Index-related chains  | Indexes  | Retrievers|
+    |---------|-------|----------------|------------------|
+    | Purpose        | To combine retrievers and language models         | To store information about documents | To quickly find documents that are relevant to a particular query |
+    | Implementation | Classes  | Data structures| Classes   |
+    | Use cases      | Question answering, summarization, recommendation | Storing and retrieving documents     | Finding documents that are relevant to a particular query         |
