@@ -1456,35 +1456,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
-    Concepts
-  </a>
-  
-    <nav class="md-nav" aria-label="Concepts">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#schema" class="md-nav__link">
     Schema
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#models" class="md-nav__link">
     Models
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#prompts" class="md-nav__link">
     Prompts
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#indexes" class="md-nav__link">
     Indexes
   </a>
@@ -1517,11 +1509,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#chains" class="md-nav__link">
@@ -1532,21 +1519,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generic-functionality" class="md-nav__link">
-    Generic Functionality
+  <a href="#generic-functionality-chains" class="md-nav__link">
+    Generic Functionality Chains
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-tos" class="md-nav__link">
-    How-To's:
+  <a href="#index-related-chains" class="md-nav__link">
+    Index-Related Chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-how-to-guides" class="md-nav__link">
+    Quick How-To Guides
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
   
 </li>
       
@@ -1613,35 +1614,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#concepts" class="md-nav__link">
-    Concepts
-  </a>
-  
-    <nav class="md-nav" aria-label="Concepts">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#schema" class="md-nav__link">
     Schema
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#models" class="md-nav__link">
     Models
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#prompts" class="md-nav__link">
     Prompts
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#indexes" class="md-nav__link">
     Indexes
   </a>
@@ -1674,11 +1667,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#chains" class="md-nav__link">
@@ -1689,21 +1677,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#generic-functionality" class="md-nav__link">
-    Generic Functionality
+  <a href="#generic-functionality-chains" class="md-nav__link">
+    Generic Functionality Chains
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#how-tos" class="md-nav__link">
-    How-To's:
+  <a href="#index-related-chains" class="md-nav__link">
+    Index-Related Chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-how-to-guides" class="md-nav__link">
+    Quick How-To Guides
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
   
 </li>
       
@@ -1741,8 +1743,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="concepts">Concepts</h2>
-<h3 id="schema">Schema</h3>
+<h2 id="schema">Schema</h2>
 <details class="tip">
 <summary>ChatMessages</summary>
 <p><strong>SystemChatMessage:</strong> A chat message representing information that should be instructions to the AI system.</p>
@@ -1774,7 +1775,7 @@
 <p>In summary, a document in the LangChain framework is an unstructured piece of data that consists of the <code>page_content</code>, representing the actual textual content, and metadata, providing auxiliary information about the attributes of the data.</p>
 </details>
 <hr>
-<h3 id="models">Models</h3>
+<h2 id="models">Models</h2>
 <p>The documentation introduces three types of models used in LangChain:</p>
 <ol>
 <li>
@@ -1788,7 +1789,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="prompts">Prompts</h3>
+<h2 id="prompts">Prompts</h2>
 <p>The documentation introduces prompts as the new method of programming models in LangChain. Prompts are constructed from multiple components using PromptTemplate. LangChain provides classes and functions to facilitate prompt construction and usage. The documentation is divided into four sections: </p>
 <ul>
 <li>PromptValue</li>
@@ -1867,7 +1868,7 @@ Here is a visual representation of the scenario:</p>
 <p>In this example, the <code>JSONOutputParser</code> takes the response string, performs the necessary parsing logic, and outputs a structured JSON object that can be easily utilized in applications or systems that expect JSON format.</p>
 </details>
 <hr>
-<h3 id="indexes">Indexes</h3>
+<h2 id="indexes">Indexes</h2>
 <p>LangChain is a framework that focuses on creating indexes for efficient document retrieval. The core component of LangChain is the Retriever interface, defined by the <code>BaseRetriever</code> class. Here's an example of the <code>BaseRetriever</code> class:</p>
 <p></p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -1919,7 +1920,7 @@ The <code>get_relevant_documents</code> method needs to be implemented in a subc
 </code></pre></div>
 <p>The above code demonstrates how to create an index using the <code>VectorstoreIndexCreator</code>, which internally handles document splitting, embedding creation, and indexing. It then retrieves relevant documents based on a question using the retriever, and finally, the question answering chain processes the query and returns the response.</p>
 <p>By understanding LangChain's indexing and retrieval capabilities, you can create powerful retrievers for various applications.</p>
-<h4 id="text-splitters">Text Splitters</h4>
+<h3 id="text-splitters">Text Splitters</h3>
 <p>Text splitters are used to divide long pieces of text into smaller, semantically meaningful chunks. This allows for better handling and processing of the text, while maintaining the context between the chunks. Here's an overview of text splitters and their customization options:</p>
 <details class="example">
 <summary>Character Text Splitter</summary>
@@ -1989,7 +1990,7 @@ Use the Character Text Splitter when you need to split text into fixed-size chun
 <p>Use the Hugging Face Tokenizer when you want to work with pre-trained models or utilize specific tokenization features provided by the Hugging Face library. It is particularly useful when dealing with transformer-based models like GPT-2 or BERT.</p>
 </details>
 <hr>
-<h4 id="retrievers">Retrievers</h4>
+<h3 id="retrievers">Retrievers</h3>
 <p>A Retriever is a component in Langchain that is responsible for finding and returning relevant documents in response to a user's query. Retrievers are typically backed by an index, which is a data structure that stores information about the documents in a corpus. When a user queries a Retriever, the Retriever will use the index to find the documents that are most likely to be relevant to the query, and then return those documents to the user.</p>
 <details class="example">
 <summary>VectorStoreRetriever</summary>
@@ -2111,7 +2112,7 @@ The Self-Query Retriever would rank the documents in the list, and return the to
 </code></pre></div>
 </details>
 <hr>
-<h4 id="vector-stores">Vector Stores</h4>
+<h3 id="vector-stores">Vector Stores</h3>
 <p>A vectorstore is a data structure that stores documents and their corresponding vector representations. Vector representations are numerical representations of text that capture the meaning of the text. They are often used for natural language processing tasks such as question answering, document retrieval, and text classification.</p>
 <p>In Langchain, vectorstores are used to store the documents that are used to train and evaluate natural language processing models. Langchain provides a number of different vectorstores that can be used, including Chroma.</p>
 <details class="success">
@@ -2184,6 +2185,7 @@ The Self-Query Retriever would rank the documents in the list, and return the to
 <span class="o">&gt;</span> <span class="n">dogs</span>
 </code></pre></div>
 </details>
+<hr>
 <h2 id="chains">Chains</h2>
 <p>Chains are a powerful tool for building complex applications that use natural language processing. Chains are made up of a sequence of modular components, such as <code>PromptTemplates</code>, <code>Models</code>, and <code>Guardrails</code>. These components can be combined in a variety of ways to create applications that can do things like generate text, translate languages, and answer questions.</p>
 <p>Aside from <strong>call</strong> and run methods shared by all Chain object </p>
@@ -2210,7 +2212,7 @@ The Self-Query Retriever would rank the documents in the list, and return the to
 
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="generic-functionality">Generic Functionality</h3>
+<h3 id="generic-functionality-chains">Generic Functionality Chains</h3>
 <details class="tip">
 <summary>Async API</summary>
 <p>Async API for Chain allows you to run chains asynchronously. This can be useful for tasks that take a long time to complete, such as summarization or question answering.</p>
@@ -2464,7 +2466,142 @@ The Self-Query Retriever would rank the documents in the list, and return the to
 </table>
 <p></p></center>
 </details>
-<h3 id="how-tos">How-To's:</h3>
+<details class="tip">
+<summary>Transformation Chains</summary>
+<p>A transformation chain is a type of chain that can be used to transform data. Transformation chains can be used to perform a variety of tasks, such as:</p>
+<ul>
+<li><strong>Filtering data:</strong> Transformation chains can be used to filter data by removing unwanted data or by keeping only certain data.</li>
+<li><strong>Formatting data:</strong> Transformation chains can be used to format data in a specific way, such as by converting it to a different format or by adding or removing certain elements.</li>
+<li><strong>Calculating data:</strong> Transformation chains can be used to calculate data, such as by summing or averaging data.</li>
+</ul>
+<p>Transformation chains are created using the <code>TransformChain</code> class. 
+The TransformChain class has the following constructor arguments:</p>
+<ul>
+<li><code>input_variables</code>: A list of the names of the input variables.</li>
+<li><code>output_variables</code>: A list of the names of the output variables.</li>
+<li><code>transform</code>: A function that takes the input variables and returns the output variables.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">TransformChain</span>
+
+<span class="k">def</span> <span class="nf">transform_func</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+    <span class="n">shortened_text</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"output_text"</span><span class="p">:</span> <span class="n">shortened_text</span><span class="p">}</span>
+
+<span class="n">transform_chain</span> <span class="o">=</span> <span class="n">TransformChain</span><span class="p">(</span><span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"output_text"</span><span class="p">],</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform_func</span><span class="p">)</span>
+
+<span class="n">state_of_the_union</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">The speaker addresses the nation, noting that while last year they were kept apart due to COVID-19, this year they are together again. They are reminded that regardless of their political affiliations, they are all Americans.</span>
+
+<span class="s2">The speaker then goes on to discuss the economy, healthcare, and education. They end their speech by calling on the nation to come together and work towards a better future.</span>
+<span class="s2">"""</span>
+
+<span class="n">transform_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">state_of_the_union</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">transform_chain</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="s2">"output_text"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+<p>Transformation chains can be used in conjunction with other types of chains, such as LLMChains. For example, the following code shows how to use a transformation chain to filter a text and then use an <code>LLMChain</code> to summarize the filtered text:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">TransformChain</span><span class="p">,</span> <span class="n">LLMChain</span><span class="p">,</span> <span class="n">SimpleSequentialChain</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="k">def</span> <span class="nf">transform_func</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span>
+    <span class="n">shortened_text</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)[:</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"output_text"</span><span class="p">:</span> <span class="n">shortened_text</span><span class="p">}</span>
+
+<span class="n">transform_chain</span> <span class="o">=</span> <span class="n">TransformChain</span><span class="p">(</span><span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span> <span class="n">output_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"output_text"</span><span class="p">],</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform_func</span><span class="p">)</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="s2">"""Summarize this text:</span>
+
+<span class="si">{output_text}</span><span class="s2"></span>
+
+<span class="s2">Summary:"""</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"output_text"</span><span class="p">],</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">llm_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">(),</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+
+<span class="n">sequential_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">transform_chain</span><span class="p">,</span> <span class="n">llm_chain</span><span class="p">])</span>
+
+<span class="n">sequential_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">state_of_the_union</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">sequential_chain</span><span class="o">.</span><span class="n">get_output</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+<p>In summary, transformation chains allow you to insert python functions to a "chain" to alter data. They are pythonic and don't call a model at any point unless chained with other chains.</p>
+</details>
+<h3 id="index-related-chains">Index-Related Chains</h3>
+<p>Index-Related Chains are a set of tools in LangChain that allow you to interact with indexes. An index is a data structure that allows you to quickly find information in a large dataset. For example, you could use an index to find all the documents that contain a certain word or phrase. The index-related chains in LangChain provide a way to combine the retriever and the language model. The index-related chains can be used to perform tasks such as question answering, summarization, and recommendation.</p>
+<p>Here is a table that summarizes the pros and cons of each method for passing multiple documents to the language model:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stuffing</strong></td>
+<td>Only makes a single call to the LLM. When generating text, the LLM has access to all the data at once.</td>
+<td>Most LLMs have a context length, and for large documents (or many documents) this will not work as it will result in a prompt larger than the context length.</td>
+</tr>
+<tr>
+<td><strong>MapReduce</strong></td>
+<td>Can scale to larger documents (and more documents) than StuffDocumentsChain. The calls to the LLM on individual documents are independent and can therefore be parallelized.</td>
+<td>Requires many more calls to the LLM than StuffDocumentsChain. Loses some information during the final combined call.</td>
+</tr>
+<tr>
+<td><strong>Refine</strong></td>
+<td>Can pull in more relevant context, and may be less lossy than <code>MapReduceDocumentsChain</code>.</td>
+<td>Requires many more calls to the LLM than StuffDocumentsChain. The calls are also NOT independent, meaning they cannot be paralleled like <code>MapReduceDocumentsChain</code>. There is also some potential dependencies on the ordering of the documents.</td>
+</tr>
+<tr>
+<td><strong>Map-Rerank</strong></td>
+<td>Similar pros as <code>MapReduceDocumentsChain</code>. Requires fewer calls, compared to <code>MapReduceDocumentsChain</code>.</td>
+<td>Cannot combine information between documents. This means it is most useful when you expect there to be a single simple answer in a single document.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples of these <a href="https://github.com/hwchase17/langchain/blob/6a3ceaa3771a725046af3c02cf4c15a3e18ec54a/docs/modules/chains/index_examples/summarize.ipynb">here</a></p>
+<details>
+<summary>load_qa_chain</summary>
+</details>
+<details>
+<summary>load_qa_with_sources_chain</summary>
+</details>
+<details>
+<summary>load_summarize_chain</summary>
+</details>
+<details>
+<summary>AnalyzeDocumentChain</summary>
+</details>
+<details>
+<summary>ConversationalRetrievalChain</summary>
+</details>
+<details>
+<summary>GraphQAChain</summary>
+</details>
+<details>
+<summary>HypotheticalDocumentEmbedder</summary>
+</details>
+<details>
+<summary>MapReduceDocumentsChain</summary>
+</details>
+<details>
+<summary>MapReduceChain</summary>
+</details>
+<details>
+<summary>RetrievalQA</summary>
+</details>
+<details>
+<summary>RetrievalQAWithSourcesChain</summary>
+</details>
+<h3 id="quick-how-to-guides">Quick How-To Guides</h3>
 <details class="tip">
 <summary>Loading a Chain - LangChainHub</summary>
 <p>Loading from LangChainHub allows you to load chains from LangChainHub. This can be useful for finding chains that have already been created and tested.</p>
@@ -2578,31 +2715,45 @@ The Self-Query Retriever would rank the documents in the list, and return the to
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 </details>
-<details class="tip">
-<summary>Router Chains</summary>
-<p>This code will run the router chain and select the best prompt template based on the user's input. In this case, the user input is "colorful socks". The router chain will then select the prompt template that is most relevant to the user's input, which is "What is a good name for a company that makes {color} products?". The chain will then run the selected prompt template and generate the following output "Socktastic":</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">langchain</span>
-
-<span class="c1"># Create a RouterChain</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">langchain</span><span class="o">.</span><span class="n">RouterChain</span><span class="p">(</span>
-    <span class="n">prompt_templates</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
-            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"product"</span><span class="p">],</span>
-            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{product}</span><span class="s2">?"</span><span class="p">,</span>
-        <span class="p">),</span>
-        <span class="n">langchain</span><span class="o">.</span><span class="n">PromptTemplate</span><span class="p">(</span>
-            <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">"color"</span><span class="p">],</span>
-            <span class="n">template</span><span class="o">=</span><span class="s2">"What is a good name for a company that makes </span><span class="si">{color}</span><span class="s2"> products?"</span><span class="p">,</span>
-        <span class="p">),</span>
-    <span class="p">],</span>
-<span class="p">)</span>
-
-<span class="c1"># Run the chain</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"colorful socks"</span><span class="p">)</span>
-
-<span class="c1"># Print the result</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</code></pre></div>
+<hr>
+<h2 id="misc">Misc</h2>
+<details>
+<summary>Difference between Indexes, Retrievers and Index Related Chains</summary>
+<ul>
+<li>Index-related chains are a set of tools that allow you to interact with indexes. An index is a data structure that stores information about documents, such as their title, content, and the keywords that they contain. The index can be used to quickly find documents that are relevant to a particular query.</li>
+<li>Indexes are data structures that store information about documents. The most common type of index is a vector index, which stores a vector representation of each document. The vector representation is a numerical representation of the document that is created by using a technique called word embedding. Word embedding is a process of converting words into a vector representation that captures the meaning of the word.</li>
+<li>Retrievers are classes that provide a way to store data so that it can be queried by a language model. The retriever must implement the get_relevant_texts method, which takes in a string and returns a list of documents. The retriever uses the index to find the most relevant documents to the query.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Index-related chains</th>
+<th>Indexes</th>
+<th>Retrievers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose</td>
+<td>To combine retrievers and language models</td>
+<td>To store information about documents</td>
+<td>To quickly find documents that are relevant to a particular query</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Classes</td>
+<td>Data structures</td>
+<td>Classes</td>
+</tr>
+<tr>
+<td>Use cases</td>
+<td>Question answering, summarization, recommendation</td>
+<td>Storing and retrieving documents</td>
+<td>Finding documents that are relevant to a particular query</td>
+</tr>
+</tbody>
+</table>
 </details></div></html>
 
 
