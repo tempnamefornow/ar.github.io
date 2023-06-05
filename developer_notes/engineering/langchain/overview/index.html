@@ -1533,6 +1533,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    Utility Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#quick-how-to-guides" class="md-nav__link">
     Quick How-To Guides
   </a>
@@ -1686,6 +1693,13 @@
           <li class="md-nav__item">
   <a href="#index-related-chains" class="md-nav__link">
     Index-Related Chains
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utility-functions" class="md-nav__link">
+    Utility Functions
   </a>
   
 </li>
@@ -2569,25 +2583,211 @@ The TransformChain class has the following constructor arguments:</p>
 </table>
 <p>Examples of these <a href="https://github.com/hwchase17/langchain/blob/6a3ceaa3771a725046af3c02cf4c15a3e18ec54a/docs/modules/chains/index_examples/summarize.ipynb">here</a></p>
 <details>
-<summary>load_qa_chain</summary>
-</details>
-<details>
-<summary>load_qa_with_sources_chain</summary>
-</details>
-<details>
-<summary>load_summarize_chain</summary>
-</details>
-<details>
 <summary>AnalyzeDocumentChain</summary>
+<p>The <code>AnalyzeDocumentChain</code> class in Langchain plays a role in splitting a single document into smaller pieces and then running them through a <code>CombineDocumentsChain</code>. Its purpose is to provide an end-to-end chain for document analysis tasks. This chain splits a single document into smaller pieces using a text splitter and then analyzes each piece using another specified chain (combine_docs_chain).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains.question_answering</span> <span class="kn">import</span> <span class="n">load_qa_chain</span>
+
+<span class="c1"># Load the question answering chain with the desired chain type</span>
+<span class="n">qa_chain</span> <span class="o">=</span> <span class="n">load_qa_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">chain_type</span><span class="o">=</span><span class="s2">"map_reduce"</span><span class="p">)</span>
+
+<span class="c1"># Create a document chain for question answering using the loaded chain</span>
+<span class="n">qa_document_chain</span> <span class="o">=</span> <span class="n">AnalyzeDocumentChain</span><span class="p">(</span><span class="n">combine_docs_chain</span><span class="o">=</span><span class="n">qa_chain</span><span class="p">)</span>
+
+<span class="c1"># Run the question answering chain on a given input document and question</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa_document_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">input_document</span><span class="o">=</span><span class="n">state_of_the_union</span><span class="p">,</span> <span class="n">question</span><span class="o">=</span><span class="s2">"what did the president say about justice breyer?"</span><span class="p">)</span>
+
+<span class="c1"># Print the answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <details>
 <summary>ConversationalRetrievalChain</summary>
+<p><strong>TLDR: ConversationalRetrievalChain = conversation memory + RetrievalQA Chain</strong></p>
+<p>The <code>ConversationalRetrievalChain</code> in Langchain is a chain designed for conversational interaction with a vector database. It combines the functionality of conversation memory with the question-answering capabilities of the RetrievalQA chain. This chain allows you to have a continuous conversation with the language model, providing a chat history as input and obtaining answers based on that context.
+It extends the <code>BaseConversationalRetrievalChain</code> class, which provides the basic structure and functionality for conversational retrieval chains.</p>
+<ul>
+<li>
+<p>The chain has a retriever (retriever attribute) that connects to the vector database or index. This retriever is responsible for retrieving relevant documents based on the conversation history and the current question.</p>
+</li>
+<li>
+<p>The chain uses a question generator (<code>question_generator</code> attribute) based on a pre-trained language model (<code>LLMChain</code>) to generate refined questions or prompts based on the conversation history. This helps in capturing the context of the conversation and generating more accurate queries.</p>
+</li>
+<li>
+<p>The <code>combine_docs_chain</code> attribute specifies the chain used to combine the retrieved documents into a single string. It is an instance of a class derived from <code>BaseCombineDocumentsChain</code> and is responsible for processing and combining the documents for further analysis.</p>
+</li>
+<li>
+<p>The chain supports the concept of chat history, which is passed as the <code>chat_history</code> input parameter. The <code>get_chat_history</code> attribute or a custom callable function can be used to transform the chat history into a string representation suitable for the chain's processing.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationalRetrievalChain</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes</span> <span class="kn">import</span> <span class="n">VectorstoreIndexCreator</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="c1"># Create the vector store to use as the index</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">VectorstoreIndexCreator</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">OpenAIEmbeddings</span><span class="p">())</span>
+
+<span class="c1"># Create a ConversationalRetrievalChain for chatting</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">ConversationalRetrievalChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">(),</span>
+    <span class="n">retriever</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_type</span><span class="o">=</span><span class="s2">"similarity"</span><span class="p">,</span> <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"k"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+    <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the conversation</span>
+<span class="n">chat_history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"User: "</span><span class="p">)</span>
+    <span class="n">chat_history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"human"</span><span class="p">,</span> <span class="n">user_input</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="p">({</span><span class="s2">"question"</span><span class="p">:</span> <span class="n">user_input</span><span class="p">,</span> <span class="s2">"chat_history"</span><span class="p">:</span> <span class="n">chat_history</span><span class="p">})</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"answer"</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Assistant:"</span><span class="p">,</span> <span class="n">answer</span><span class="p">)</span>
+    <span class="n">chat_history</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">"ai"</span><span class="p">,</span> <span class="n">answer</span><span class="p">))</span>
+</code></pre></div>
+<p>In this example, we create a vector store index from a set of documents using the <code>VectorstoreIndexCreator</code> and an embeddings model. Then, we initialize a <code>ConversationalRetrievalChain</code> by providing the pre-trained language model (llm) and the retriever created from the vector store index. We also enable the <code>return_source_documents</code> option to retrieve the source documents along with the answer.</p>
+<p>The code sets up a conversation loop where the user can enter their input, which is added to the chat history. The chain is invoked with the current user input and the chat history. The assistant's response is printed, and the assistant's reply is added to the chat history. The loop continues until the conversation is terminated.</p>
+<p>By using the <code>ConversationalRetrievalChain</code>, you can have an interactive and context-aware conversation with the language model, utilizing a vector database for information retrieval and question answering.</p>
+<p>The most important points to highlight are:</p>
+<ol>
+<li>The ConversationalRetrievalChain facilitates chat-based retrieval by incorporating a vector database and memory for conversation tracking.</li>
+<li>Chat history can be maintained and passed explicitly, allowing for contextual conversations.</li>
+<li>The chain supports various features like returning source documents, setting search distance thresholds, and combining different document chains.</li>
+<li>The streaming variant allows real-time monitoring of outputs, token by token.</li>
+<li>Custom formatting of chat history is possible using the <code>get_chat_history</code> function.</li>
+</ol>
 </details>
 <details>
 <summary>GraphQAChain</summary>
+<p>The <code>GraphQAChain</code> is a component in the Langchain library that enables question-answering over a graph data structure. Its purpose is to extract entities, look up information, and provide answers to questions based on the graph. It combines entity extraction, graph traversal, and language model-based question answering to generate informative answers based on the given graph structure.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">GraphQAChain</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes.graph</span> <span class="kn">import</span> <span class="n">NetworkxEntityGraph</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="c1"># Create the graph</span>
+<span class="n">index_creator</span> <span class="o">=</span> <span class="n">GraphIndexCreator</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"../../state_of_the_union.txt"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">all_text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">105</span><span class="p">:</span><span class="mi">108</span><span class="p">])</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">index_creator</span><span class="o">.</span><span class="n">from_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Querying the graph</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">GraphQAChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"what is Intel going to build?"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="n">Intel</span> <span class="ow">is</span> <span class="n">going</span> <span class="n">to</span> <span class="n">build</span> <span class="n">a</span> <span class="err">$</span><span class="mi">20</span> <span class="n">billion</span> <span class="n">semiconductor</span> <span class="s2">"mega site"</span> <span class="k">with</span> <span class="n">state</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">art</span> <span class="n">factories</span><span class="p">,</span> <span class="n">creating</span> <span class="mi">10</span><span class="p">,</span><span class="mi">000</span> <span class="n">new</span> <span class="n">good</span><span class="o">-</span><span class="n">paying</span> <span class="n">jobs</span> <span class="ow">and</span> <span class="n">helping</span> <span class="n">to</span> <span class="n">build</span> <span class="n">Silicon</span> <span class="n">Valley</span><span class="o">.</span>
+
+<span class="o">**</span><span class="n">Saving</span> <span class="n">a</span> <span class="n">graph</span><span class="p">:</span><span class="o">**</span>
+
+<span class="err">```</span><span class="n">python</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">GraphQAChain</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes.graph</span> <span class="kn">import</span> <span class="n">NetworkxEntityGraph</span>
+
+<span class="c1"># Create the graph</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"..."</span>  <span class="c1"># Snippet of text</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">NetworkxEntityGraph</span><span class="o">.</span><span class="n">from_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Initialize the GraphQAChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">GraphQAChain</span><span class="o">.</span><span class="n">from_llm</span><span class="p">(</span><span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Ask a question and get the answer</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">"What is Intel going to build?"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: "Intel is going to build a $20 billion semiconductor "mega site" with state-of-the-art factories, creating 10,000 new good-paying jobs and helping to build Silicon Valley."</span>
+
+<span class="c1"># Save and load the graph</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">write_to_gml</span><span class="p">(</span><span class="s2">"graph.gml"</span><span class="p">)</span>
+<span class="n">loaded_graph</span> <span class="o">=</span> <span class="n">NetworkxEntityGraph</span><span class="o">.</span><span class="n">from_gml</span><span class="p">(</span><span class="s2">"graph.gml"</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Why not just use a vector store?</strong></p>
+<p></p><center>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Graph</th>
+<th>Vector Store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pros</td>
+<td>- Relationship representation</td>
+<td>- Efficiency</td>
+</tr>
+<tr>
+<td></td>
+<td>- Contextual understanding</td>
+<td>- Scalability</td>
+</tr>
+<tr>
+<td></td>
+<td>- Flexible querying</td>
+<td>- Compact storage</td>
+</tr>
+<tr>
+<td></td>
+<td>- Graph algorithms</td>
+<td>- Parallel processing</td>
+</tr>
+<tr>
+<td>Cons</td>
+<td>- Scalability</td>
+<td>- Lack of explicit relationships</td>
+</tr>
+<tr>
+<td></td>
+<td>- Storage overhead</td>
+<td>- Limited context awareness</td>
+</tr>
+<tr>
+<td></td>
+<td>- Complex data modeling</td>
+<td>- Difficulty with complex queries</td>
+</tr>
+<tr>
+<td></td>
+<td>- Limited parallelism</td>
+<td>- Interpretability</td>
+</tr>
+</tbody>
+</table>
+<p></p></center>
 </details>
 <details>
 <summary>HypotheticalDocumentEmbedder</summary>
+<p>Hypothetical Document Embeddings (HyDE) is a technique for generating embeddings from hypothetical documents. Hypothetical documents are documents that do not exist, but could exist. They are generated by an LLMChain, which is a type of chain in LangChain that uses a large language model (LLM) to generate text.
+HyDE is a new approach to dense retrieval that uses hypothetical documents to generate embeddings. Dense retrieval is a technique for finding documents that are similar to a given query. It is often used in tasks such as question answering, fact-checking, and online search.</p>
+<p><img src="../../../../resources/images/developer_handbook/langchain/hyde.png" style="height:500px; display: block; margin-right: auto; margin-left: auto;"></p>
+<p>HyDE has several advantages over traditional dense retrieval methods. First, it is fully zero-shot, which means that it does not require any labeled data. This makes it much easier to deploy HyDE in new applications. Second, HyDE is able to generalize across tasks. This means that it can be used for different tasks, such as question answering, fact-checking, and online search, without being retrained.</p>
+<p>HyDE is useful for a variety of tasks, including:</p>
+<ul>
+<li>Question answering: HyDE can be used to generate embeddings for questions that do not have a single answer. For example, the question "What is the best way to solve world hunger?" does not have a single answer. HyDE can be used to generate embeddings for a variety of hypothetical documents that could be used to answer this question.</li>
+<li>Text summarization: HyDE can be used to generate embeddings for documents that are too long to be summarized manually. For example, the State of the Union address is a long document that is difficult to summarize manually. HyDE can be used to generate embeddings for a hypothetical document that summarizes the State of the Union address.</li>
+<li>Natural language generation: HyDE can be used to generate new text that is similar to existing text. For example, HyDE can be used to generate new passages of fiction that are similar to the works of a particular author.
+The following code shows how to use HyDE to generate an embedding for the question "What is the best way to solve world hunger?"</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">HypotheticalDocumentEmbedder</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+
+<span class="c1"># Create an LLMChain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="s2">"What is the best way to solve world hunger?"</span><span class="p">)</span>
+
+<span class="c1"># Generate a hypothetical document</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Create a HypotheticalDocumentEmbedder</span>
+<span class="n">embedder</span> <span class="o">=</span> <span class="n">HypotheticalDocumentEmbedder</span><span class="p">(</span><span class="n">llm_chain</span><span class="o">=</span><span class="n">chain</span><span class="p">)</span>
+
+<span class="c1"># Generate an embedding for the document</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">embedder</span><span class="o">.</span><span class="n">embed_document</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+</code></pre></div>
+<p>The embedding variable now contains an embedding for the hypothetical document. This embedding can be used for a variety of tasks, such as question answering, text summarization, and natural language generation.</p>
+<p><strong>In a Nutshell</strong></p>
+<p>HyDE is a way of making a possible example of document that would be embedded in a vector store based off of a user's prompt. This means you would provide a question to the LLM and it will produce and embed a document that could may very be real. It can also be used the produce an query that can replace your query, against a vector store. This results in dense information retrieval or example generation. It works by first generating a hypothetical document that answers the given query. This document is then converted into an embedding vector. This vector is a representation of the document that captures its meaning. The embedding vector is then used to search for similar documents in a corpus.</p>
 </details>
 <details>
 <summary>MapReduceDocumentsChain</summary>
@@ -2597,9 +2797,64 @@ The TransformChain class has the following constructor arguments:</p>
 </details>
 <details>
 <summary>RetrievalQA</summary>
+<p>The RetrievalQA class in Langchain is a chain specifically designed for question-answering against a vector database. It combines the capabilities of language models and vector retrieval systems to provide accurate answers to questions based on relevant text chunks.</p>
+<p>The purpose of RetrievalQA is to retrieve the most relevant text chunks from a vector database using a retriever and then utilize a language model to answer questions based on those chunks. By using a vector retrieval system, it avoids the need to process the entire text corpus and instead focuses on retrieving the most relevant information.</p>
+<blockquote>
+<p>RetrievalQA chain actually uses <code>load_qa_chain</code> under the hood.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">RetrievalQA</span>
+<span class="kn">from</span> <span class="nn">langchain.indexes</span> <span class="kn">import</span> <span class="n">VectorstoreIndexCreator</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">CharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
+
+<span class="c1"># Split the documents into chunks</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Select the embeddings to use</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">()</span>
+
+<span class="c1"># Create the vector store to use as the index</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+
+<span class="c1"># Expose the index in a retriever interface</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_type</span><span class="o">=</span><span class="s2">"similarity"</span><span class="p">,</span> <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"k"</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+
+<span class="c1"># Create a RetrievalQA chain to answer questions</span>
+<span class="n">qa</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">OpenAI</span><span class="p">(),</span> <span class="n">chain_type</span><span class="o">=</span><span class="s2">"stuff"</span><span class="p">,</span> <span class="n">retriever</span><span class="o">=</span><span class="n">retriever</span><span class="p">,</span> <span class="n">return_source_documents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">query</span> <span class="o">=</span> <span class="s2">"How many AI publications in 2021?"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa</span><span class="p">({</span><span class="s2">"query"</span><span class="p">:</span> <span class="n">query</span><span class="p">})</span>
+</code></pre></div>
 </details>
 <details>
 <summary>RetrievalQAWithSourcesChain</summary>
+</details>
+<h3 id="utility-functions">Utility Functions</h3>
+<details>
+<summary>load_qa_chain</summary>
+<p>The <code>load_qa_chain()</code> function is a utility function in the Langchain library that is used to load a question answering chain. It takes several parameters including the language model (<code>llm</code>), the type of document combining chain to use (<code>chain_type</code>), and optional parameters like verbosity and callback manager that allows for custom callback functions to be executed during the chain's execution.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chains.question_answering</span> <span class="kn">import</span> <span class="n">load_qa_chain</span>
+
+<span class="c1"># Load the question answering chain with the desired chain type</span>
+<span class="n">qa_chain</span> <span class="o">=</span> <span class="n">load_qa_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">chain_type</span><span class="o">=</span><span class="s2">"map_reduce"</span><span class="p">)</span>
+
+<span class="c1"># Create a document chain for question answering using the loaded chain</span>
+<span class="n">qa_document_chain</span> <span class="o">=</span> <span class="n">AnalyzeDocumentChain</span><span class="p">(</span><span class="n">combine_docs_chain</span><span class="o">=</span><span class="n">qa_chain</span><span class="p">)</span>
+
+<span class="c1"># Run the question answering chain on a given input document and question</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa_document_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">input_document</span><span class="o">=</span><span class="n">state_of_the_union</span><span class="p">,</span> <span class="n">question</span><span class="o">=</span><span class="s2">"what did the president say about justice breyer?"</span><span class="p">)</span>
+
+<span class="c1"># Print the answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details>
+<summary>load_qa_with_sources_chain</summary>
+</details>
+<details>
+<summary>load_summarize_chain</summary>
 </details>
 <h3 id="quick-how-to-guides">Quick How-To Guides</h3>
 <details class="tip">
