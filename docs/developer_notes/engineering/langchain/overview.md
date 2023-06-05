@@ -906,20 +906,149 @@ Here is a table that summarizes the pros and cons of each method for passing mul
 
 Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771a725046af3c02cf4c15a3e18ec54a/docs/modules/chains/index_examples/summarize.ipynb)
 
-
-
-
-??? "load_qa_chain"
-
-??? "load_qa_with_sources_chain"
-
-??? "load_summarize_chain"
-
 ??? "AnalyzeDocumentChain"
 
+    The `AnalyzeDocumentChain` class in Langchain plays a role in splitting a single document into smaller pieces and then running them through a `CombineDocumentsChain`. Its purpose is to provide an end-to-end chain for document analysis tasks. This chain splits a single document into smaller pieces using a text splitter and then analyzes each piece using another specified chain (combine_docs_chain).
+
+    ```python
+    from langchain.chains.question_answering import load_qa_chain
+
+    # Load the question answering chain with the desired chain type
+    qa_chain = load_qa_chain(llm, chain_type="map_reduce")
+
+    # Create a document chain for question answering using the loaded chain
+    qa_document_chain = AnalyzeDocumentChain(combine_docs_chain=qa_chain)
+
+    # Run the question answering chain on a given input document and question
+    result = qa_document_chain.run(input_document=state_of_the_union, question="what did the president say about justice breyer?")
+
+    # Print the answer
+    print(result)
+
+    ```
+
+
 ??? "ConversationalRetrievalChain"
+    **TLDR: ConversationalRetrievalChain = conversation memory + RetrievalQA Chain**
+
+    The `ConversationalRetrievalChain` in Langchain is a chain designed for conversational interaction with a vector database. It combines the functionality of conversation memory with the question-answering capabilities of the RetrievalQA chain. This chain allows you to have a continuous conversation with the language model, providing a chat history as input and obtaining answers based on that context.
+    It extends the `BaseConversationalRetrievalChain` class, which provides the basic structure and functionality for conversational retrieval chains.
+
+    - The chain has a retriever (retriever attribute) that connects to the vector database or index. This retriever is responsible for retrieving relevant documents based on the conversation history and the current question.
+
+    - The chain uses a question generator (`question_generator` attribute) based on a pre-trained language model (`LLMChain`) to generate refined questions or prompts based on the conversation history. This helps in capturing the context of the conversation and generating more accurate queries.
+
+    - The `combine_docs_chain` attribute specifies the chain used to combine the retrieved documents into a single string. It is an instance of a class derived from `BaseCombineDocumentsChain` and is responsible for processing and combining the documents for further analysis.
+
+    - The chain supports the concept of chat history, which is passed as the `chat_history` input parameter. The `get_chat_history` attribute or a custom callable function can be used to transform the chat history into a string representation suitable for the chain's processing.
+
+    ```python
+    from langchain.chains import ConversationalRetrievalChain
+    from langchain.indexes import VectorstoreIndexCreator
+    from langchain.embeddings import OpenAIEmbeddings
+
+    # Create the vector store to use as the index
+    db = VectorstoreIndexCreator.from_documents(documents, embeddings=OpenAIEmbeddings())
+
+    # Create a ConversationalRetrievalChain for chatting
+    chain = ConversationalRetrievalChain.from_llm(
+        llm=OpenAI(),
+        retriever=db.as_retriever(search_type="similarity", search_kwargs={"k": 2}),
+        return_source_documents=True,
+    )
+
+    # Start the conversation
+    chat_history = []
+    while True:
+        user_input = input("User: ")
+        chat_history.append(("human", user_input))
+        result = chain({"question": user_input, "chat_history": chat_history})
+        answer = result["answer"]
+        print("Assistant:", answer)
+        chat_history.append(("ai", answer))
+    ```
+
+    In this example, we create a vector store index from a set of documents using the `VectorstoreIndexCreator` and an embeddings model. Then, we initialize a `ConversationalRetrievalChain` by providing the pre-trained language model (llm) and the retriever created from the vector store index. We also enable the `return_source_documents` option to retrieve the source documents along with the answer.
+
+    The code sets up a conversation loop where the user can enter their input, which is added to the chat history. The chain is invoked with the current user input and the chat history. The assistant's response is printed, and the assistant's reply is added to the chat history. The loop continues until the conversation is terminated.
+
+    By using the `ConversationalRetrievalChain`, you can have an interactive and context-aware conversation with the language model, utilizing a vector database for information retrieval and question answering.
+
+    The most important points to highlight are:
+
+    1. The ConversationalRetrievalChain facilitates chat-based retrieval by incorporating a vector database and memory for conversation tracking.
+    2. Chat history can be maintained and passed explicitly, allowing for contextual conversations.
+    3. The chain supports various features like returning source documents, setting search distance thresholds, and combining different document chains.
+    4. The streaming variant allows real-time monitoring of outputs, token by token.
+    5. Custom formatting of chat history is possible using the `get_chat_history` function.
 
 ??? "GraphQAChain"
+    The `GraphQAChain` is a component in the Langchain library that enables question-answering over a graph data structure. Its purpose is to extract entities, look up information, and provide answers to questions based on the graph. It combines entity extraction, graph traversal, and language model-based question answering to generate informative answers based on the given graph structure.
+
+    ```python
+    from langchain.chains import GraphQAChain
+    from langchain.indexes.graph import NetworkxEntityGraph
+    from langchain.llms import OpenAI
+
+    # Create the graph
+    index_creator = GraphIndexCreator(llm=OpenAI(temperature=0))
+    with open("../../state_of_the_union.txt") as f:
+        all_text = f.read()
+    text = "\n".join(all_text.split("\n\n")[105:108])
+    graph = index_creator.from_text(text)
+
+    # Querying the graph
+    chain = GraphQAChain.from_llm(OpenAI(temperature=0), graph=graph, verbose=True)
+    result = chain.run("what is Intel going to build?")
+    print(result)
+
+    > Intel is going to build a $20 billion semiconductor "mega site" with state-of-the-art factories, creating 10,000 new good-paying jobs and helping to build Silicon Valley.
+
+    **Saving a graph:**
+
+    ```python
+    from langchain.chains import GraphQAChain
+    from langchain.llms import OpenAI
+    from langchain.indexes.graph import NetworkxEntityGraph
+
+    # Create the graph
+    text = "..."  # Snippet of text
+    graph = NetworkxEntityGraph.from_text(text)
+
+    # Initialize the GraphQAChain
+    chain = GraphQAChain.from_llm(OpenAI(temperature=0), graph=graph, verbose=True)
+
+    # Ask a question and get the answer
+    question = "What is Intel going to build?"
+    result = chain.run(question)
+    print(result)  # Output: "Intel is going to build a $20 billion semiconductor "mega site" with state-of-the-art factories, creating 10,000 new good-paying jobs and helping to build Silicon Valley."
+
+    # Save and load the graph
+    graph.write_to_gml("graph.gml")
+    loaded_graph = NetworkxEntityGraph.from_gml("graph.gml")
+
+    ```
+
+    **Why not just use a vector store?**
+
+    <center>
+
+    |                 | Graph                                          | Vector Store                                       |
+    |-----------------|------------------------------------------------|----------------------------------------------------|
+    | Pros            | - Relationship representation                   | - Efficiency                                       |
+    |                 | - Contextual understanding                      | - Scalability                                      |
+    |                 | - Flexible querying                             | - Compact storage                                  |
+    |                 | - Graph algorithms                              | - Parallel processing                              |
+    | Cons            | - Scalability                                   | - Lack of explicit relationships                   |
+    |                 | - Storage overhead                              | - Limited context awareness                        |
+    |                 | - Complex data modeling                         | - Difficulty with complex queries                  |
+    |                 | - Limited parallelism                           | - Interpretability                                 |
+
+    </center>
+
+
+
+
 
 ??? "HypotheticalDocumentEmbedder"
 
@@ -927,9 +1056,70 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
 
 ??? "MapReduceChain"
 
-??? "RetrievalQA"
+??? "RetrievalQA" 
+    The RetrievalQA class in Langchain is a chain specifically designed for question-answering against a vector database. It combines the capabilities of language models and vector retrieval systems to provide accurate answers to questions based on relevant text chunks.
+
+    The purpose of RetrievalQA is to retrieve the most relevant text chunks from a vector database using a retriever and then utilize a language model to answer questions based on those chunks. By using a vector retrieval system, it avoids the need to process the entire text corpus and instead focuses on retrieving the most relevant information.
+
+    > RetrievalQA chain actually uses `load_qa_chain` under the hood.
+
+    ```python  
+    from langchain.chains import RetrievalQA
+    from langchain.indexes import VectorstoreIndexCreator
+    from langchain.text_splitter import CharacterTextSplitter
+    from langchain.embeddings import OpenAIEmbeddings
+    from langchain.vectorstores import Chroma
+
+    # Split the documents into chunks
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    texts = text_splitter.split_documents(documents)
+
+    # Select the embeddings to use
+    embeddings = OpenAIEmbeddings()
+
+    # Create the vector store to use as the index
+    db = Chroma.from_documents(texts, embeddings)
+
+    # Expose the index in a retriever interface
+    retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 2})
+
+    # Create a RetrievalQA chain to answer questions
+    qa = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=retriever, return_source_documents=True)
+
+    query = "How many AI publications in 2021?"
+    result = qa({"query": query})
+    ```
 
 ??? "RetrievalQAWithSourcesChain"
+
+
+### Utility Functions
+
+
+??? "load_qa_chain"
+    The `load_qa_chain()` function is a utility function in the Langchain library that is used to load a question answering chain. It takes several parameters including the language model (`llm`), the type of document combining chain to use (`chain_type`), and optional parameters like verbosity and callback manager that allows for custom callback functions to be executed during the chain's execution.
+
+    ```python
+    from langchain.chains.question_answering import load_qa_chain
+
+    # Load the question answering chain with the desired chain type
+    qa_chain = load_qa_chain(llm, chain_type="map_reduce")
+
+    # Create a document chain for question answering using the loaded chain
+    qa_document_chain = AnalyzeDocumentChain(combine_docs_chain=qa_chain)
+
+    # Run the question answering chain on a given input document and question
+    result = qa_document_chain.run(input_document=state_of_the_union, question="what did the president say about justice breyer?")
+
+    # Print the answer
+    print(result)
+    ```
+
+
+??? "load_qa_with_sources_chain"
+
+??? "load_summarize_chain"
+
 
 ### Quick How-To Guides
 
