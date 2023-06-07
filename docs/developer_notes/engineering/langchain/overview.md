@@ -1285,6 +1285,15 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
     print(result)
     ```
 
+---
+
+## Embeddings
+
+
+??? "CohereEmbeddings"
+
+
+??? "OpenAI Embeggins"
 
 
 ---
