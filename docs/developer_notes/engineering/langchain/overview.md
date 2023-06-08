@@ -1133,6 +1133,54 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
     ```
 
 ??? "RetrievalQAWithSourcesChain"
+    The `RetrievalQAWithSourcesChain` chain in Langchain is used to perform question-answering with sources over an index. It does this by first using a retriever to retrieve a set of documents that are relevant to the question. The retriever can be any type of retriever, such as a search engine or a knowledge base. Once the documents have been retrieved, they are then passed to a language model which is used to generate an answer to the question. The language model can also be used to generate a list of sources for the answer.
+
+
+    ```python
+    from langchain.chains import RetrievalQAWithSourcesChain
+    from langchain import OpenAI
+
+    # Create a retriever
+    retriever = docsearch.as_retriever()
+
+    # Create a language model
+    lang_model = OpenAI(temperature=0)
+
+    # Create a RetrievalQAWithSourcesChain chain
+    chain = RetrievalQAWithSourcesChain(
+        retriever=retriever,
+        lang_model=lang_model,
+    )
+
+    # Ask a question
+    question = "What did the president say about Justice Breyer?"
+
+    # Get the answer
+    answer, sources = chain({"question": question}, return_only_outputs=True)
+
+    # Print the answer
+    print(answer)
+
+    # Print the sources
+    print(sources)
+
+
+    {
+    "answer": "The president honored Justice Breyer for his service and mentioned his legacy of excellence.",
+    "sources": "31-pl",
+    }
+    ```
+
+    The `RetrievalQAWithSourcesChain` chain uses a:
+
+    1. retriever to retrieve a set of documents that are relevant to the question. The retriever can be any type of retriever, such as a search engine or a knowledge base.
+    2. The language model then generates an answer to the question using the retrieved documents.
+    3. The answer and sources are returned from the chain.
+
+    Here are some use cases for `RetrievalQAWithSourcesChain`:
+
+    - **Chatbot**: A chatbot can use `RetrievalQAWithSourcesChain` to answer questions from users in a natural and conversational way. For example, if a user asks a chatbot "What is the capital of France?", the chatbot can use `RetrievalQAWithSourcesChain` to retrieve a set of documents that are relevant to the question, such as Wikipedia articles and news articles. The chatbot can then use the retrieved documents to generate an answer, such as "The capital of France is Paris."
+    - **Customer support system:** A customer support system can use `RetrievalQAWithSourcesChain` to provide users with answers to their questions in a timely and efficient way. For example, if a user has a question about a product, they can use the customer support system to submit their question. The customer support system can then use `RetrievalQAWithSourcesChain` to retrieve a set of documents that are relevant to the question, such as product documentation, FAQs, and troubleshooting guides. The customer support system can then use the retrieved documents to generate an answer to the user's question.
 
 
 ### Utility Functions
@@ -1294,7 +1342,7 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
 
 
 ??? "OpenAI Embeggins"
-
+    
 
 ---
 
