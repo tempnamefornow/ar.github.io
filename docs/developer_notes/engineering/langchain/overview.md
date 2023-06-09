@@ -1183,6 +1183,74 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
     - **Customer support system:** A customer support system can use `RetrievalQAWithSourcesChain` to provide users with answers to their questions in a timely and efficient way. For example, if a user has a question about a product, they can use the customer support system to submit their question. The customer support system can then use `RetrievalQAWithSourcesChain` to retrieve a set of documents that are relevant to the question, such as product documentation, FAQs, and troubleshooting guides. The customer support system can then use the retrieved documents to generate an answer to the user's question.
 
 
+### Other Chains
+
+??? APIChain
+    API Chains are a type of chain that makes API calls and summarizes the responses to answer a question. They are useful for tasks such as:
+    
+    - **Getting information from external sources:** API Chains can be used to get information from external sources, such as weather data, stock quotes, or movie reviews.
+    - **Completing tasks that require multiple steps:** API Chains can be used to complete tasks that require multiple steps, such as booking a flight or reserving a hotel room.
+    - **Automating tasks:** API Chains can be used to automate tasks, such as sending out email notifications or updating a database.
+    
+    API Chains are built using two types of chains:
+
+    - **API Request Chains:** API Request Chains are responsible for making the API calls. They use an LLM to generate the API request URL, and then use a requests library to make the call.
+    - **API Response Chains:** API Response Chains are responsible for summarizing the API responses. They use an LLM to generate a summary of the response, and then use a text summarizer to generate a shorter version of the response.
+
+    ```python
+    from langchain.chains.api import news_docs, open_meteo_docs, podcast_docs, tmdb_docs
+    import langchain
+
+    # Initialize the API Chain
+    chain = APIChain.from_llm_and_api_docs(
+        llm=OpenAI(),
+        api_docs=open_meteo_docs.OPEN_METEO_DOCS,
+        verbose=True,
+    )
+
+    # Ask the question
+    chain.run("What is the weather like in San Francisco today?")
+
+    # Get the answer
+    answer = chain.get_output()
+
+    # Print the answer
+    print(answer)
+
+    ```
+
+??? ConstitutionalChain
+    Constitutional AI is a framework for ensuring that large language models (LLMs) produce outputs that are consistent with a set of ethical principles. It does this by first generating a set of possible outputs, and then filtering those outputs through a set of rules that enforce the ethical principles.
+
+    The purpose of Constitutional AI is to prevent LLMs from being used to generate harmful or unethical content. This is important because LLMs are becoming increasingly powerful, and there is a risk that they could be used to spread misinformation, promote violence, or harm individuals.
+
+    Constitutional AI can be used in a variety of ways. It can be used to filter the output of LLMs that are used in chatbots, customer service applications, or other applications where it is important to ensure that the output is ethical. It can also be used to train LLMs to produce outputs that are consistent with a set of ethical principles.
+
+    ```
+    import langchain
+
+    # Create a ConstitutionalChain object
+    chain = langchain.ConstitutionalChain()
+
+    # Add the ethical principles to the chain
+    chain.add_principle("Do not promote violence.")
+    chain.add_principle("Do not spread misinformation.")
+    chain.add_principle("Do not harm individuals.")
+
+    # Generate a possible output
+    output = chain.generate_output("What is the best way to get revenge on my enemies?")
+
+    # Filter the output through the rules
+    filtered_output = chain.filter_output(output)
+
+    # Print the filtered output
+    print(filtered_output)
+
+    ```
+
+??? tip "FLARE"
+
+
 ### Utility Functions
 
 
@@ -1210,8 +1278,81 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
 
 ??? "load_summarize_chain"
 
+---
 
-### Quick How-To Guides
+## Agents
+
+
+---
+
+## Embeddings
+
+
+??? "CohereEmbeddings"
+
+
+??? "OpenAI Embeggins"
+    
+
+---
+
+## Quick How-To Guides
+
+??? tip "Vector DB Text Generation"
+    Vector DB Text Generation is a technique for generating text using a vector database. A vector database is a type of database that stores data as vectors, which are mathematical objects that represent the meaning of words or phrases. When generating text, a vector database can be used to find similar vectors, which can then be used to generate new text.
+
+    ```python
+    import langchain
+
+    # Prepare Data
+    # Fetch a documentation site that consists of markdown files hosted on Github
+    sources = get_github_docs("yirenlu92", "deno-manual-forked")
+
+    # Split the documentation content into small enough Documents
+    source_chunks = []
+    splitter = CharacterTextSplitter(separator=" ", chunk_size=1024, chunk_overlap=0)
+    for source in sources:
+        for chunk in splitter.split_text(source.page_content):
+            source_chunks.append(Document(page_content=chunk, metadata=source.metadata))
+
+    # Set Up Vector DB
+    # Put all this information in a vector index for easy retrieval
+    search_index = Chroma.from_documents(source_chunks, OpenAIEmbeddings())
+
+    # Set Up LLM Chain with Custom Prompt
+    # Set up a simple LLM chain but give it a custom prompt for blog post generation
+    from langchain.chains import LLMChain
+    prompt_template = """Use the context below to write a 400 word blog post about the topic below:
+        Context: {context}
+        Topic: {topic}
+        Blog post:"""
+
+    PROMPT = PromptTemplate(
+        template=prompt_template, input_variables=["context", "topic"]
+    )
+
+    llm = OpenAI(temperature=0)
+
+    chain = LLMChain(llm=llm, prompt=PROMPT)
+
+    # Generate Text
+    # Write a function to apply our inputs to the chain
+    def generate_blog_post(topic):
+        docs = search_index.similarity_search(topic, k=4)
+        inputs = [{"context": doc.page_content, "topic": topic} for doc in docs]
+        print(chain.apply(inputs))
+
+    # Generate a Blog Post
+    generate_blog_post("environment variables")
+    ```
+
+    Here is how the approach works in steps:
+
+    1. **Prepare Data:** Fetch a documentation site that consists of markdown files hosted on Github and split them into small enough Documents.
+    2. **Set Up Vector DB:** Put all this information in a vector index for easy retrieval.
+    3. Set Up LLM Chain with Custom Prompt: Set up a simple LLM chain but give it a custom prompt for blog post generation.
+    4. **Generate Text:** Write a function to apply our inputs to the chain.
+    5. **Generate a Blog Post:** Generate a blog post using the function.
 
 ??? tip "Loading a Chain - LangChainHub"
     Loading from LangChainHub allows you to load chains from LangChainHub. This can be useful for finding chains that have already been created and tested.
@@ -1280,71 +1421,8 @@ Examples of these [here](https://github.com/hwchase17/langchain/blob/6a3ceaa3771
     ```
 
 
----
 
 
-??? tip "Chatbot"
-    Chatbots: Chatbots are a type of chain that uses a conversational AI (CAI) model to interact with users in a natural way. Chatbots are often used for customer service, education, and other applications.
-
-    ```python
-    import langchain
-
-    # Create a Chatbot
-    chatbot = langchain.Chatbot(
-        llm=langchain.OpenAI(),
-        prompt=langchain.ChatPromptTemplate(),
-    )
-
-    # Start a conversation
-    chatbot.start()
-
-    # Ask a question
-    chatbot.ask("What is the capital of France?")
-
-    # Get the answer
-    answer = chatbot.get_answer()
-
-    # Print the answer
-    print(answer)
-    ```
-
-??? tip "Virtual Assistants"
-    Virtual assistants are a type of chain that uses a CAI model to help users with tasks such as scheduling appointments, making travel arrangements, and playing music. Virtual assistants are often used in homes and businesses.
-
-    ```python
-    import langchain
-
-    # Create a Virtual Assistant
-    assistant = langchain.VirtualAssistant(
-        llm=langchain.OpenAI(),
-        prompt=langchain.VirtualAssistantPromptTemplate(),
-    )
-
-    # Start a conversation
-    assistant.start()
-
-    # Give a command
-    assistant.give_command("Open Google Chrome")
-
-    # Get the result
-    result = assistant.get_result()
-
-    # Print the result
-    print(result)
-    ```
-
----
-
-## Embeddings
-
-
-??? "CohereEmbeddings"
-
-
-??? "OpenAI Embeggins"
-    
-
----
 
 ## Misc
 
